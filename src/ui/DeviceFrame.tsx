@@ -9,6 +9,7 @@ interface DeviceFrameProps {
   children: React.ReactNode;
   isActive?: boolean;
   className?: string;
+  screenHeight?: string;
   onMaximize?: () => void;
 }
 
@@ -19,6 +20,7 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
   children,
   isActive = false,
   className = '',
+  screenHeight,
   onMaximize,
 }) => {
   if (type === 'mobile') {
@@ -106,7 +108,7 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({
         </div>
 
         {/* Screen */}
-        <div className="w-full h-[540px] bg-[var(--bg)] overflow-auto">{children}</div>
+        <div className={`w-full ${screenHeight || 'h-[520px]'} bg-[var(--bg)] overflow-auto`}>{children}</div>
       </div>
 
       {/* Device Label */}

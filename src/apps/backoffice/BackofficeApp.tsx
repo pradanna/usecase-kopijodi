@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useEcosystemStore } from '../../store/useEcosystemStore';
 import { createEvent } from '../../domain/events';
 import type { Invoice, InvoiceItem, CashierShift, MenuItem, Recipe } from '../../domain/types';
@@ -39,7 +39,21 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 
-export const BackofficeApp: React.FC = () => {
+export type BackofficeMenu = 'warehouse' | 'catalog' | 'finance' | 'approvals' | 'settings';
+export type WarehouseSubTab = 'stock_cards' | 'raw_materials' | 'purchase_orders' | 'transfers' | 'stock_opname';
+export type FinanceSubTab = 'cashflow' | 'journal_feed' | 'cashier_recon' | 'debt_trueup' | 'profit_loss';
+
+export interface BackofficeAppProps {
+  initialMenu?: BackofficeMenu;
+  initialWarehouseSubTab?: WarehouseSubTab;
+  initialFinanceSubTab?: FinanceSubTab;
+}
+
+export const BackofficeApp: React.FC<BackofficeAppProps> = ({
+  initialMenu = 'finance',
+  initialWarehouseSubTab = 'stock_cards',
+  initialFinanceSubTab = 'cashflow',
+}) => {
   const {
     outlets,
     ingredients,
@@ -59,24 +73,30 @@ export const BackofficeApp: React.FC = () => {
   } = useEcosystemStore();
 
   // Primary Navigation: warehouse | catalog | finance | approvals | settings
-  const [activeMenu, setActiveMenu] = useState<
-    'warehouse' | 'catalog' | 'finance' | 'approvals' | 'settings'
-  >('finance');
+  const [activeMenu, setActiveMenu] = useState<BackofficeMenu>(initialMenu);
 
   // Sub-Navigation Tabs
-  const [warehouseSubTab, setWarehouseSubTab] = useState<
-    'stock_cards' | 'raw_materials' | 'purchase_orders' | 'transfers' | 'stock_opname'
-  >('stock_cards');
+  const [warehouseSubTab, setWarehouseSubTab] = useState<WarehouseSubTab>(initialWarehouseSubTab);
 
   const [catalogSubTab, setCatalogSubTab] = useState<
     'menu_catalog' | 'recipe_bom' | 'prepared_items' | 'modifiers' | 'local_proposals'
   >('menu_catalog');
 
-  const [financeSubTab, setFinanceSubTab] = useState<
-    'cashflow' | 'journal_feed' | 'cashier_recon' | 'debt_trueup' | 'profit_loss'
-  >('cashflow');
+  const [financeSubTab, setFinanceSubTab] = useState<FinanceSubTab>(initialFinanceSubTab);
 
   const [selectedOutletId, setSelectedOutletId] = useState<string>('all');
+
+  useEffect(() => {
+    if (initialMenu) setActiveMenu(initialMenu);
+  }, [initialMenu]);
+
+  useEffect(() => {
+    if (initialWarehouseSubTab) setWarehouseSubTab(initialWarehouseSubTab);
+  }, [initialWarehouseSubTab]);
+
+  useEffect(() => {
+    if (initialFinanceSubTab) setFinanceSubTab(initialFinanceSubTab);
+  }, [initialFinanceSubTab]);
 
   // Modals state
   const [selectedShiftForVerification, setSelectedShiftForVerification] = useState<CashierShift | null>(null);

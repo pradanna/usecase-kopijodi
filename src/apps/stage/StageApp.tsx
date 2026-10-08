@@ -43,7 +43,7 @@ import {
 export interface DemoStep {
   title: string;
   narration: string;
-  activeDevice: 'customer' | 'pos' | 'kds' | 'ops' | 'all';
+  activeDevice: string;
   action: () => void;
 }
 
@@ -248,7 +248,15 @@ export const StageApp: React.FC = () => {
           },
         },
         {
-          title: 'Langkah 3: Truk Tiba: Terima Barang -> Status "Menunggu Nota" (BR-05)',
+          title: 'Langkah 3: Gudang Pusat Terbitkan Surat Jalan & Kirim Barang',
+          narration: 'Gudang logistik pusat memproses PO, menyiapkan 2 karton susu fresh, dan menerbitkan Surat Jalan pengiriman ke outlet Sudirman.',
+          activeDevice: 'warehouse',
+          action: () => {
+            // Dispatched from warehouse
+          },
+        },
+        {
+          title: 'Langkah 4: Truk Tiba: Terima Barang Fisik -> Status "Menunggu Nota" (BR-05)',
           narration: 'Barang fisik tiba di gerai. Manager konfirmasi terima barang. Stok fisik 24L langsung masuk kartu stok gerai berstatus "Menunggu Nota" agar bisa langsung dipakai operasional (BR-05).',
           activeDevice: 'ops',
           action: () => {
@@ -267,9 +275,9 @@ export const StageApp: React.FC = () => {
           },
         },
         {
-          title: 'Langkah 4: Finance Input Faktur Riil -> Sistem Auto True-Up HPP (BR-06)',
+          title: 'Langkah 5: Finance Input Faktur Riil -> Sistem Auto True-Up HPP (BR-06)',
           narration: 'Finance pusat memverifikasi faktur riil (Rp 19.500/L). Sistem melakukan rekonsiliasi otomatis (True-Up HPP dari Rp 18/ml ke Rp 19.5/ml) dan mengakui hutang cabang ke pusat.',
-          activeDevice: 'pos',
+          activeDevice: 'finance',
           action: () => {
             const lastPo = useEcosystemStore.getState().purchaseOrders[0];
             if (lastPo) {
@@ -291,14 +299,6 @@ export const StageApp: React.FC = () => {
                 newUnitCost: 19.5,
               }, 'outlet-sudirman'));
             }
-          },
-        },
-        {
-          title: 'Langkah 5: Stok Definitif & Laporan Margin Terupdate Real-Time',
-          narration: 'Kartu stok gerai kini berstatus "Invoiced Definitif". Laba kotor dan neraca cabang di Dashboard Owner serta Backoffice ERP langsung terupdate presisi!',
-          activeDevice: 'all',
-          action: () => {
-            // Supply chain scenario finished
           },
         },
       ],
@@ -365,7 +365,7 @@ export const StageApp: React.FC = () => {
         {
           title: 'Langkah 5: Owner Pantau Leaderboard Barista & Rekap Payroll',
           narration: 'Owner dapat membuka tab "HR & Shift Barista" di Dashboard Owner untuk melihat produktivitas tim, leaderboard gerai, dan estimasi bonus insentif.',
-          activeDevice: 'all',
+          activeDevice: 'owner',
           action: () => {
             // HR scenario finished
           },
@@ -464,7 +464,7 @@ export const StageApp: React.FC = () => {
         {
           title: 'Langkah 4: Rekonsiliasi Sistem: Variance / Selisih Rp 0 (Match 100%)',
           narration: 'Sistem membandingkan hitungan fisik vs penjualan sistem: Total Rp 380.000 (Float Rp 200k + Kas Rp 180k). Selisih = Rp 0 (Tepat & Akurat).',
-          activeDevice: 'pos',
+          activeDevice: 'recon',
           action: () => {
             // Verified variance 0
           },
@@ -472,7 +472,7 @@ export const StageApp: React.FC = () => {
         {
           title: 'Langkah 5: Finance Verifikasi Setoran Bank & Auto-Posting Jurnal',
           narration: 'Finance memvalidasi bukti transfer setoran kas ke Bank BCA (#DEP-BCA-8821). Sistem otomatis mendebit Kas Bank dan mengkredit Kas Kasir Outlet.',
-          activeDevice: 'all',
+          activeDevice: 'journal',
           action: () => {
             const auditShift = useEcosystemStore.getState().cashierShifts.find((s) => s.status === 'PENDING_FINANCE_AUDIT' || s.status === 'VERIFIED');
             if (auditShift) {
@@ -518,7 +518,7 @@ export const StageApp: React.FC = () => {
         {
           title: 'Langkah 2: Sistem Validasi Plafon 3-Tier (Tier 1: Nominal <= Rp 100.000)',
           narration: 'Karena nominal Rp 85.000 berada di bawah batas plafon bebas outlet (Rp 100.000), pengajuan otomatis di-approve (Tier 1) dengan syarat foto nota.',
-          activeDevice: 'ops',
+          activeDevice: 'approvals',
           action: () => {
             const lastExpense = useEcosystemStore.getState().pettyCashExpenses[0];
             if (lastExpense) {
@@ -532,7 +532,7 @@ export const StageApp: React.FC = () => {
         {
           title: 'Langkah 3: Saldo Kas Gerai Terpotong & Tercatat di Jurnal Beban Cabang',
           narration: 'Saldo petty cash outlet Sudirman terpotong dari Rp 500.000 menjadi Rp 415.000. Finance pusat dapat melihat struk digital secara terpusat tanpa risiko struk fiktif.',
-          activeDevice: 'all',
+          activeDevice: 'owner',
           action: () => {
             // Petty cash done
           },
@@ -599,7 +599,7 @@ export const StageApp: React.FC = () => {
   };
 
   // Check if a device is active in the current step
-  const isActiveDevice = (deviceKey: 'customer' | 'pos' | 'kds' | 'ops') => {
+  const isActiveDevice = (deviceKey: string) => {
     if (currentStepIndex >= steps.length) return false;
     const currentActive = steps[currentStepIndex]?.activeDevice;
     if (currentActive === 'all') return true;
@@ -793,57 +793,227 @@ export const StageApp: React.FC = () => {
           {/* Main Multi-Device Stage Canvas */}
           <div className="flex-1 overflow-auto p-6 flex flex-col items-center justify-center">
             {/* Scenario Tagline Banner */}
-            <div className="mb-4 text-center max-w-2xl animate-fade-in">
-              <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-1">
-                Skenario Aktif: {currentScenario.name}
+            <div className="mb-4 text-center max-w-3xl animate-fade-in">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-900 border border-gray-800 text-xs font-mono mb-2 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                <span className="text-amber-400 font-bold uppercase">
+                  Tampilan Kanvas Khusus: {currentScenario.name}
+                </span>
+                <span className="text-gray-500">•</span>
+                <span className="text-gray-400">
+                  {selectedScenarioId === 'order_flow' && '4 Layar: Pelanggan • POS • KDS • Ops Gerai'}
+                  {selectedScenarioId === 'purchase_flow' && '3 Layar: Ops Gerai • Gudang Pusat • Finance True-Up'}
+                  {selectedScenarioId === 'hr_flow' && '3 Layar: Presensi GPS Barista • KDS Dapur • Dashboard Owner HR'}
+                  {selectedScenarioId === 'finance_flow' && '3 Layar: POS Kasir Laci • Audit Rekonsiliasi • Jurnal Akuntansi'}
+                  {selectedScenarioId === 'petty_cash_flow' && '3 Layar: Ops Gerai • Portal Approval 3-Tier • Dashboard Beban Cabang'}
+                </span>
               </div>
               <div className="text-xs text-gray-400">
                 {currentScenario.tagline}
               </div>
             </div>
 
-            {/* Balanced Grid: Customer App (HP), POS (Tablet), KDS (Monitor/Tablet), Ops App (HP) */}
-            <div className="flex items-center gap-6 max-w-7xl mx-auto">
-              {/* 1. Customer Smartphone */}
-              <DeviceFrame
-                type="mobile"
-                title="App Pelanggan"
-                subtitle="PWA iOS / Android"
-                isActive={isActiveDevice('customer')}
-              >
-                <CustomerApp />
-              </DeviceFrame>
+            {/* DYNAMIC SCENARIO CANVAS - TAMPILAN BERBEDA SESUAI DEMO YANG DIPILIH */}
+            {selectedScenarioId === 'order_flow' && (
+              <div className="flex items-center gap-6 max-w-7xl mx-auto animate-fade-in">
+                {/* 1. Customer Smartphone */}
+                <DeviceFrame
+                  type="mobile"
+                  title="App Pelanggan"
+                  subtitle="PWA iOS / Android • Pesan & QRIS"
+                  isActive={isActiveDevice('customer')}
+                >
+                  <CustomerApp />
+                </DeviceFrame>
 
-              {/* 2. Tablet POS Kasir */}
-              <DeviceFrame
-                type="tablet"
-                title="POS Kasir Outlet"
-                subtitle="Tablet Landscape Counter"
-                isActive={isActiveDevice('pos')}
-              >
-                <PosApp />
-              </DeviceFrame>
+                {/* 2. Tablet POS Kasir */}
+                <DeviceFrame
+                  type="tablet"
+                  title="POS Kasir Outlet"
+                  subtitle="Tablet Kasir • Terima Pesanan Online"
+                  isActive={isActiveDevice('pos')}
+                >
+                  <PosApp />
+                </DeviceFrame>
 
-              {/* 3. KDS Barista */}
-              <DeviceFrame
-                type="tablet"
-                title="KDS Barista Dapur"
-                subtitle="Monitor Layar Dapur"
-                isActive={isActiveDevice('kds')}
-              >
-                <KdsApp />
-              </DeviceFrame>
+                {/* 3. KDS Barista */}
+                <DeviceFrame
+                  type="tablet"
+                  title="KDS Barista Dapur"
+                  subtitle="Monitor Dapur • Racik & Potong Stok Resep"
+                  isActive={isActiveDevice('kds')}
+                >
+                  <KdsApp />
+                </DeviceFrame>
 
-              {/* 4. Store Manager Smartphone */}
-              <DeviceFrame
-                type="mobile"
-                title="App Operasi Outlet"
-                subtitle="Smartphone Store Manager"
-                isActive={isActiveDevice('ops')}
-              >
-                <OpsApp />
-              </DeviceFrame>
-            </div>
+                {/* 4. Store Manager Smartphone */}
+                <DeviceFrame
+                  type="mobile"
+                  title="App Operasi Outlet"
+                  subtitle="Smartphone Store Manager • Pantau Stok & Shift"
+                  isActive={isActiveDevice('ops')}
+                >
+                  <OpsApp initialTab="beranda" />
+                </DeviceFrame>
+              </div>
+            )}
+
+            {selectedScenarioId === 'purchase_flow' && (
+              <div className="flex items-center gap-6 max-w-[1650px] mx-auto animate-fade-in w-full justify-center">
+                {/* 1. Store Manager Smartphone: Buat PO & Terima Barang */}
+                <DeviceFrame
+                  type="mobile"
+                  title="App Operasi Gerai"
+                  subtitle="Store Manager • PO Tanpa Harga (BR-04) & Terima Fisik (BR-05)"
+                  isActive={isActiveDevice('ops')}
+                >
+                  <OpsApp initialTab="po" />
+                </DeviceFrame>
+
+                {/* 2. Warehouse Central: Dispatching */}
+                <DeviceFrame
+                  type="desktop"
+                  title="Gudang Logistik Pusat (ERP)"
+                  subtitle="Dispatched Pasokan, Resi Logistik & Terbitkan Surat Jalan"
+                  isActive={isActiveDevice('warehouse')}
+                  className="w-[480px] xl:w-[540px] shrink-0"
+                  screenHeight="h-[460px]"
+                  onMaximize={() => setFocusedApp('Pusat Backoffice')}
+                >
+                  <BackofficeApp initialMenu="warehouse" initialWarehouseSubTab="purchase_orders" />
+                </DeviceFrame>
+
+                {/* 3. Finance Central: True-Up HPP */}
+                <DeviceFrame
+                  type="desktop"
+                  title="Finance & Akuntansi Pusat"
+                  subtitle="Input Faktur Supplier Riil, Auto True-Up HPP & Saldo Hutang (BR-06)"
+                  isActive={isActiveDevice('finance')}
+                  className="w-[480px] xl:w-[540px] shrink-0"
+                  screenHeight="h-[460px]"
+                  onMaximize={() => setFocusedApp('Pusat Backoffice')}
+                >
+                  <BackofficeApp initialMenu="finance" initialFinanceSubTab="debt_trueup" />
+                </DeviceFrame>
+              </div>
+            )}
+
+            {selectedScenarioId === 'hr_flow' && (
+              <div className="flex items-center gap-6 max-w-[1650px] mx-auto animate-fade-in w-full justify-center">
+                {/* 1. Barista Smartphone: Clock-In GPS */}
+                <DeviceFrame
+                  type="mobile"
+                  title="Smartphone Barista"
+                  subtitle="Presensi GPS Geofencing Radius 50m (Anti-Fake GPS)"
+                  isActive={isActiveDevice('ops')}
+                >
+                  <OpsApp initialTab="shift" />
+                </DeviceFrame>
+
+                {/* 2. KDS Kitchen Display: Racik & SLA */}
+                <DeviceFrame
+                  type="tablet"
+                  title="KDS Barista Dapur"
+                  subtitle="Live Counter Output Cup & Stopwatch SLA Kecepatan"
+                  isActive={isActiveDevice('kds')}
+                >
+                  <KdsApp />
+                </DeviceFrame>
+
+                {/* 3. Owner Dashboard: HR & Payroll */}
+                <DeviceFrame
+                  type="desktop"
+                  title="Dashboard Owner (Modul HR)"
+                  subtitle="Leaderboard Barista, Audit Presensi GPS & Estimasi Payroll"
+                  isActive={isActiveDevice('owner')}
+                  className="w-[520px] xl:w-[600px] shrink-0"
+                  screenHeight="h-[460px]"
+                  onMaximize={() => setFocusedApp('Dashboard Owner')}
+                >
+                  <OwnerApp initialTab="hr" />
+                </DeviceFrame>
+              </div>
+            )}
+
+            {selectedScenarioId === 'finance_flow' && (
+              <div className="flex items-center gap-6 max-w-[1650px] mx-auto animate-fade-in w-full justify-center">
+                {/* 1. Tablet POS Kasir: Shift & Cash Count */}
+                <DeviceFrame
+                  type="tablet"
+                  title="POS Kasir Outlet"
+                  subtitle="Shift Kasir, Modal Float Rp 200k, & Blind Cash Count"
+                  isActive={isActiveDevice('pos')}
+                >
+                  <PosApp />
+                </DeviceFrame>
+
+                {/* 2. Backoffice: Rekonsiliasi Kasir */}
+                <DeviceFrame
+                  type="desktop"
+                  title="Audit & Rekonsiliasi Kasir"
+                  subtitle="Pencocokan Kas Laci (Variance Rp 0) & Slip Setoran Bank"
+                  isActive={isActiveDevice('recon')}
+                  className="w-[480px] xl:w-[540px] shrink-0"
+                  screenHeight="h-[460px]"
+                  onMaximize={() => setFocusedApp('Pusat Backoffice')}
+                >
+                  <BackofficeApp initialMenu="finance" initialFinanceSubTab="cashier_recon" />
+                </DeviceFrame>
+
+                {/* 3. Backoffice: Jurnal Umum & Cashflow */}
+                <DeviceFrame
+                  type="desktop"
+                  title="Buku Jurnal Umum Finansial"
+                  subtitle="Auto-Posting Debit Kas Bank & Kredit Kas Kasir Gerai"
+                  isActive={isActiveDevice('journal')}
+                  className="w-[480px] xl:w-[540px] shrink-0"
+                  screenHeight="h-[460px]"
+                  onMaximize={() => setFocusedApp('Pusat Backoffice')}
+                >
+                  <BackofficeApp initialMenu="finance" initialFinanceSubTab="journal_feed" />
+                </DeviceFrame>
+              </div>
+            )}
+
+            {selectedScenarioId === 'petty_cash_flow' && (
+              <div className="flex items-center gap-6 max-w-[1650px] mx-auto animate-fade-in w-full justify-center">
+                {/* 1. Smartphone Ops: Pengajuan Kas */}
+                <DeviceFrame
+                  type="mobile"
+                  title="App Operasi Gerai"
+                  subtitle="Pengajuan Kas Kecil Darurat + Foto Nota Struk Fisik"
+                  isActive={isActiveDevice('ops')}
+                >
+                  <OpsApp initialTab="kas" />
+                </DeviceFrame>
+
+                {/* 2. Backoffice: Portal Approval 3-Tier */}
+                <DeviceFrame
+                  type="desktop"
+                  title="Portal Approval & Audit Nota"
+                  subtitle="Validasi Plafon 3-Tier (Tier 1 Auto-Approved, Tier 2-3 Review)"
+                  isActive={isActiveDevice('approvals')}
+                  className="w-[480px] xl:w-[540px] shrink-0"
+                  screenHeight="h-[460px]"
+                  onMaximize={() => setFocusedApp('Pusat Backoffice')}
+                >
+                  <BackofficeApp initialMenu="approvals" />
+                </DeviceFrame>
+
+                {/* 3. Owner Dashboard: Biaya Cabang */}
+                <DeviceFrame
+                  type="desktop"
+                  title="Dashboard Owner: Kontrol Biaya"
+                  subtitle="Monitoring Beban Operasional & Pengeluaran Kas Gerai"
+                  isActive={isActiveDevice('owner')}
+                  className="w-[480px] xl:w-[540px] shrink-0"
+                  screenHeight="h-[460px]"
+                  onMaximize={() => setFocusedApp('Dashboard Owner')}
+                >
+                  <OwnerApp initialTab="cockpit" />
+                </DeviceFrame>
+              </div>
+            )}
           </div>
 
           {/* Bottom Subtitle / Live Narrative Bar */}

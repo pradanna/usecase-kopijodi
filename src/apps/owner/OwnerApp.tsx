@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useEcosystemStore } from '../../store/useEcosystemStore';
 import { Badge } from '../../ui/Badge';
 import { Button } from '../../ui/Button';
@@ -25,7 +25,13 @@ import {
   Zap,
 } from 'lucide-react';
 
-export const OwnerApp: React.FC = () => {
+export type OwnerTab = 'cockpit' | 'hr' | 'approvals';
+
+export interface OwnerAppProps {
+  initialTab?: OwnerTab;
+}
+
+export const OwnerApp: React.FC<OwnerAppProps> = ({ initialTab = 'cockpit' }) => {
   const {
     outlets,
     orders,
@@ -37,8 +43,14 @@ export const OwnerApp: React.FC = () => {
     dispatch,
   } = useEcosystemStore();
 
-  const [activeTab, setActiveTab] = useState<'cockpit' | 'hr' | 'approvals'>('cockpit');
+  const [activeTab, setActiveTab] = useState<OwnerTab>(initialTab);
   const [selectedOutletFilter, setSelectedOutletFilter] = useState<string>('all');
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
 
   const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
   const totalDebts = centralDebts.reduce((sum, d) => sum + (d.amount - d.paidAmount), 0);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useEcosystemStore } from '../../store/useEcosystemStore';
 import { createEvent } from '../../domain/events';
 import type { PurchaseOrder, GoodsReceipt, PettyCashExpense, LocalMenuProposal } from '../../domain/types';
@@ -23,7 +23,13 @@ import {
   UserCheck,
 } from 'lucide-react';
 
-export const OpsApp: React.FC = () => {
+export type OpsTab = 'beranda' | 'stok' | 'po' | 'kas' | 'menu' | 'shift';
+
+export interface OpsAppProps {
+  initialTab?: OpsTab;
+}
+
+export const OpsApp: React.FC<OpsAppProps> = ({ initialTab = 'beranda' }) => {
   const {
     outlets,
     ingredients,
@@ -37,7 +43,13 @@ export const OpsApp: React.FC = () => {
   } = useEcosystemStore();
 
   const [selectedOutletId, setSelectedOutletId] = useState<string>('outlet-sudirman');
-  const [activeTab, setActiveTab] = useState<'beranda' | 'stok' | 'po' | 'kas' | 'menu' | 'shift'>('beranda');
+  const [activeTab, setActiveTab] = useState<OpsTab>(initialTab);
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
 
   // Modal states
   const [isPoModalOpen, setIsPoModalOpen] = useState<boolean>(false);
