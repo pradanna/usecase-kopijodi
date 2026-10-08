@@ -30,9 +30,12 @@ import {
   AlertTriangle,
   TrendingDown,
   Lock,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 
 export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToDemo }) => {
+  const [showPricing, setShowPricing] = useState<boolean>(false); // Default false: pitch mode tanpa harga!
   const [selectedScheme, setSelectedScheme] = useState<'turnkey' | 'dedicated'>('dedicated');
   const [selectedTurnkeyPackage, setSelectedTurnkeyPackage] = useState<'bundling' | 'phase1' | 'phase2' | 'phase3'>('bundling');
   const [activeModuleTab, setActiveModuleTab] = useState<number>(0);
@@ -168,20 +171,41 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <img src="/genossys_logo.png" alt="genossys" className="h-8 w-auto object-contain" />
             <div className="h-4 w-px bg-slate-300" />
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-sm text-slate-900 tracking-tight">PROPOSAL RESMI</span>
+              <span className="font-extrabold text-sm text-slate-900 tracking-tight">
+                {showPricing ? 'PROPOSAL RESMI & BIAYA' : 'PROPOSAL FITUR & TEKNOLOGI'}
+              </span>
               <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
                 Kopi Jodi Ecosystem
               </span>
+              {!showPricing && (
+                <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-extrabold hidden md:inline">
+                  Mode Pitching Fitur
+                </span>
+              )}
             </div>
           </div>
 
           <div className="flex items-center gap-2.5">
+            {/* Toggle Mode Pitching / Tampilkan Harga */}
+            <button
+              onClick={() => setShowPricing(!showPricing)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
+                showPricing
+                  ? 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
+                  : 'bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100'
+              }`}
+              title={showPricing ? "Klik untuk sembunyikan harga (Mode Pitching Fitur)" : "Klik untuk menampilkan angka investasi"}
+            >
+              {showPricing ? <EyeOff className="w-3.5 h-3.5 text-amber-700" /> : <Eye className="w-3.5 h-3.5 text-emerald-700" />}
+              <span>{showPricing ? 'Harga Aktif' : 'Mode Pitching (Tanpa Harga)'}</span>
+            </button>
+
             {onBackToDemo && (
               <button
                 onClick={onBackToDemo}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all cursor-pointer"
               >
-                <span>📱 Buka Demo Interaktif</span>
+                <span>📱 Demo Interaktif</span>
               </button>
             )}
 
@@ -191,16 +215,16 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               title="Cetak atau Simpan PDF"
             >
               <Printer className="w-3.5 h-3.5 text-slate-500" />
-              <span>Cetak / PDF</span>
+              <span className="hidden sm:inline">Cetak / PDF</span>
             </button>
 
             <a
               href="/Penawaran_Ekosistem_Kopi_Jodi.docx"
-              download="Penawaran_Pengembangan_Ekosistem_Aplikasi_Kopi_Jodi.docx"
+              download="Proposal_Fitur_Ekosistem_Kopi_Jodi.docx"
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--brand-600,#C86D3B)] hover:bg-[var(--brand-700,#A85428)] text-white text-xs font-bold transition-all shadow-xs"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download Word (.docx)</span>
+              <span>Word (.docx)</span>
             </a>
           </div>
         </div>
@@ -216,7 +240,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-xs font-bold backdrop-blur-sm">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Dokumen Resmi Penawaran Teknis & Komersial</span>
+                <span>
+                  {showPricing
+                    ? 'Dokumen Resmi Penawaran Teknis & Komersial'
+                    : 'Dokumen Resmi Presentasi Teknis & Solusi Ekosistem'}
+                </span>
               </div>
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 Pengembangan Ekosistem Aplikasi & ERP Multi-Outlet Kopi Jodi
@@ -404,7 +432,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 3: Pilihan Skema Kerjasama & Biaya (Interactive Switcher) */}
+        {/* Section 3: Pilihan Skema Kerjasama & Delivery (Interactive Switcher) */}
         <section className="space-y-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
@@ -412,8 +440,14 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 03
               </div>
               <div>
-                <h2 className="text-xl font-extrabold text-slate-900">Pilihan Skema Kerjasama & Investasi</h2>
-                <p className="text-xs text-slate-500">Pilih skema yang paling sesuai dengan strategi arus kas dan pertumbuhan Kopi Jodi</p>
+                <h2 className="text-xl font-extrabold text-slate-900">
+                  {showPricing ? 'Pilihan Skema Kerjasama & Investasi' : 'Pilihan Model Kerjasama & Delivery Sistem'}
+                </h2>
+                <p className="text-xs text-slate-500">
+                  {showPricing
+                    ? 'Pilih skema yang paling sesuai dengan strategi arus kas dan pertumbuhan Kopi Jodi'
+                    : 'Pilih model kolaborasi pengembangan teknologi jangka panjang untuk akselerasi pertumbuhan Kopi Jodi'}
+                </p>
               </div>
             </div>
 
@@ -427,7 +461,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                ⭐ Opsi 2: Bulanan (Dedicated)
+                ⭐ Opsi 2: Dedicated Programmer
               </button>
               <button
                 onClick={() => setSelectedScheme('turnkey')}
@@ -465,14 +499,32 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   </p>
                 </div>
 
-                <div className="bg-white rounded-2xl p-5 border border-amber-300 shadow-sm text-center min-w-[220px]">
-                  <div className="text-[11px] font-bold text-slate-500 uppercase">Investasi Bulanan Flat</div>
-                  <div className="text-3xl font-black text-slate-900 my-1">
-                    Rp 5.000.000<span className="text-sm font-semibold text-slate-500">/bln</span>
+                <div className="bg-white rounded-2xl p-5 border border-amber-300 shadow-sm text-center min-w-[240px]">
+                  <div className="text-[11px] font-bold text-slate-500 uppercase">
+                    {showPricing ? 'Investasi Bulanan Flat' : 'Model Kerjasama'}
                   </div>
-                  <div className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 rounded-lg py-1 px-2 border border-emerald-200">
-                    Komitmen Kontrak: 5 Tahun (60 Bulan)
-                  </div>
+                  {showPricing ? (
+                    <>
+                      <div className="text-3xl font-black text-slate-900 my-1">
+                        Rp 5.000.000<span className="text-sm font-semibold text-slate-500">/bln</span>
+                      </div>
+                      <div className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 rounded-lg py-1 px-2 border border-emerald-200">
+                        Komitmen Kontrak: 5 Tahun (60 Bulan)
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-xl font-black text-amber-900 my-1">
+                        Dedicated Partner
+                      </div>
+                      <div className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 rounded-lg py-1 px-2.5 border border-emerald-200">
+                        Flat Bulanan & Siaga 5 Tahun
+                      </div>
+                      <div className="text-[10px] text-slate-500 mt-1 font-medium">
+                        (Detail nilai investasi pada sesi penawaran)
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -541,11 +593,24 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 </div>
 
                 <div className="text-right">
-                  <span className="text-[11px] font-bold text-slate-500 uppercase">Paket Bundling Penuh</span>
-                  <div className="text-2xl font-black text-emerald-700">Rp 135.000.000</div>
-                  <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
-                    Hemat Rp 15.000.000,-
+                  <span className="text-[11px] font-bold text-slate-500 uppercase">
+                    {showPricing ? 'Paket Bundling Penuh' : 'Model Paket'}
                   </span>
+                  {showPricing ? (
+                    <>
+                      <div className="text-2xl font-black text-emerald-700">Rp 135.000.000</div>
+                      <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
+                        Hemat Rp 15.000.000,-
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-xl font-black text-slate-800">Bundling Seluruh Fase</div>
+                      <span className="text-[10px] font-extrabold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
+                        Serah Terima Bertahap per Fase
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -560,7 +625,9 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   }`}
                 >
                   <div className="text-[11px] font-bold text-slate-500 uppercase">Fase 1 (Core)</div>
-                  <div className="text-lg font-black text-slate-900 my-1">Rp 75.000.000</div>
+                  <div className="text-lg font-black text-slate-900 my-1">
+                    {showPricing ? 'Rp 75.000.000' : 'Milestone 1 (Fondasi)'}
+                  </div>
                   <div className="text-[11px] text-slate-500 font-medium">Estimasi: 2.5 - 3 Bulan</div>
                   <div className="mt-3 text-[11px] text-slate-600 space-y-1">
                     <div>&bull; ERP Backoffice & Finance</div>
@@ -579,12 +646,14 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   }`}
                 >
                   <div className="text-[11px] font-bold text-slate-500 uppercase">Fase 2 (Omni)</div>
-                  <div className="text-lg font-black text-slate-900 my-1">Rp 48.000.000</div>
+                  <div className="text-lg font-black text-slate-900 my-1">
+                    {showPricing ? 'Rp 48.000.000' : 'Milestone 2 (Ekspansi)'}
+                  </div>
                   <div className="text-[11px] text-slate-500 font-medium">Estimasi: 2 Bulan</div>
                   <div className="mt-3 text-[11px] text-slate-600 space-y-1">
                     <div>&bull; Mobile App Pelanggan (PWA)</div>
                     <div>&bull; Online Pickup & Tracking</div>
-                    <div>&bull; CRM & Promo Panel Panel</div>
+                    <div>&bull; CRM & Promo Panel</div>
                     <div>&bull; Loyalty Point & E-Voucher</div>
                   </div>
                 </div>
@@ -598,7 +667,9 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   }`}
                 >
                   <div className="text-[11px] font-bold text-slate-500 uppercase">Fase 3 (Scale)</div>
-                  <div className="text-lg font-black text-slate-900 my-1">Rp 27.000.000</div>
+                  <div className="text-lg font-black text-slate-900 my-1">
+                    {showPricing ? 'Rp 27.000.000' : 'Milestone 3 (Skalabilitas)'}
+                  </div>
                   <div className="text-[11px] text-slate-500 font-medium">Estimasi: 1 - 1.5 Bulan</div>
                   <div className="mt-3 text-[11px] text-slate-600 space-y-1">
                     <div>&bull; Portal Mitra / Investor Read-Only</div>
@@ -612,9 +683,9 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               {/* Termin Pembayaran Beli Putus */}
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
                 <div>
-                  <div className="font-extrabold text-slate-900">Termin Pembayaran Beli Putus:</div>
+                  <div className="font-extrabold text-slate-900">Termin Serah Terima & Pembayaran Beli Putus:</div>
                   <div className="text-slate-600 mt-0.5">
-                    <strong>DP 30%</strong> (Penandatanganan Kontrak) &rarr; <strong>Termin 2 40%</strong> (Modul Siap UAT Outlet) &rarr; <strong>Pelunasan 30%</strong> (Go-Live & Training Selesai).
+                    <strong>Termin 1 (30%)</strong> Kickoff & Desain &rarr; <strong>Termin 2 (40%)</strong> Modul Siap UAT Outlet &rarr; <strong>Termin 3 (30%)</strong> Go-Live & Training Selesai.
                   </div>
                 </div>
                 <div className="text-emerald-700 font-bold shrink-0 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
@@ -641,8 +712,16 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <tbody className="divide-y divide-slate-200">
                   <tr>
                     <td className="p-3 font-bold text-slate-900">Beban Arus Kas (Cashflow)</td>
-                    <td className="p-3 text-slate-700">Modal besar per termin proyek (Rp 75 Jt s/d Rp 135 Jt)</td>
-                    <td className="p-3 bg-amber-50/30 font-bold text-emerald-800">Sangat Ringan (Flat Rp 5 Juta / bulan)</td>
+                    <td className="p-3 text-slate-700">
+                      {showPricing
+                        ? 'Modal besar per termin proyek (Rp 75 Jt s/d Rp 135 Jt)'
+                        : 'Sesuai termin serah terima modul (Milestone-based)'}
+                    </td>
+                    <td className="p-3 bg-amber-50/30 font-bold text-emerald-800">
+                      {showPricing
+                        ? 'Sangat Ringan (Flat Rp 5 Juta / bulan)'
+                        : 'Investasi bulanan flat terencana (OpEx-friendly & zero modal awal)'}
+                    </td>
                   </tr>
                   <tr>
                     <td className="p-3 font-bold text-slate-900">Masa Kerjasama</td>
@@ -726,23 +805,39 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
 
               <div className="bg-white/80 rounded-2xl p-4 border border-rose-200 space-y-2">
                 <div className="flex justify-between text-xs text-slate-600">
-                  <span>Biaya Lisensi Dasar (~Rp 299rb/bln x {comparisonOutletCount} outlet):</span>
-                  <span className="font-bold">Rp {(comparisonOutletCount * 299000).toLocaleString('id-ID')} /bln</span>
+                  <span>Biaya Lisensi Dasar ({comparisonOutletCount} outlet):</span>
+                  <span className="font-bold">
+                    {showPricing
+                      ? `Rp ${(comparisonOutletCount * 299000).toLocaleString('id-ID')} /bln`
+                      : `Dihitung per outlet baru (~Rp 299rb x ${comparisonOutletCount} gerai)`}
+                  </span>
                 </div>
                 <div className="flex justify-between text-xs text-slate-600">
-                  <span>Add-on Wajib Kafe (KDS Dapur, Moka Order, BOM Inventory ~Rp 200rb/bln):</span>
-                  <span className="font-bold">Rp {(comparisonOutletCount * 200000).toLocaleString('id-ID')} /bln</span>
+                  <span>Add-on Wajib Kafe (KDS Dapur, Moka Order, BOM Inventory):</span>
+                  <span className="font-bold">
+                    {showPricing
+                      ? `Rp ${(comparisonOutletCount * 200000).toLocaleString('id-ID')} /bln`
+                      : `Dihitung per perangkat lisensi (~Rp 200rb x ${comparisonOutletCount} gerai)`}
+                  </span>
                 </div>
                 <div className="pt-2 border-t border-rose-200 flex justify-between items-center text-rose-900">
                   <span className="text-xs font-bold">Total Biaya Sewa ({comparisonOutletCount} Outlet):</span>
-                  <span className="text-lg font-black">
-                    Rp {(comparisonOutletCount * 499000).toLocaleString('id-ID')} <span className="text-xs font-normal text-slate-500">/bln</span>
-                  </span>
+                  {showPricing ? (
+                    <span className="text-lg font-black">
+                      Rp {(comparisonOutletCount * 499000).toLocaleString('id-ID')} <span className="text-xs font-normal text-slate-500">/bln</span>
+                    </span>
+                  ) : (
+                    <span className="text-sm font-extrabold text-rose-800">
+                      Membengkak {comparisonOutletCount}x Lipat Setiap Bulan
+                    </span>
+                  )}
                 </div>
                 <div className="flex justify-between text-xs text-slate-500 pt-1">
                   <span>Estimasi Biaya 5 Tahun:</span>
                   <span className="font-extrabold text-rose-700">
-                    Rp {(comparisonOutletCount * 499000 * 60).toLocaleString('id-ID')},-
+                    {showPricing
+                      ? `Rp ${(comparisonOutletCount * 499000 * 60).toLocaleString('id-ID')},-`
+                      : 'Akumulasi Ratusan Juta (Uang Hangus Tanpa Hak Milik)'}
                   </span>
                 </div>
               </div>
@@ -785,19 +880,31 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   <span className="font-extrabold text-emerald-700">Rp 0,- (GRATIS Selamanya)</span>
                 </div>
                 <div className="flex justify-between text-xs text-slate-600">
-                  <span>Skema Dedicated Programmer (Opsi 2):</span>
-                  <span className="font-bold">Rp 5.000.000 /bln (FLAT untuk SEMUA CABANG)</span>
+                  <span>Skema Dedicated Programmer:</span>
+                  <span className="font-bold text-emerald-900">
+                    {showPricing
+                      ? 'Rp 5.000.000 /bln (FLAT untuk SEMUA CABANG)'
+                      : 'Biaya Flat untuk SEMUA Cabang (Bebas Tambah Gerai)'}
+                  </span>
                 </div>
                 <div className="pt-2 border-t border-emerald-200 flex justify-between items-center text-emerald-900">
                   <span className="text-xs font-bold">Biaya per Outlet pada {comparisonOutletCount} Cabang:</span>
-                  <span className="text-lg font-black text-emerald-700">
-                    Rp {Math.round(5000000 / comparisonOutletCount).toLocaleString('id-ID')} <span className="text-xs font-normal text-slate-500">/outlet/bln</span>
-                  </span>
+                  {showPricing ? (
+                    <span className="text-lg font-black text-emerald-700">
+                      Rp {Math.round(5000000 / comparisonOutletCount).toLocaleString('id-ID')} <span className="text-xs font-normal text-slate-500">/outlet/bln</span>
+                    </span>
+                  ) : (
+                    <span className="text-sm font-extrabold text-emerald-700">
+                      Semakin Banyak Cabang, Semakin Murah Mendekati Nol
+                    </span>
+                  )}
                 </div>
                 <div className="flex justify-between text-xs text-slate-500 pt-1">
                   <span>Opsi Beli Putus (Turnkey Sekali Bayar):</span>
                   <span className="font-extrabold text-emerald-800">
-                    Rp 135.000.000,- (Lunas Selamanya)
+                    {showPricing
+                      ? 'Rp 135.000.000,- (Lunas Selamanya)'
+                      : 'Lunas Selamanya & 100% Hak Milik Source Code'}
                   </span>
                 </div>
               </div>
@@ -972,8 +1079,8 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               05
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-slate-900">Estimasi Biaya Pihak Ketiga (Infrastruktur & Lisensi)</h2>
-              <p className="text-xs text-slate-500">Biaya resmi yang dibayarkan langsung ke penyedia layanan (tanpa markup vendor)</p>
+              <h2 className="text-xl font-extrabold text-slate-900">Estimasi Kebutuhan Pihak Ketiga (Infrastruktur & Lisensi)</h2>
+              <p className="text-xs text-slate-500">Layanan resmi yang dihubungkan langsung ke platform Kopi Jodi (transparan tanpa markup)</p>
             </div>
           </div>
 
@@ -981,28 +1088,36 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
               <div className="text-[10px] uppercase font-bold text-slate-400">Cloud Server & Database</div>
               <div className="font-extrabold text-slate-900 text-sm">DigitalOcean / Lightsail</div>
-              <div className="text-amber-700 font-black text-xs">Rp 600rb - 1.2jt / bln</div>
-              <p className="text-[10px] text-slate-500">Sesuai volume transaksi cabang</p>
+              <div className="text-amber-700 font-black text-xs">
+                {showPricing ? 'Rp 600rb - 1.2jt / bln' : 'At-Cost Sesuai Beban Cabang'}
+              </div>
+              <p className="text-[10px] text-slate-500">Langsung dibayar ke provider</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Payment Gateway</div>
+              <div className="text-[10px] uppercase font-bold text-slate-400">Payment Gateway QRIS</div>
               <div className="font-extrabold text-slate-900 text-sm">Midtrans Indonesia</div>
-              <div className="text-emerald-700 font-black text-xs">0.7% / transaksi QRIS</div>
+              <div className="text-emerald-700 font-black text-xs">
+                Tarif Bank Indonesia (0.7%)
+              </div>
               <p className="text-[10px] text-slate-500">Tanpa biaya bulanan / setup</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
               <div className="text-[10px] uppercase font-bold text-slate-400">Google Play Developer</div>
               <div className="font-extrabold text-slate-900 text-sm">Google Play Store</div>
-              <div className="text-blue-700 font-black text-xs">$25 USD (~Rp 400rb)</div>
+              <div className="text-blue-700 font-black text-xs">
+                {showPricing ? '$25 USD (~Rp 400rb)' : 'Lisensi Resmi Akun Google ($25 Sekali)'}
+              </div>
               <p className="text-[10px] text-slate-500">Sekali bayar seumur hidup</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
               <div className="text-[10px] uppercase font-bold text-slate-400">Apple Developer Program</div>
               <div className="font-extrabold text-slate-900 text-sm">Apple App Store (iOS)</div>
-              <div className="text-purple-700 font-black text-xs">$99 USD (~Rp 1.6jt/thn)</div>
+              <div className="text-purple-700 font-black text-xs">
+                {showPricing ? '$99 USD (~Rp 1.6jt/thn)' : 'Lisensi Resmi Apple ($99/thn)'}
+              </div>
               <p className="text-[10px] text-slate-500">Lisensi tahunan resmi Apple</p>
             </div>
           </div>
@@ -1066,7 +1181,9 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               />
               <div className="flex-1">
                 <div className="font-extrabold text-slate-900">
-                  OPSI 2: Sistem Bulanan Dedicated Programmer (Rp 5.000.000,- / bulan)
+                  {showPricing
+                    ? 'OPSI 2: Sistem Bulanan Dedicated Programmer (Rp 5.000.000,- / bulan)'
+                    : 'OPSI 2: Sistem Kemitraan Dedicated Developer (Investasi Bulanan Flat & Bebas Tambah Fitur)'}
                 </div>
                 <div className="text-[11px] text-slate-500">
                   Minimal Kontrak 5 Tahun (60 Bulan) &bull; Bebas Tambah Fitur Apapun (*Zero Change Request Fee*) &bull; Support Standby
@@ -1084,10 +1201,12 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               />
               <div className="flex-1">
                 <div className="font-extrabold text-slate-900">
-                  OPSI 1: Beli Putus Paket Bundling Lengkap (Rp 135.000.000,- Sekali Bayar)
+                  {showPricing
+                    ? 'OPSI 1: Beli Putus Paket Bundling Lengkap (Rp 135.000.000,- Sekali Bayar)'
+                    : 'OPSI 1: Beli Putus Paket Turnkey Lengkap (Serah Terima per Milestone & 100% Hak Milik Source Code)'}
                 </div>
                 <div className="text-[11px] text-slate-500">
-                  Mencakup Seluruh Fase 1 + Fase 2 + Fase 3 &bull; Hemat Rp 15 Juta &bull; Garansi Bug 6 Bulan
+                  Mencakup Seluruh Fase 1 + Fase 2 + Fase 3 &bull; Garansi Bug 6 Bulan &bull; Penyerahan Source Code Penuh
                 </div>
               </div>
             </label>
