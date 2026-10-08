@@ -11,6 +11,7 @@ import type {
   LocalMenuProposal,
   BrandThemeId,
   CashierShift,
+  BaristaShift,
 } from './types';
 
 export type EventType =
@@ -40,6 +41,7 @@ export type EventType =
   | 'PettyCashApproved'
   | 'PettyCashRejected'
   | 'HppRecalculated'
+  | 'CashierShiftOpened'
   | 'CashierShiftClosed'
   | 'CashierSettlementVerified'
   // Catalog
@@ -47,6 +49,9 @@ export type EventType =
   | 'LocalMenuApproved'
   | 'LocalMenuRejected'
   | 'ChannelMarkupChanged'
+  // HR & Operations
+  | 'BaristaClockedIn'
+  | 'BaristaShiftCompleted'
   // Promotion
   | 'VoucherCreated'
   | 'VoucherRedeemed'
@@ -109,8 +114,12 @@ export type PettyCashApprovedEvent = BaseDomainEvent<'PettyCashApproved', { expe
 export type PettyCashRejectedEvent = BaseDomainEvent<'PettyCashRejected', { expenseId: string; reason: string }>;
 export type PaymentToCentralRecordedEvent = BaseDomainEvent<'PaymentToCentralRecorded', { payment: CentralPaymentRecord }>;
 
+export type CashierShiftOpenedEvent = BaseDomainEvent<'CashierShiftOpened', { shift: CashierShift }>;
 export type CashierShiftClosedEvent = BaseDomainEvent<'CashierShiftClosed', { shift: CashierShift }>;
-export type CashierSettlementVerifiedEvent = BaseDomainEvent<'CashierSettlementVerified', { shiftId: string; verifiedBy: string; depositRef: string }>;
+export type CashierSettlementVerifiedEvent = BaseDomainEvent<'CashierSettlementVerified', { shiftId: string; verifiedBy: string; depositRef?: string }>;
+
+export type BaristaClockedInEvent = BaseDomainEvent<'BaristaClockedIn', { shift: BaristaShift }>;
+export type BaristaShiftCompletedEvent = BaseDomainEvent<'BaristaShiftCompleted', { shiftId: string; cupsCompleted?: number }>;
 
 export type LocalMenuProposedEvent = BaseDomainEvent<'LocalMenuProposed', { proposal: LocalMenuProposal }>;
 export type LocalMenuApprovedEvent = BaseDomainEvent<'LocalMenuApproved', { proposalId: string; approvedMenuId: string }>;
@@ -146,8 +155,11 @@ export type DomainEvent =
   | PettyCashApprovedEvent
   | PettyCashRejectedEvent
   | PaymentToCentralRecordedEvent
+  | CashierShiftOpenedEvent
   | CashierShiftClosedEvent
   | CashierSettlementVerifiedEvent
+  | BaristaClockedInEvent
+  | BaristaShiftCompletedEvent
   | LocalMenuProposedEvent
   | LocalMenuApprovedEvent
   | LocalMenuRejectedEvent

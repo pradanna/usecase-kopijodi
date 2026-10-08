@@ -16,6 +16,8 @@ import type {
   LocalMenuProposal,
   BrandThemeId,
   CashierShift,
+  Employee,
+  BaristaShift,
 } from './types';
 import {
   INITIAL_OUTLETS,
@@ -29,6 +31,8 @@ import {
   INITIAL_ORDERS,
   INITIAL_VOUCHERS,
   INITIAL_CASHIER_SHIFTS,
+  INITIAL_EMPLOYEES,
+  INITIAL_BARISTA_SHIFTS,
 } from '../seed/initialData';
 
 export interface EcosystemState {
@@ -48,6 +52,8 @@ export interface EcosystemState {
   vouchers: Voucher[];
   localProposals: LocalMenuProposal[];
   cashierShifts: CashierShift[];
+  employees: Employee[];
+  baristaShifts: BaristaShift[];
 }
 
 export const INITIAL_STATE: EcosystemState = {
@@ -73,6 +79,8 @@ export const INITIAL_STATE: EcosystemState = {
   vouchers: INITIAL_VOUCHERS,
   localProposals: [],
   cashierShifts: INITIAL_CASHIER_SHIFTS,
+  employees: INITIAL_EMPLOYEES,
+  baristaShifts: INITIAL_BARISTA_SHIFTS,
 };
 
 export function domainReducer(state: EcosystemState, event: DomainEvent): EcosystemState {
@@ -353,6 +361,14 @@ export function domainReducer(state: EcosystemState, event: DomainEvent): Ecosys
       };
     }
 
+    case 'CashierShiftOpened': {
+      const { shift } = event.payload;
+      return {
+        ...state,
+        cashierShifts: [shift, ...state.cashierShifts.filter((s) => s.id !== shift.id)],
+      };
+    }
+
     case 'CashierShiftClosed': {
       const { shift } = event.payload;
       const exists = state.cashierShifts.some((s) => s.id === shift.id);
@@ -376,6 +392,35 @@ export function domainReducer(state: EcosystemState, event: DomainEvent): Ecosys
                 verifiedBy,
                 verifiedAt: new Date().toLocaleTimeString('id-ID'),
                 depositRef: depositRef || s.depositRef,
+              }
+            : s
+        ),
+      };
+    }
+
+    case 'BaristaClockedIn': {
+      const { shift } = event.payload;
+      return {
+        ...state,
+        baristaShifts: state.baristaShifts.map((s) =>
+          s.id === shift.id || (s.employeeId === shift.employeeId && s.date === shift.date)
+            ? { ...s, ...shift, status: 'CLOCKED_IN' }
+            : s
+        ),
+      };
+    }
+
+    case 'BaristaShiftCompleted': {
+      const { shiftId, cupsCompleted } = event.payload;
+      return {
+        ...state,
+        baristaShifts: state.baristaShifts.map((s) =>
+          s.id === shiftId
+            ? {
+                ...s,
+                status: 'COMPLETED',
+                clockOutTime: new Date().toLocaleTimeString('id-ID'),
+                cupsCompleted: cupsCompleted || s.cupsCompleted,
               }
             : s
         ),

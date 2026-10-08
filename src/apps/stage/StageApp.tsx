@@ -32,7 +32,29 @@ import {
   X,
   Coffee,
   FileText,
+  ShoppingBag,
+  Users,
+  DollarSign,
+  ShieldCheck,
+  ArrowRight,
+  ExternalLink,
 } from 'lucide-react';
+
+export interface DemoStep {
+  title: string;
+  narration: string;
+  activeDevice: 'customer' | 'pos' | 'kds' | 'ops' | 'all';
+  action: () => void;
+}
+
+export interface DemoScenario {
+  id: string;
+  name: string;
+  badge: string;
+  icon: React.ReactNode;
+  tagline: string;
+  steps: DemoStep[];
+}
 
 export const StageApp: React.FC = () => {
   const { brandId, dispatch } = useEcosystemStore();
@@ -40,14 +62,14 @@ export const StageApp: React.FC = () => {
   // Top Mode: 'demo' (multi-device) | 'proposal' (resmi penawaran)
   const [stageViewMode, setStageViewMode] = useState<'demo' | 'proposal'>('demo');
 
-  const [activeLayout, setActiveLayout] = useState<'grid' | 'focus'>('grid');
   const [focusedApp, setFocusedApp] = useState<string | null>(null);
 
   // Live event log
   const [liveEvents, setLiveEvents] = useState<DomainEvent[]>([]);
   const [isEventLogOpen, setIsEventLogOpen] = useState<boolean>(false);
 
-  // Autoplay presentation mode state
+  // Active scenario and autoplay states
+  const [selectedScenarioId, setSelectedScenarioId] = useState<string>('order_flow');
   const [isPlayingAutoDemo, setIsPlayingAutoDemo] = useState<boolean>(false);
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const [currentNarrative, setCurrentNarrative] = useState<string>('');
@@ -66,178 +88,485 @@ export const StageApp: React.FC = () => {
     dispatch(createEvent('BrandThemeChanged', 'Presenter (Stage)', { brandId: nextBrandId }));
   };
 
-  // Reset Demo
+  // Reset entire demo to T0
   const handleResetDemo = () => {
     if (confirm('Reset seluruh data demo ke kondisi bersih awal (T0)?')) {
       dispatch(createEvent('DemoReset', 'Presenter', { resetAt: Date.now() }));
       setLiveEvents([]);
       setIsPlayingAutoDemo(false);
       setCurrentStepIndex(0);
-      setCurrentNarrative('Demo di-reset ke kondisi awal.');
+      setCurrentNarrative('Seluruh database & event demo telah di-reset ke kondisi awal T0.');
     }
   };
 
-  // Skenario Utama: "Satu Gelas, Satu Cerita" Step-by-Step Script
-  const steps = [
+  // ==========================================
+  // MULTI-SCENARIO DEMO CATALOGUE
+  // ==========================================
+  const scenarios: DemoScenario[] = [
+    // 1. ORDER-TO-CUP FLOW
     {
-      title: 'Langkah 1: Pelanggan Pesan Es Kopi Susu via App',
-      narration: 'Pelanggan memilih gerai Sudirman, kustomisasi less sugar, pasang voucher HEMAT10, dan checkout bayar QRIS.',
-      action: () => {
-        const orderId = `ord_auto_${Date.now()}`;
-        const newOrder = {
-          id: orderId,
-          ticketNumber: '#A-101',
-          outletId: 'outlet-sudirman',
-          channel: 'app' as const,
-          customerName: 'Pradana (Demo VIP)',
-          items: [
-            {
-              menuItemId: 'menu-kopi-susu',
-              menuName: 'Es Kopi Susu Aren',
-              qty: 1,
-              unitPrice: 23000,
-              selectedModifiers: [
-                { groupId: 'mod-sugar', groupName: 'Gula', optionId: 'opt-less', optionName: 'Less Sugar', priceDelta: 0 },
+      id: 'order_flow',
+      name: '1. Order-to-Cup',
+      badge: 'Omni-channel',
+      icon: <Coffee className="w-4 h-4" />,
+      tagline: 'Sinkronisasi pesanan real-time dari App Pelanggan -> POS Kasir -> KDS Barista -> Potong Stok Resep.',
+      steps: [
+        {
+          title: 'Langkah 1: Pelanggan Pesan Es Kopi Susu via App',
+          narration: 'Pelanggan memilih gerai Sudirman, kustomisasi Less Sugar, pakai voucher HEMAT10, dan checkout bayar QRIS.',
+          activeDevice: 'customer',
+          action: () => {
+            const orderId = `ord_auto_${Date.now()}`;
+            const newOrder = {
+              id: orderId,
+              ticketNumber: '#A-101',
+              outletId: 'outlet-sudirman',
+              channel: 'app' as const,
+              customerName: 'Pradana (Demo VIP)',
+              items: [
+                {
+                  menuItemId: 'menu-kopi-susu',
+                  menuName: 'Es Kopi Susu Aren',
+                  qty: 1,
+                  unitPrice: 23000,
+                  selectedModifiers: [
+                    { groupId: 'mod-sugar', groupName: 'Gula', optionId: 'opt-less', optionName: 'Less Sugar', priceDelta: 0 },
+                  ],
+                  subtotal: 23000,
+                },
               ],
               subtotal: 23000,
-            },
-          ],
-          subtotal: 23000,
-          appMarkupAmount: 3000,
-          discountAmount: 10000,
-          taxAmount: 0,
-          total: 13000,
-          status: 'PLACED' as const,
-          paymentMethod: 'qris' as const,
-          paymentStatus: 'PAID' as const,
-          createdAt: new Date().toLocaleTimeString('id-ID'),
-          updatedAt: new Date().toLocaleTimeString('id-ID'),
-        };
-        dispatch(createEvent('PaymentCaptured', 'Midtrans Gateway', { orderId, amount: 13000, method: 'qris' as const }, 'outlet-sudirman'));
-        dispatch(createEvent('OrderPlaced', 'Customer App', { order: newOrder }, 'outlet-sudirman'));
-      },
+              appMarkupAmount: 3000,
+              discountAmount: 10000,
+              taxAmount: 0,
+              total: 13000,
+              status: 'PLACED' as const,
+              paymentMethod: 'qris' as const,
+              paymentStatus: 'PAID' as const,
+              createdAt: new Date().toLocaleTimeString('id-ID'),
+              updatedAt: new Date().toLocaleTimeString('id-ID'),
+            };
+            dispatch(createEvent('PaymentCaptured', 'Midtrans Gateway', { orderId, amount: 13000, method: 'qris' as const }, 'outlet-sudirman'));
+            dispatch(createEvent('OrderPlaced', 'Customer App', { order: newOrder }, 'outlet-sudirman'));
+          },
+        },
+        {
+          title: 'Langkah 2: Kasir POS Terima Pesanan Online',
+          narration: 'Pesanan online muncul di antrean tablet POS dengan penanda badge "Online". Kasir menekan Terima dan meneruskannya ke KDS.',
+          activeDevice: 'pos',
+          action: () => {
+            const targetOrder = useEcosystemStore.getState().orders[0];
+            if (targetOrder) {
+              dispatch(createEvent('OrderAccepted', 'Kasir POS', { orderId: targetOrder.id, estimatedMinutes: 8 }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 3: Barista Mulai Meracik di KDS',
+          narration: 'Tiket meluncur ke layar KDS Barista. Barista menekan Mulai. Status di smartphone pelanggan live berubah menjadi "Sedang Diracik".',
+          activeDevice: 'kds',
+          action: () => {
+            const targetOrder = useEcosystemStore.getState().orders[0];
+            if (targetOrder) {
+              dispatch(createEvent('OrderPrepStarted', 'Barista KDS', { orderId: targetOrder.id, ticketNumber: targetOrder.ticketNumber }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 4: Barista Tandai Siap & Stok Terpotong Otomatis',
+          narration: 'Minuman selesai. Barista mengetuk Siap. Sistem otomatis memotong stok biji kopi, susu, dan cup sesuai resep (BR-08).',
+          activeDevice: 'kds',
+          action: () => {
+            const targetOrder = useEcosystemStore.getState().orders[0];
+            if (targetOrder) {
+              dispatch(createEvent('OrderReady', 'Barista KDS', { orderId: targetOrder.id, ticketNumber: targetOrder.ticketNumber }, 'outlet-sudirman'));
+              dispatch(createEvent('StockConsumed', 'Recipe Engine', {
+                outletId: 'outlet-sudirman',
+                orderId: targetOrder.id,
+                consumed: [
+                  { ingredientId: 'ing-kopi-blend', qty: 18, uom: 'gram' },
+                  { ingredientId: 'ing-susu-fresh', qty: 120, uom: 'ml' },
+                  { ingredientId: 'ing-cup-16oz', qty: 1, uom: 'pcs' },
+                ],
+              }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 5: Pelanggan Ambil Pesanan di Counter Gerai',
+          narration: 'Pelanggan menerima notifikasi "Pesanan Siap Diambil", scan QR pickup di kasir, dan otomatis mendapatkan +130 Poin Loyalti.',
+          activeDevice: 'customer',
+          action: () => {
+            const targetOrder = useEcosystemStore.getState().orders[0];
+            if (targetOrder) {
+              dispatch(createEvent('OrderPickedUp', 'Kasir Counter', { orderId: targetOrder.id }, 'outlet-sudirman'));
+            }
+          },
+        },
+      ],
     },
+
+    // 2. PURCHASE & SUPPLY CHAIN FLOW
     {
-      title: 'Langkah 2: Kasir POS Terima Pesanan Online',
-      narration: 'Pesanan online muncul di antrean tablet POS dengan penanda badge "Online". Kasir menekan Terima dan meneruskannya ke KDS.',
-      action: () => {
-        const targetOrder = useEcosystemStore.getState().orders[0];
-        if (targetOrder) {
-          dispatch(createEvent('OrderAccepted', 'Kasir POS', { orderId: targetOrder.id, estimatedMinutes: 8 }, 'outlet-sudirman'));
-        }
-      },
-    },
-    {
-      title: 'Langkah 3: Barista Mulai Meracik di KDS',
-      narration: 'Tiket meluncur ke layar KDS Barista. Barista menekan Mulai. Status di smartphone pelanggan live berubah menjadi "Sedang Diracik".',
-      action: () => {
-        const targetOrder = useEcosystemStore.getState().orders[0];
-        if (targetOrder) {
-          dispatch(createEvent('OrderPrepStarted', 'Barista KDS', { orderId: targetOrder.id, ticketNumber: targetOrder.ticketNumber }, 'outlet-sudirman'));
-        }
-      },
-    },
-    {
-      title: 'Langkah 4: Barista Tandai Siap & Stok Terpotong Otomatis',
-      narration: 'Minuman selesai. Barista mengetuk Siap. Sistem otomatis memotong stok biji kopi, susu, dan cup sesuai resep (BR-08).',
-      action: () => {
-        const targetOrder = useEcosystemStore.getState().orders[0];
-        if (targetOrder) {
-          dispatch(createEvent('OrderReady', 'Barista KDS', { orderId: targetOrder.id, ticketNumber: targetOrder.ticketNumber }, 'outlet-sudirman'));
-          dispatch(createEvent('StockConsumed', 'Recipe Engine', {
-            outletId: 'outlet-sudirman',
-            orderId: targetOrder.id,
-            consumed: [
-              { ingredientId: 'ing-kopi-blend', qty: 18, uom: 'gram' },
-              { ingredientId: 'ing-susu-fresh', qty: 120, uom: 'ml' },
-              { ingredientId: 'ing-cup-16oz', qty: 1, uom: 'pcs' },
-            ],
-          }, 'outlet-sudirman'));
-        }
-      },
-    },
-    {
-      title: 'Langkah 5: Alert Stok Susu Menipis ke Store Manager',
-      narration: 'Konsumsi susu melewati batas pengaman safety stock. App Operasi Outlet milik Store Manager membunyikan alert Low Stock.',
-      action: () => {
-        dispatch(createEvent('LowStockAlert', 'Inventory Engine', {
-          outletId: 'outlet-sudirman',
-          ingredientId: 'ing-susu-fresh',
-          ingredientName: 'Susu Fresh Milk Pasteurisasi',
-          currentQty: 4880,
-          minStock: 5000,
-          uom: 'ml',
-        }, 'outlet-sudirman'));
-      },
-    },
-    {
-      title: 'Langkah 6: Store Manager Buat PO Tanpa Harga ke Pusat',
-      narration: 'Store Manager menerbitkan PO pengisian ulang ke pusat hanya berisi barang dan kuantitas, tanpa kolom harga (BR-04).',
-      action: () => {
-        const poId = `po_${Date.now()}`;
-        const newPO = {
-          id: poId,
-          outletId: 'outlet-sudirman',
-          supplierType: 'central' as const,
-          items: [{ ingredientId: 'ing-susu-fresh', ingredientName: 'Susu Fresh Milk Pasteurisasi', qty: 2, uom: 'Karton (12L)' }],
-          status: 'SENT' as const, // already dispatched by warehouse
-          createdAt: new Date().toLocaleTimeString('id-ID'),
-        };
-        dispatch(createEvent('PORequested', 'Store Manager', { po: newPO }, 'outlet-sudirman'));
-      },
-    },
-    {
-      title: 'Langkah 7: Terima Barang Fisik -> Status "Menunggu Nota"',
-      narration: 'Truk logistik tiba. Manager menerima barang. Stok susu fisik langsung bertambah status "Menunggu Nota" dengan HPP sementara (BR-05).',
-      action: () => {
-        const lastPo = useEcosystemStore.getState().purchaseOrders[0];
-        if (lastPo) {
-          dispatch(createEvent('GoodsReceived', 'Store Manager', {
-            receipt: {
-              id: `rcpt_${Date.now()}`,
-              poId: lastPo.id,
+      id: 'purchase_flow',
+      name: '2. Demo Purchase & Supply Chain',
+      badge: 'Pengadaan & HPP',
+      icon: <ShoppingBag className="w-4 h-4" />,
+      tagline: 'PO tanpa harga (BR-04), terima fisik status Menunggu Nota (BR-05), hingga rekonsiliasi faktur & auto true-up HPP (BR-06).',
+      steps: [
+        {
+          title: 'Langkah 1: Alert Stok Susu Menipis di Gerai Sudirman',
+          narration: 'Konsumsi susu melewati batas safety stock (tersisa 4.800ml < 5.000ml). App Operasi Outlet milik Store Manager membunyikan alert Low Stock.',
+          activeDevice: 'ops',
+          action: () => {
+            dispatch(createEvent('LowStockAlert', 'Inventory Engine', {
               outletId: 'outlet-sudirman',
-              items: [{ ingredientId: 'ing-susu-fresh', qtyReceived: 24000 }], // 24 L
-              receivedAt: new Date().toLocaleTimeString('id-ID'),
-            },
-          }, 'outlet-sudirman'));
-        }
-      },
-    },
-    {
-      title: 'Langkah 8: Finance Input Nota Faktur -> True-Up HPP',
-      narration: 'Finance pusat memverifikasi faktur riil (Rp 19.500/L). Nilai HPP dikoreksi otomatis (true-up) dan saldo hutang cabang tercatat (BR-06).',
-      action: () => {
-        const lastPo = useEcosystemStore.getState().purchaseOrders[0];
-        if (lastPo) {
-          dispatch(createEvent('InvoiceEntered', 'Finance Pusat', {
-            invoice: {
-              id: `inv_${Date.now()}`,
-              invoiceNumber: 'INV-PST-2026-105',
-              poId: lastPo.id,
+              ingredientId: 'ing-susu-fresh',
+              ingredientName: 'Susu Fresh Milk Pasteurisasi',
+              currentQty: 4880,
+              minStock: 5000,
+              uom: 'ml',
+            }, 'outlet-sudirman'));
+          },
+        },
+        {
+          title: 'Langkah 2: Store Manager Buat PO Tanpa Harga ke Pusat (BR-04)',
+          narration: 'Store Manager menerbitkan PO 2 Karton (24L) Susu ke Gudang Pusat. Sesuai aturan BR-04, formulir PO tidak memiliki kolom harga modal.',
+          activeDevice: 'ops',
+          action: () => {
+            const poId = `po_${Date.now()}`;
+            const newPO = {
+              id: poId,
               outletId: 'outlet-sudirman',
-              items: [{ ingredientId: 'ing-susu-fresh', qtyReceived: 2, actualPricePerUom: 234000 }],
-              totalAmount: 468000,
-              verifiedAt: new Date().toLocaleTimeString('id-ID'),
-            },
-          }, 'outlet-sudirman'));
-          dispatch(createEvent('HppRecalculated', 'Finance Engine', {
-            outletId: 'outlet-sudirman',
-            ingredientId: 'ing-susu-fresh',
-            oldUnitCost: 18,
-            newUnitCost: 19.5,
-          }, 'outlet-sudirman'));
-        }
-      },
+              supplierType: 'central' as const,
+              items: [{ ingredientId: 'ing-susu-fresh', ingredientName: 'Susu Fresh Milk Pasteurisasi', qty: 2, uom: 'Karton (12L)' }],
+              status: 'SENT' as const,
+              notes: 'Permintaan pasokan reguler gerai',
+              createdAt: new Date().toLocaleTimeString('id-ID'),
+            };
+            dispatch(createEvent('PORequested', 'Store Manager', { po: newPO }, 'outlet-sudirman'));
+          },
+        },
+        {
+          title: 'Langkah 3: Truk Tiba: Terima Barang -> Status "Menunggu Nota" (BR-05)',
+          narration: 'Barang fisik tiba di gerai. Manager konfirmasi terima barang. Stok fisik 24L langsung masuk kartu stok gerai berstatus "Menunggu Nota" agar bisa langsung dipakai operasional (BR-05).',
+          activeDevice: 'ops',
+          action: () => {
+            const lastPo = useEcosystemStore.getState().purchaseOrders[0];
+            if (lastPo) {
+              dispatch(createEvent('GoodsReceived', 'Store Manager', {
+                receipt: {
+                  id: `rcpt_${Date.now()}`,
+                  poId: lastPo.id,
+                  outletId: 'outlet-sudirman',
+                  items: [{ ingredientId: 'ing-susu-fresh', qtyReceived: 24000 }],
+                  receivedAt: new Date().toLocaleTimeString('id-ID'),
+                },
+              }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 4: Finance Input Faktur Riil -> Sistem Auto True-Up HPP (BR-06)',
+          narration: 'Finance pusat memverifikasi faktur riil (Rp 19.500/L). Sistem melakukan rekonsiliasi otomatis (True-Up HPP dari Rp 18/ml ke Rp 19.5/ml) dan mengakui hutang cabang ke pusat.',
+          activeDevice: 'pos',
+          action: () => {
+            const lastPo = useEcosystemStore.getState().purchaseOrders[0];
+            if (lastPo) {
+              dispatch(createEvent('InvoiceEntered', 'Finance Pusat', {
+                invoice: {
+                  id: `inv_${Date.now()}`,
+                  invoiceNumber: 'INV-PST-2026-105',
+                  poId: lastPo.id,
+                  outletId: 'outlet-sudirman',
+                  items: [{ ingredientId: 'ing-susu-fresh', qtyReceived: 2, actualPricePerUom: 234000 }],
+                  totalAmount: 468000,
+                  verifiedAt: new Date().toLocaleTimeString('id-ID'),
+                },
+              }, 'outlet-sudirman'));
+              dispatch(createEvent('HppRecalculated', 'Finance Engine', {
+                outletId: 'outlet-sudirman',
+                ingredientId: 'ing-susu-fresh',
+                oldUnitCost: 18,
+                newUnitCost: 19.5,
+              }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 5: Stok Definitif & Laporan Margin Terupdate Real-Time',
+          narration: 'Kartu stok gerai kini berstatus "Invoiced Definitif". Laba kotor dan neraca cabang di Dashboard Owner serta Backoffice ERP langsung terupdate presisi!',
+          activeDevice: 'all',
+          action: () => {
+            // Supply chain scenario finished
+          },
+        },
+      ],
     },
+
+    // 3. HR, SHIFT & BARISTA GPS FLOW
     {
-      title: 'Langkah 9: Dashboard Owner & Portal Mitra Terupdate Real-Time',
-      narration: 'Grafik omzet, margin, dan HPP definitif di Owner Dashboard dan Portal Mitra terupdate serentak secara real-time!',
-      action: () => {
-        // Target achieved!
-      },
+      id: 'hr_flow',
+      name: '3. Demo HR & Barista GPS',
+      badge: 'Presensi & KPI',
+      icon: <Users className="w-4 h-4" />,
+      tagline: 'Jadwal shift, presensi GPS geofencing radius 50m, live tracking output racikan cup, hingga SLA kecepatan barista.',
+      steps: [
+        {
+          title: 'Langkah 1: Barista Buka Jadwal Shift di App Operasi Outlet',
+          narration: 'Barista Andi Pratama membuka tab HR/Shift di smartphone gerai Sudirman. Jadwal shift pagi (07:00 - 15:00) terkonfirmasi di sistem.',
+          activeDevice: 'ops',
+          action: () => {
+            // Highlight shift on OpsApp
+          },
+        },
+        {
+          title: 'Langkah 2: Clock-In dengan Validasi GPS Geofencing Radius 50m',
+          narration: 'Sistem memverifikasi posisi GPS perangkat (11 meter dari gerai, valid di bawah radius 50m). Presensi disetujui, anti-fake GPS dan anti-titip absen.',
+          activeDevice: 'ops',
+          action: () => {
+            const shift = useEcosystemStore.getState().baristaShifts.find((s) => s.outletId === 'outlet-sudirman');
+            if (shift) {
+              const updatedShift = {
+                ...shift,
+                status: 'CLOCKED_IN' as const,
+                clockInTime: '06:52 WIB',
+                gpsDistanceMeters: 11,
+              };
+              dispatch(createEvent('BaristaClockedIn', 'Andi Pratama', { shift: updatedShift }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 3: Barista Mulai Meracik di Stasiun KDS Dapur',
+          narration: 'Barista aktif di layar KDS. Setiap pesanan yang masuk langsung diproses. Stopwatch SLA per cup mulai berjalan otomatis.',
+          activeDevice: 'kds',
+          action: () => {
+            const targetOrder = useEcosystemStore.getState().orders[0];
+            if (targetOrder) {
+              dispatch(createEvent('OrderPrepStarted', 'Barista Andi (KDS)', { orderId: targetOrder.id, ticketNumber: targetOrder.ticketNumber }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 4: Minuman Siap: Counter Output Cup & SLA Kecepatan Terhitung',
+          narration: 'Tiket selesai dalam 138 detik (standar SLA < 180 detik). Counter output naik (85 / 120 cup). Skor performa Andi mencapai 96 poin (Grade A).',
+          activeDevice: 'kds',
+          action: () => {
+            const shift = useEcosystemStore.getState().baristaShifts.find((s) => s.outletId === 'outlet-sudirman');
+            if (shift) {
+              dispatch(createEvent('BaristaShiftCompleted', 'Barista Andi', {
+                shiftId: shift.id,
+                cupsCompleted: (shift.cupsCompleted || 84) + 1,
+              }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 5: Owner Pantau Leaderboard Barista & Rekap Payroll',
+          narration: 'Owner dapat membuka tab "HR & Shift Barista" di Dashboard Owner untuk melihat produktivitas tim, leaderboard gerai, dan estimasi bonus insentif.',
+          activeDevice: 'all',
+          action: () => {
+            // HR scenario finished
+          },
+        },
+      ],
+    },
+
+    // 4. CASHIER & FINANCE RECONCILIATION FLOW
+    {
+      id: 'finance_flow',
+      name: '4. Demo Finance & Kasir',
+      badge: 'Rekonsiliasi Kas',
+      icon: <DollarSign className="w-4 h-4" />,
+      tagline: 'Buka modal laci (Float), pencatatan transaksi kasir, tutup shift blind cash count, rekonsiliasi selisih Rp 0 & jurnal deposit bank.',
+      steps: [
+        {
+          title: 'Langkah 1: Kasir Buka Shift POS dengan Modal Awal (Float Rp 200.000)',
+          narration: 'Kasir Budi Santoso memasukkan modal awal uang pecahan kecil Rp 200.000 ke laci kasir saat membuka shift pagi.',
+          activeDevice: 'pos',
+          action: () => {
+            const shiftId = `shift_${Date.now()}`;
+            dispatch(createEvent('CashierShiftOpened', 'Kasir POS', {
+              shift: {
+                id: shiftId,
+                outletId: 'outlet-sudirman',
+                shiftNumber: 1,
+                cashierName: 'Budi Santoso',
+                openedAt: '07:00 WIB',
+                startingFloat: 200000,
+                totalCashSales: 0,
+                totalQrisSales: 0,
+                totalTransactions: 0,
+                expectedCashInDrawer: 200000,
+                status: 'OPEN' as const,
+              },
+            }, 'outlet-sudirman'));
+          },
+        },
+        {
+          title: 'Langkah 2: Transaksi Penjualan Masuk (Tunai Rp 180.000 & QRIS Rp 250.000)',
+          narration: 'Kasir melayani transaksi langsung di meja kasir. Uang tunai masuk laci dan saldo kasir shift bertambah secara terisolasi per user.',
+          activeDevice: 'pos',
+          action: () => {
+            const cashOrder = {
+              id: `ord_cash_${Date.now()}`,
+              ticketNumber: '#POS-08',
+              outletId: 'outlet-sudirman',
+              channel: 'pos' as const,
+              customerName: 'Pelanggan Walk-in (Tunai)',
+              items: [
+                {
+                  menuItemId: 'menu-kopi-susu',
+                  menuName: 'Es Kopi Susu Aren',
+                  qty: 2,
+                  unitPrice: 20000,
+                  selectedModifiers: [],
+                  subtotal: 40000,
+                },
+              ],
+              subtotal: 40000,
+              appMarkupAmount: 0,
+              discountAmount: 0,
+              taxAmount: 0,
+              total: 40000,
+              status: 'COMPLETED' as any,
+              paymentMethod: 'cash' as const,
+              paymentStatus: 'PAID' as const,
+              createdAt: new Date().toLocaleTimeString('id-ID'),
+              updatedAt: new Date().toLocaleTimeString('id-ID'),
+            };
+            dispatch(createEvent('PaymentCaptured', 'Kasir POS', { orderId: cashOrder.id, amount: 40000, method: 'cash' as const }, 'outlet-sudirman'));
+            dispatch(createEvent('OrderPlaced', 'Kasir POS', { order: cashOrder as any }, 'outlet-sudirman'));
+          },
+        },
+        {
+          title: 'Langkah 3: Kasir Tutup Shift & Lakukan "Blind Cash Count"',
+          narration: 'Kasir menghitung fisik uang kertas & koin di laci kasir tanpa melihat angka ekspektasi sistem terlebih dahulu (Anti-Fraud Blind Count).',
+          activeDevice: 'pos',
+          action: () => {
+            const openShift = useEcosystemStore.getState().cashierShifts.find((s) => s.status === 'OPEN' && s.outletId === 'outlet-sudirman');
+            if (openShift) {
+              const physicalCash = openShift.expectedCashInDrawer;
+              dispatch(createEvent('CashierShiftClosed', 'Kasir POS', {
+                shift: {
+                  ...openShift,
+                  status: 'PENDING_FINANCE_AUDIT' as const,
+                  closedAt: new Date().toLocaleTimeString('id-ID'),
+                  actualCashCounted: physicalCash,
+                  variance: 0,
+                  closingNotes: 'Penghitungan fisik laci kasir cocok sempurna',
+                },
+              }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 4: Rekonsiliasi Sistem: Variance / Selisih Rp 0 (Match 100%)',
+          narration: 'Sistem membandingkan hitungan fisik vs penjualan sistem: Total Rp 380.000 (Float Rp 200k + Kas Rp 180k). Selisih = Rp 0 (Tepat & Akurat).',
+          activeDevice: 'pos',
+          action: () => {
+            // Verified variance 0
+          },
+        },
+        {
+          title: 'Langkah 5: Finance Verifikasi Setoran Bank & Auto-Posting Jurnal',
+          narration: 'Finance memvalidasi bukti transfer setoran kas ke Bank BCA (#DEP-BCA-8821). Sistem otomatis mendebit Kas Bank dan mengkredit Kas Kasir Outlet.',
+          activeDevice: 'all',
+          action: () => {
+            const auditShift = useEcosystemStore.getState().cashierShifts.find((s) => s.status === 'PENDING_FINANCE_AUDIT' || s.status === 'VERIFIED');
+            if (auditShift) {
+              dispatch(createEvent('CashierSettlementVerified', 'Finance Supervisor', {
+                shiftId: auditShift.id,
+                verifiedBy: 'Finance Supervisor',
+                depositRef: 'DEP-BCA-20261008-01',
+              }, 'outlet-sudirman'));
+            }
+          },
+        },
+      ],
+    },
+
+    // 5. PETTY CASH ANTI-FRAUD FLOW
+    {
+      id: 'petty_cash_flow',
+      name: '5. Demo Petty Cash Anti-Fraud',
+      badge: 'Kontrol Pengeluaran',
+      icon: <ShieldCheck className="w-4 h-4" />,
+      tagline: 'Pengajuan kas kecil darurat gerai, validasi plafon 3-tier, foto struk fisik, approval bertingkat & posting beban otomatis.',
+      steps: [
+        {
+          title: 'Langkah 1: Store Manager Ajukan Kas Kecil Darurat (Beli Es Batu)',
+          narration: 'Outlet mengalami lonjakan pengunjung dan kehabisan es batu. Manager membeli 3 karung es batu kristal darurat seharga Rp 85.000.',
+          activeDevice: 'ops',
+          action: () => {
+            const expenseId = `petty_${Date.now()}`;
+            dispatch(createEvent('PettyCashSubmitted', 'Store Manager', {
+              expense: {
+                id: expenseId,
+                outletId: 'outlet-sudirman',
+                amount: 85000,
+                category: 'Operasional',
+                description: 'Beli es batu kristal 3 karung (supplier darurat)',
+                receiptPhotoUrl: '/receipt-ice.jpg',
+                status: 'AWAITING_APPROVAL' as const,
+                createdAt: new Date().toLocaleTimeString('id-ID'),
+              },
+            }, 'outlet-sudirman'));
+          },
+        },
+        {
+          title: 'Langkah 2: Sistem Validasi Plafon 3-Tier (Tier 1: Nominal <= Rp 100.000)',
+          narration: 'Karena nominal Rp 85.000 berada di bawah batas plafon bebas outlet (Rp 100.000), pengajuan otomatis di-approve (Tier 1) dengan syarat foto nota.',
+          activeDevice: 'ops',
+          action: () => {
+            const lastExpense = useEcosystemStore.getState().pettyCashExpenses[0];
+            if (lastExpense) {
+              dispatch(createEvent('PettyCashApproved', 'Sistem Otorisasi Otomatis', {
+                expenseId: lastExpense.id,
+                approvedBy: 'Auto-Rule Tier 1 (<= Plafon Bebas)',
+              }, 'outlet-sudirman'));
+            }
+          },
+        },
+        {
+          title: 'Langkah 3: Saldo Kas Gerai Terpotong & Tercatat di Jurnal Beban Cabang',
+          narration: 'Saldo petty cash outlet Sudirman terpotong dari Rp 500.000 menjadi Rp 415.000. Finance pusat dapat melihat struk digital secara terpusat tanpa risiko struk fiktif.',
+          activeDevice: 'all',
+          action: () => {
+            // Petty cash done
+          },
+        },
+      ],
     },
   ];
+
+  const currentScenario = scenarios.find((s) => s.id === selectedScenarioId) || scenarios[0];
+  const steps = currentScenario.steps;
+
+  // Handle Switch Scenario
+  const handleSelectScenario = (scenarioId: string) => {
+    setSelectedScenarioId(scenarioId);
+    setCurrentStepIndex(0);
+    setIsPlayingAutoDemo(false);
+    const scen = scenarios.find((s) => s.id === scenarioId) || scenarios[0];
+    setCurrentNarrative(`${scen.name}: ${scen.steps[0].title} — ${scen.steps[0].narration}`);
+  };
+
+  // Next Step Manual
+  const handleNextStep = () => {
+    if (currentStepIndex < steps.length) {
+      const current = steps[currentStepIndex];
+      setCurrentNarrative(`${current.title} — ${current.narration}`);
+      current.action();
+      if (currentStepIndex + 1 < steps.length) {
+        setCurrentStepIndex((prev) => prev + 1);
+      } else {
+        setIsPlayingAutoDemo(false);
+        setCurrentNarrative(`Skenario "${currentScenario.name}" selesai sukses 100%!`);
+      }
+    }
+  };
 
   // Auto demo stepper loop
   useEffect(() => {
@@ -249,19 +578,32 @@ export const StageApp: React.FC = () => {
         current.action();
 
         timer = setTimeout(() => {
-          setCurrentStepIndex((prev) => prev + 1);
-        }, 5500); // 5.5 seconds per step
+          if (currentStepIndex + 1 < steps.length) {
+            setCurrentStepIndex((prev) => prev + 1);
+          } else {
+            setIsPlayingAutoDemo(false);
+            setCurrentNarrative(`Skenario "${currentScenario.name}" selesai sukses 100%!`);
+          }
+        }, 5000); // 5 seconds per step
       } else {
         setIsPlayingAutoDemo(false);
-        setCurrentNarrative('Skenario "Satu Gelas, Satu Cerita" selesai sukses 100%!');
+        setCurrentNarrative(`Skenario "${currentScenario.name}" selesai sukses 100%!`);
       }
     }
     return () => clearTimeout(timer);
-  }, [isPlayingAutoDemo, currentStepIndex]);
+  }, [isPlayingAutoDemo, currentStepIndex, selectedScenarioId]);
 
   const handleStartAutoDemo = () => {
     setCurrentStepIndex(0);
     setIsPlayingAutoDemo(true);
+  };
+
+  // Check if a device is active in the current step
+  const isActiveDevice = (deviceKey: 'customer' | 'pos' | 'kds' | 'ops') => {
+    if (currentStepIndex >= steps.length) return false;
+    const currentActive = steps[currentStepIndex]?.activeDevice;
+    if (currentActive === 'all') return true;
+    return currentActive === deviceKey;
   };
 
   return (
@@ -282,7 +624,7 @@ export const StageApp: React.FC = () => {
               </Badge>
             </div>
             <div className="text-[11px] text-gray-400">
-              Ekosistem Terpadu: Satu Gelas, Satu Cerita • Multi-Device Real-Time Sync
+              Katalog Multi-Skenario Demo Interaktif • Event-Driven Multi-Device Live Sync
             </div>
           </div>
         </div>
@@ -333,7 +675,18 @@ export const StageApp: React.FC = () => {
                 className="font-bold flex items-center gap-1.5 shadow-md"
               >
                 {isPlayingAutoDemo ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
-                <span>{isPlayingAutoDemo ? 'Jeda Demo' : 'Play Demo Otomatis'}</span>
+                <span>{isPlayingAutoDemo ? 'Jeda Demo' : 'Play Skenario'}</span>
+              </Button>
+
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={handleNextStep}
+                className="text-xs font-bold bg-gray-800 hover:bg-gray-700 text-amber-300 border-gray-700 flex items-center gap-1"
+                title="Langkah berikutnya manual"
+              >
+                <span>Langkah Berikutnya</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Button>
 
               <Button
@@ -353,7 +706,7 @@ export const StageApp: React.FC = () => {
                 className="text-xs font-semibold bg-gray-800 text-rose-300 border-gray-700 hover:bg-gray-700"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-                <span>Reset Demo</span>
+                <span>Reset (T0)</span>
               </Button>
 
               <Button
@@ -376,14 +729,14 @@ export const StageApp: React.FC = () => {
             <button
               key={role}
               onClick={() => setFocusedApp(role)}
-              className="px-2.5 py-1 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold cursor-pointer"
+              className="px-2.5 py-1 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold cursor-pointer transition-colors"
             >
               {role}
             </button>
           ))}
           <button
             onClick={() => setStageViewMode('proposal')}
-            className="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-800/80 text-amber-300 text-xs font-bold cursor-pointer flex items-center gap-1"
+            className="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-800/80 text-amber-300 text-xs font-bold cursor-pointer flex items-center gap-1 transition-colors"
           >
             <FileText className="w-3 h-3" />
             <span>Proposal</span>
@@ -397,8 +750,58 @@ export const StageApp: React.FC = () => {
         </div>
       ) : (
         <>
+          {/* Sub-Header: Interactive Scenario Selection Bar */}
+          <div className="bg-[#11141C] border-b border-gray-800/80 px-6 py-2.5 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2 overflow-x-auto">
+              <span className="text-xs font-bold text-gray-400 mr-2 flex items-center gap-1 shrink-0">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                PILIH SKENARIO DEMO:
+              </span>
+
+              {scenarios.map((scen) => {
+                const isSelected = scen.id === selectedScenarioId;
+                return (
+                  <button
+                    key={scen.id}
+                    onClick={() => handleSelectScenario(scen.id)}
+                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border shrink-0 ${
+                      isSelected
+                        ? 'bg-[var(--brand-600)] text-white border-[var(--brand-500)] shadow-lg shadow-[var(--brand-900)]/30 scale-102'
+                        : 'bg-gray-900/90 text-gray-300 border-gray-800 hover:border-gray-700 hover:text-white'
+                    }`}
+                  >
+                    <span className={isSelected ? 'text-white' : 'text-amber-400'}>{scen.icon}</span>
+                    <span>{scen.name}</span>
+                    <span
+                      className={`text-[9px] px-1.5 py-0.2 rounded-full uppercase font-mono ${
+                        isSelected ? 'bg-white/20 text-white' : 'bg-gray-800 text-gray-400'
+                      }`}
+                    >
+                      {scen.badge}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="text-[11px] text-gray-400 hidden xl:flex items-center gap-2 font-mono">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{steps.length} Langkah Terotomasi</span>
+            </div>
+          </div>
+
           {/* Main Multi-Device Stage Canvas */}
-          <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
+          <div className="flex-1 overflow-auto p-6 flex flex-col items-center justify-center">
+            {/* Scenario Tagline Banner */}
+            <div className="mb-4 text-center max-w-2xl animate-fade-in">
+              <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-1">
+                Skenario Aktif: {currentScenario.name}
+              </div>
+              <div className="text-xs text-gray-400">
+                {currentScenario.tagline}
+              </div>
+            </div>
+
             {/* Balanced Grid: Customer App (HP), POS (Tablet), KDS (Monitor/Tablet), Ops App (HP) */}
             <div className="flex items-center gap-6 max-w-7xl mx-auto">
               {/* 1. Customer Smartphone */}
@@ -406,7 +809,7 @@ export const StageApp: React.FC = () => {
                 type="mobile"
                 title="App Pelanggan"
                 subtitle="PWA iOS / Android"
-                isActive={isPlayingAutoDemo && currentStepIndex === 0}
+                isActive={isActiveDevice('customer')}
               >
                 <CustomerApp />
               </DeviceFrame>
@@ -416,7 +819,7 @@ export const StageApp: React.FC = () => {
                 type="tablet"
                 title="POS Kasir Outlet"
                 subtitle="Tablet Landscape Counter"
-                isActive={isPlayingAutoDemo && (currentStepIndex === 1 || currentStepIndex === 2)}
+                isActive={isActiveDevice('pos')}
               >
                 <PosApp />
               </DeviceFrame>
@@ -426,7 +829,7 @@ export const StageApp: React.FC = () => {
                 type="tablet"
                 title="KDS Barista Dapur"
                 subtitle="Monitor Layar Dapur"
-                isActive={isPlayingAutoDemo && (currentStepIndex === 2 || currentStepIndex === 3)}
+                isActive={isActiveDevice('kds')}
               >
                 <KdsApp />
               </DeviceFrame>
@@ -436,7 +839,7 @@ export const StageApp: React.FC = () => {
                 type="mobile"
                 title="App Operasi Outlet"
                 subtitle="Smartphone Store Manager"
-                isActive={isPlayingAutoDemo && (currentStepIndex === 4 || currentStepIndex === 5 || currentStepIndex === 6)}
+                isActive={isActiveDevice('ops')}
               >
                 <OpsApp />
               </DeviceFrame>
@@ -444,25 +847,51 @@ export const StageApp: React.FC = () => {
           </div>
 
           {/* Bottom Subtitle / Live Narrative Bar */}
-          <div className="h-14 bg-[#161B26] border-t border-gray-800 px-6 flex items-center justify-between shrink-0 text-xs font-medium z-30">
-            <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-gray-300 font-bold">
-                {currentNarrative || 'Siap menjalankan demo. Tekan "Play Demo Otomatis" atau klik langsung di layar perangkat.'}
-              </span>
+          <div className="h-16 bg-[#161B26] border-t border-gray-800 px-6 flex items-center justify-between shrink-0 text-xs font-medium z-30">
+            <div className="flex items-center gap-3 max-w-4xl">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <div>
+                <span className="text-gray-400 font-mono text-[10px] uppercase block">
+                  {currentScenario.name} • Langkah {Math.min(currentStepIndex + 1, steps.length)} dari {steps.length}
+                </span>
+                <span className="text-gray-200 font-bold text-xs line-clamp-1">
+                  {currentNarrative || `${steps[0]?.title}: ${steps[0]?.narration}`}
+                </span>
+              </div>
             </div>
 
-            {isPlayingAutoDemo && (
-              <div className="flex items-center gap-2 font-mono text-amber-400 font-bold">
-                <span>Step {currentStepIndex + 1} of {steps.length}</span>
+            <div className="flex items-center gap-4">
+              {/* Context shortcut */}
+              {(selectedScenarioId === 'purchase_flow' || selectedScenarioId === 'finance_flow') && (
+                <button
+                  onClick={() => setFocusedApp('Pusat Backoffice')}
+                  className="px-3 py-1.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-800/80 text-emerald-300 text-xs font-bold cursor-pointer flex items-center gap-1.5 transition-colors"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Buka Backoffice ERP</span>
+                </button>
+              )}
+
+              {selectedScenarioId === 'hr_flow' && (
+                <button
+                  onClick={() => setFocusedApp('Dashboard Owner')}
+                  className="px-3 py-1.5 rounded-lg bg-purple-950/80 hover:bg-purple-900 border border-purple-800/80 text-purple-300 text-xs font-bold cursor-pointer flex items-center gap-1.5 transition-colors"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Buka Modul HR Owner</span>
+                </button>
+              )}
+
+              <div className="flex items-center gap-2 font-mono text-amber-400 font-bold shrink-0">
+                <span className="text-xs">Step {Math.min(currentStepIndex + 1, steps.length)}/{steps.length}</span>
                 <div className="w-24 h-2 bg-gray-800 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-amber-400 transition-all duration-300"
-                    style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
+                    style={{ width: `${((Math.min(currentStepIndex + 1, steps.length)) / steps.length) * 100}%` }}
                   />
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </>
       )}
@@ -492,7 +921,7 @@ export const StageApp: React.FC = () => {
 
       {/* Live Event Log Drawer */}
       {isEventLogOpen && (
-        <div className="fixed top-16 right-0 bottom-14 w-96 bg-[#161B26] border-l border-gray-800 shadow-2xl z-40 flex flex-col text-xs font-mono">
+        <div className="fixed top-16 right-0 bottom-16 w-96 bg-[#161B26] border-l border-gray-800 shadow-2xl z-40 flex flex-col text-xs font-mono">
           <div className="h-11 px-4 border-b border-gray-800 flex items-center justify-between">
             <span className="font-bold text-gray-300 flex items-center gap-1.5">
               <Terminal className="w-4 h-4 text-emerald-400" />

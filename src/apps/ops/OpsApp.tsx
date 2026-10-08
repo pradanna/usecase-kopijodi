@@ -18,6 +18,9 @@ import {
   Camera,
   X,
   FileText,
+  Users,
+  MapPin,
+  UserCheck,
 } from 'lucide-react';
 
 export const OpsApp: React.FC = () => {
@@ -28,11 +31,13 @@ export const OpsApp: React.FC = () => {
     purchaseOrders,
     pettyCashExpenses,
     orders,
+    employees,
+    baristaShifts,
     dispatch,
   } = useEcosystemStore();
 
   const [selectedOutletId, setSelectedOutletId] = useState<string>('outlet-sudirman');
-  const [activeTab, setActiveTab] = useState<'beranda' | 'stok' | 'po' | 'kas' | 'menu'>('beranda');
+  const [activeTab, setActiveTab] = useState<'beranda' | 'stok' | 'po' | 'kas' | 'menu' | 'shift'>('beranda');
 
   // Modal states
   const [isPoModalOpen, setIsPoModalOpen] = useState<boolean>(false);
@@ -494,26 +499,164 @@ export const OpsApp: React.FC = () => {
             </div>
           </div>
         )}
+
+        {/* TAB 6: HR, SHIFT & PRESENSI GPS BARISTA */}
+        {activeTab === 'shift' && (
+          <div className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="font-bold text-xs text-[var(--text-secondary)]">
+                Shift & Presensi Barista ({selectedOutlet.name})
+              </span>
+              <Badge variant="brand" className="text-[10px] font-mono">
+                📍 Geofence 50m Aktif
+              </Badge>
+            </div>
+
+            {/* Banner GPS Status */}
+            <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="font-bold text-emerald-400">Presensi GPS Terkunci</div>
+                  <div className="text-[10px] text-gray-400">Radius absensi maksimum 50m dari titik koordinat gerai</div>
+                </div>
+              </div>
+            </div>
+
+            {/* List Barista Shifts */}
+            <div className="space-y-2">
+              {baristaShifts
+                .filter((s) => s.outletId === selectedOutletId)
+                .map((shift) => {
+                  const emp = employees.find((e) => e.id === shift.employeeId);
+                  const targetCup = emp ? emp.dailyTargetCups : 100;
+                  const progressPct = Math.min(100, Math.round((shift.cupsCompleted / targetCup) * 100));
+
+                  return (
+                    <div
+                      key={shift.id}
+                      className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-3.5 space-y-2.5 shadow-xs"
+                    >
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <div className="font-black text-sm text-[var(--text)] flex items-center gap-1.5">
+                            {shift.employeeName}
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[var(--surface-muted)] text-[var(--text-muted)] font-normal">
+                              {emp?.role || 'Barista'}
+                            </span>
+                          </div>
+                          <div className="text-[11px] text-[var(--text-muted)] flex items-center gap-1 mt-0.5">
+                            <Clock className="w-3 h-3" />
+                            <span>{shift.shiftType}</span>
+                          </div>
+                        </div>
+
+                        <Badge
+                          variant={
+                            shift.status === 'CLOCKED_IN'
+                              ? 'success'
+                              : shift.status === 'COMPLETED'
+                              ? 'neutral'
+                              : 'warning'
+                          }
+                          className="text-[10px] uppercase font-bold tracking-wider"
+                        >
+                          {shift.status === 'CLOCKED_IN'
+                            ? 'Aktif Bertugas'
+                            : shift.status === 'COMPLETED'
+                            ? 'Selesai Shift'
+                            : 'Terjadwal'}
+                        </Badge>
+                      </div>
+
+                      {/* GPS & Clock In Time */}
+                      <div className="bg-[var(--surface-muted)] p-2 rounded-xl flex items-center justify-between text-[11px]">
+                        <div className="text-[var(--text-muted)]">
+                          {shift.status === 'CLOCKED_IN' ? (
+                            <>
+                              Masuk: <span className="font-bold text-[var(--text)]">{shift.clockInTime}</span>
+                            </>
+                          ) : (
+                            <span className="text-amber-500 font-semibold">Belum Clock-In</span>
+                          )}
+                        </div>
+                        {shift.gpsDistanceMeters !== undefined && (
+                          <div className="flex items-center gap-1 font-mono text-[10px] text-emerald-600 font-bold">
+                            <MapPin className="w-3 h-3" />
+                            <span>GPS: {shift.gpsDistanceMeters}m (Valid)</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Output Racikan & SLA */}
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-[10px] font-bold">
+                          <span className="text-[var(--text-muted)]">Target Output Harian</span>
+                          <span className="text-[var(--brand-600)] font-mono">
+                            {shift.cupsCompleted} / {targetCup} Cup ({progressPct}%)
+                          </span>
+                        </div>
+                        <div className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-[var(--brand-600)] rounded-full transition-all duration-500"
+                            style={{ width: `${progressPct}%` }}
+                          />
+                        </div>
+                        <div className="flex justify-between text-[10px] text-[var(--text-muted)] pt-0.5">
+                          <span>SLA Racik: {shift.avgSecondsPerCup ? `${shift.avgSecondsPerCup} dtk/cup` : '-'}</span>
+                          <span>Skor Kinerja: <strong className="text-emerald-600 font-mono">{shift.performanceScore} pts</strong></span>
+                        </div>
+                      </div>
+
+                      {/* Clock In Action Button */}
+                      {shift.status === 'SCHEDULED' && (
+                        <Button
+                          size="sm"
+                          variant="primary"
+                          className="w-full font-bold flex items-center justify-center gap-1.5 mt-1"
+                          onClick={() => {
+                            const updatedShift = {
+                              ...shift,
+                              status: 'CLOCKED_IN' as const,
+                              clockInTime: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB',
+                              gpsDistanceMeters: Math.floor(Math.random() * 18) + 8,
+                            };
+                            dispatch(createEvent('BaristaClockedIn', shift.employeeName, { shift: updatedShift }, selectedOutletId));
+                          }}
+                        >
+                          <MapPin className="w-3.5 h-3.5" />
+                          <span>Clock-In Sekarang (Verifikasi GPS)</span>
+                        </Button>
+                      )}
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bottom Tabs Bar */}
-      <div className="h-14 bg-[var(--surface)] border-t border-[var(--border)] px-3 flex items-center justify-around shrink-0 text-xs">
+      <div className="h-14 bg-[var(--surface)] border-t border-[var(--border)] px-2 flex items-center justify-around shrink-0 text-xs">
         {[
           { id: 'beranda', label: 'Beranda', icon: <Boxes className="w-4 h-4" /> },
           { id: 'stok', label: 'Stok', icon: <ClipboardList className="w-4 h-4" /> },
           { id: 'po', label: 'PO', icon: <PackageCheck className="w-4 h-4" /> },
           { id: 'kas', label: 'Kas', icon: <DollarSign className="w-4 h-4" /> },
+          { id: 'shift', label: 'HR/Shift', icon: <UserCheck className="w-4 h-4" /> },
           { id: 'menu', label: 'Menu', icon: <Coffee className="w-4 h-4" /> },
         ].map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`flex flex-col items-center gap-1 font-bold cursor-pointer transition-colors ${
+            className={`flex flex-col items-center gap-0.5 font-bold cursor-pointer transition-colors ${
               activeTab === tab.id ? 'text-[var(--brand-600)]' : 'text-[var(--text-muted)]'
             }`}
           >
             {tab.icon}
-            <span className="text-[10px]">{tab.label}</span>
+            <span className="text-[9px]">{tab.label}</span>
           </button>
         ))}
       </div>

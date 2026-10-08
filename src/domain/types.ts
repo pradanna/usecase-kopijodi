@@ -266,3 +266,31 @@ export interface CashierShift {
   depositRef?: string;
 }
 
+export interface Employee {
+  id: string;
+  outletId: string;
+  name: string;
+  role: 'Head Barista' | 'Barista' | 'Kasir' | 'Store Manager';
+  phone: string;
+  dailyTargetCups: number;
+  baseSalary: number;
+  status: 'ACTIVE' | 'OFF' | 'LEAVE';
+  avatar?: string;
+}
+
+export interface BaristaShift {
+  id: string;
+  employeeId: string;
+  employeeName: string;
+  outletId: string;
+  date: string;
+  shiftType: 'Pagi (07:00 - 15:00)' | 'Sore (15:00 - 23:00)';
+  status: 'SCHEDULED' | 'CLOCKED_IN' | 'COMPLETED' | 'ABSENT';
+  clockInTime?: string;
+  clockOutTime?: string;
+  gpsDistanceMeters?: number; // Distance in meters from outlet geofence
+  cupsCompleted: number;
+  avgSecondsPerCup: number;
+  performanceScore: number; // 0 - 100%
+}
+
