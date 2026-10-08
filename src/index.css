@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text-main: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+
+  --color-status-success: var(--success);
+  --color-status-success-bg: var(--success-light);
+  --color-status-warning: var(--warning);
+  --color-status-warning-bg: var(--warning-light);
+  --color-status-danger: var(--danger);
+  --color-status-danger-bg: var(--danger-light);
+  --color-status-info: var(--info);
+  --color-status-info-bg: var(--info-light);
+}
+
+:root {
+  color-scheme: light;
+  
+  /* Neutral & Surfaces (PRD 12.2) */
+  --bg: #F5F6F8;
+  --surface: #FFFFFF;
+  --surface-muted: #EDEFF3;
+  --border: #D5DAE1;
+  --border-strong: #8A94A3;
+  --text: #14181F;
+  --text-secondary: #3D4654;
+  --text-muted: #5B6575;
+
+  /* Brand Default: Kopi Jodi (Coffee Brown) */
+  --brand-id: "jodi";
+  --brand-name: "Kopi Jodi";
+  --brand-tagline: "Satu Gelas, Satu Cerita";
+  --brand-50: #F8EFE8;
+  --brand-100: #EEDCCB;
+  --brand-600: #7A4A2B;
+  --brand-700: #5F3820;
+
+  /* Status Colors (WCAG AA Compliant) */
+  --success: #176B3F;
+  --success-light: #E6F4EC;
+  --warning: #8F5200;
+  --warning-light: #FFF3DC;
+  --danger: #B42318;
+  --danger-light: #FDECEA;
+  --info: #1A56B0;
+  --info-light: #E8F0FC;
+}
+
+/* White-Label Theme: Teras Kopi (Teal / Toska) */
+[data-theme="teras-kopi"] {
+  --brand-id: "teras";
+  --brand-name: "Teras Kopi";
+  --brand-tagline: "Kopi Tenang, Hati Nyaman";
+  --brand-50: #E6F4F4;
+  --brand-100: #CCE8E8;
+  --brand-600: #0B6666;
+  --brand-700: #084C4C;
+}
+
+/* Base resets & typography */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbars (light only) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-muted);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
