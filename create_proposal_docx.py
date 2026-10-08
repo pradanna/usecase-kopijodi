@@ -465,14 +465,61 @@ def build_proposal_docx(file_path):
         for c_idx, val in enumerate(d):
             row.cells[c_idx].paragraphs[0].text = val
             
-    format_table(cmp_table, cmp_widths, cmp_align, header_bg="2C1810")
-    
+    # -------------------------------------------------------------
+    # SECTION 4: KOMPARASI STRATEGIS VS MOKA POS PER OUTLET
+    # -------------------------------------------------------------
+    style_heading(doc.add_paragraph(), "4. Komparasi Strategis: Mengapa Ekosistem Kopi Jodi Jauh Lebih Unggul & Menguntungkan Dibanding Sewa Moka POS per Outlet?", level=1)
+    add_body_p(doc, "Banyak jaringan kafe pemula terjebak menyewa POS retail umum seperti Moka POS yang memungut biaya per outlet / per kasir. Untuk kafe multi-outlet yang agresif berekspansi, model sewa per outlet memiliki kelemahan finansial dan operasional yang fatal:")
+
+    moka_sim_table = doc.add_table(rows=5, cols=4)
+    moka_headers = ["Jumlah Outlet", "Sewa Moka POS / Bln (~Rp 499rb/bln)", "Total Sewa Moka (5 Tahun)", "Ekosistem Kopi Jodi (genossys)"]
+    moka_widths = [1.2, 1.8, 1.7, 1.57]
+    moka_align = [WD_ALIGN_PARAGRAPH.CENTER, WD_ALIGN_PARAGRAPH.RIGHT, WD_ALIGN_PARAGRAPH.RIGHT, WD_ALIGN_PARAGRAPH.LEFT]
+    for i, h in enumerate(moka_headers):
+        moka_sim_table.cell(0, i).paragraphs[0].text = h
+    moka_data = [
+        ("3 Outlet", "Rp 1.497.000 / bln", "Rp 89.820.000,-", "Rp 5 Juta/bln flat (8 Apps + Hak Milik)"),
+        ("5 Outlet", "Rp 2.495.000 / bln", "Rp 149.700.000,-", "Rp 5 Juta/bln flat (Hemat komisi ojol)"),
+        ("10 Outlet", "Rp 4.990.000 / bln", "Rp 299.400.000,-", "BIAYA SAMA, TAPI DAPAT DEDICATED DEV 5 TAHUN + BEBAS TAMBAH FITUR!"),
+        ("20 Outlet", "Rp 9.980.000 / bln", "Rp 598.800.000,-", "KOPI JODI 50% LEBIH HEMAT (Hemat Rp 300 Juta!)")
+    ]
+    for r_idx, d in enumerate(moka_data, start=1):
+        row = moka_sim_table.rows[r_idx]
+        for c_idx, val in enumerate(d):
+            row.cells[c_idx].paragraphs[0].text = val
+    format_table(moka_sim_table, moka_widths, moka_align, header_bg="2C1810")
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+    style_heading(doc.add_paragraph(), "Perbandingan 10 Aspek Fundamental: Kopi Jodi vs Sewa Moka POS", level=2)
+    moka_cmp_table = doc.add_table(rows=11, cols=3)
+    mc_headers = ["Aspek Perbandingan", "Sewa Moka POS per Outlet", "Ekosistem Terintegrasi Kopi Jodi"]
+    mc_widths = [1.8, 2.2, 2.27]
+    mc_align = [WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.LEFT]
+    for i, h in enumerate(mc_headers):
+        moka_cmp_table.cell(0, i).paragraphs[0].text = h
+    mc_data = [
+        ("1. Biaya Tambah Cabang", "Membengkak: Buka cabang baru wajib bayar lisensi sewa baru per outlet selamanya.", "Biaya Flat Rp 0: Buka 5, 20, 100 cabang software Rp 0 per cabang tambahan."),
+        ("2. Mobile App Pelanggan (PWA)", "Tidak Ada: Pelanggan wajib antre kasir atau kafe kena potongan komisi ojol 20-30%.", "Tersedia Resmi (iOS/Android/PWA): Pelanggan pesan online tanpa antre, zero potongan komisi ojol!"),
+        ("3. Koreksi HPP Otomatis (True-Up)", "Tidak Ada: HPP statis. Nota supplier terlambat membuat laporan laba rugi bias / laba semu.", "Otomatis (BR-06): Saat nota diverifikasi Finance, HPP pesanan terjual direvisi otomatis. Laba 100% riil."),
+        ("4. Potong Stok di KDS Dapur", "Di Kasir: Terpotong saat bayar di kasir, sering selisih jika batal di meja racik.", "Di KDS Barista (BR-12): Stok bahan baku BOM terpotong presisi saat barista menyelesaikan tiket."),
+        ("5. Resep Olahan Batch Dapur", "Terbatas Bahan Mentah: Tidak mendukung resep olahan batch dapur sebelum buka.", "Mendukung Penuh: Resep batch simple syrup aren 1.2L, cold brew 24h, topping jelly lengkap dengan yield & HPP."),
+        ("6. Kontrol Kas Kecil (Petty Cash)", "Pencatatan Biasa: Tanpa approval limit bertingkat. Rawan pengeluaran lokal fiktif.", "Approval 3-Tier Otomatis: Plafon bertingkat (Store Manager -> Finance -> Owner) wajib unggah foto nota."),
+        ("7. Portal Investor Mitra", "Tidak Ada: Owner harus manual rekap dan kirim Excel setiap bulan.", "Portal Mitra Read-Only: Investor memantau omzet harian, HPP riil, dan bagi hasil live tanpa risiko edit data."),
+        ("8. Status Kepemilikan Sistem", "Sewa Selamanya: Jika stop bayar, sistem mati total. Valuasi IT perusahaan = Rp 0.", "100% Hak Milik Kopi Jodi: Source code dan database menjadi aset intelektual berharga perusahaan."),
+        ("9. Fleksibilitas Tambah Fitur", "Terkunci: Software massal retail umum; request fitur kafe tidak akan dibuatkan.", "Bebas 100% (Unlimited): Kopi Jodi bebas minta modul & fitur baru apapun tanpa biaya tambahan."),
+        ("10. Branding & Citra Usaha", "Citra UKM Retail Biasa: Logo vendor Moka terlihat di struk dan sistem.", "Citra Korporasi Modern: 100% brand Kopi Jodi di seluruh perangkat (setara Fore / Kopi Kenangan).")
+    ]
+    for r_idx, d in enumerate(mc_data, start=1):
+        row = moka_cmp_table.rows[r_idx]
+        for c_idx, val in enumerate(d):
+            row.cells[c_idx].paragraphs[0].text = val
+    format_table(moka_cmp_table, mc_widths, mc_align, header_bg="2C1810")
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
     # -------------------------------------------------------------
-    # SECTION 4: ESTIMASI BIAYA PIHAK KETIGA
+    # SECTION 5: ESTIMASI BIAYA PIHAK KETIGA
     # -------------------------------------------------------------
-    style_heading(doc.add_paragraph(), "4. Estimasi Biaya Layanan Pihak Ketiga (Infrastruktur)", level=1)
+    style_heading(doc.add_paragraph(), "5. Estimasi Biaya Layanan Pihak Ketiga (Infrastruktur)", level=1)
     add_body_p(doc, "Biaya operasional pihak ketiga dibayarkan langsung ke penyedia resmi (tanpa markup):")
 
     tp_table = doc.add_table(rows=6, cols=4)
@@ -501,9 +548,9 @@ def build_proposal_docx(file_path):
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
     # -------------------------------------------------------------
-    # SECTION 5: TIMELINE & KETENTUAN
+    # SECTION 6: TIMELINE & KETENTUAN
     # -------------------------------------------------------------
-    style_heading(doc.add_paragraph(), "5. Timeline Pengerjaan & Ketentuan Pembayaran", level=1)
+    style_heading(doc.add_paragraph(), "6. Timeline Pengerjaan & Ketentuan Pembayaran", level=1)
     
     add_bullet_p(doc, "Minggu 1 - 2: ", "Finalisasi alur operasional outlet, master resep, dan perancangan database.")
     add_bullet_p(doc, "Minggu 3 - 8: ", "Pengembangan Core ERP Backoffice, POS Tablet kasir, dan Layar Barista (KDS).")
@@ -518,9 +565,9 @@ def build_proposal_docx(file_path):
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
     # -------------------------------------------------------------
-    # SECTION 6: LEMBAR PERSETUJUAN
+    # SECTION 7: LEMBAR PERSETUJUAN
     # -------------------------------------------------------------
-    style_heading(doc.add_paragraph(), "6. Lembar Konfirmasi & Persetujuan", level=1)
+    style_heading(doc.add_paragraph(), "7. Lembar Konfirmasi & Persetujuan", level=1)
     add_body_p(doc, "Silakan beri tanda centang pada opsi yang dipilih oleh Manajemen Kopi Jodi:")
 
     opt_table = doc.add_table(rows=4, cols=3)

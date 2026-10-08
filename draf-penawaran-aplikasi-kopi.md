@@ -101,7 +101,42 @@ Kami menyediakan **2 alternatif skema investasi** yang dapat disesuaikan dengan 
 
 ---
 
-## 5. Estimasi Biaya Pihak Ketiga (Infrastruktur & Lisensi)
+## 5. Komparasi Strategis: Mengapa Ekosistem Kopi Jodi Jauh Lebih Unggul & Menguntungkan Dibanding Sewa Moka POS per Outlet?
+
+Banyak pebisnis kafe pemula terjebak menyewa POS retail umum seperti **Moka POS** (yang mengenakan biaya per outlet / per kasir). Untuk jaringan kafe modern yang ingin berkembang dan berekspansi (*multi-outlet chain*), model sewa per outlet ini memiliki kelemahan mendasar:
+
+### A. Perbandingan Model Biaya Multi-Outlet (Biaya Membengkak vs Biaya Flat)
+*Biaya Moka POS dihitung dengan asumsi lisensi dasar ~Rp 299.000/bln + Add-on wajib kafe (KDS Layar Dapur, Moka Order Online, Advanced Inventory BOM) ~Rp 200.000/bln = **~Rp 499.000 / outlet / bulan**.*
+
+| Jumlah Cabang | Total Biaya Sewa Moka POS / Bulan | Total Biaya Moka (5 Tahun) | Biaya Ekosistem Kopi Jodi (Dedicated genossys) | Hemat / Nilai Tambah Kopi Jodi |
+|:---:|:---:|:---:|:---:|---|
+| **3 Outlet** | Rp 1.497.000 / bln | Rp 89.820.000,- | Rp 5.000.000 / bln | Disediakan 8 Aplikasi Lengkap + Hak Milik Source Code |
+| **5 Outlet** | Rp 2.495.000 / bln | Rp 149.700.000,- | Rp 5.000.000 / bln | Hemat puluhan juta komisi ojol via App Pelanggan sendiri |
+| **10 Outlet** | **Rp 4.990.000 / bln** | **Rp 299.400.000,-** | **Rp 5.000.000 / bln** | **Biaya Sama Besar, Namun di Kopi Jodi Diberikan Programmer Dedicated Standby 5 Tahun + Bebas Tambah Fitur Apapun!** |
+| **20 Outlet** | **Rp 9.980.000 / bln** | **Rp 598.800.000,-** | **Rp 5.000.000 / bln** | **Kopi Jodi 50% LEBIH HEMAT (Hemat Rp 300 Juta!)** |
+
+> **Catatan Kunci:** Jika memilih **Opsi 1 (Beli Putus Rp 135 Juta)**, pada 10 outlet, dalam tempo < 2.5 tahun biaya sewa Moka sudah melampaui Rp 135 Juta, sementara Kopi Jodi sudah lunas dan tidak perlu membayar lisensi apapun selamanya!
+
+---
+
+### B. Tabel Perbandingan 10 Aspek Fundamental: Kopi Jodi vs Moka POS
+
+| # | Aspek Fitur & Operasional | Sewa Moka POS per Outlet | Ekosistem Terintegrasi Kopi Jodi (genossys) |
+|:---:|---|---|---|
+| 1 | **Biaya Tambah Cabang Baru** | **Biaya Membengkak:** Buka cabang baru wajib bayar sewa lisensi baru tiap bulan selamanya. | **Biaya Flat Rp 0:** Buka 10, 20, hingga 100 cabang tidak ada biaya lisensi per cabang tambahan. |
+| 2 | **Mobile App Pelanggan (PWA Brand Sendiri)** | **Tidak Ada:** Pelanggan tidak punya app Kopi Jodi; wajib antre kasir atau kafe dipotong komisi 20-30% oleh GoFood/GrabFood. | **Tersedia Resmi (iOS/Android/PWA):** Pelanggan pesan pick-up mandiri tanpa antre, bayar QRIS, kumpulkan poin loyalty. Zero potongan komisi ojol! |
+| 3 | **Koreksi HPP Otomatis (*True-Up HPP*)** | **Tidak Ada:** HPP statis/rata-rata. Nota fisik supplier terlambat membuat laporan laba rugi bias / laba semu. | **Otomatis (BR-06):** Saat nota diverifikasi Finance, sistem merevisi HPP minuman yang sudah terjual secara retrospektif. Laporan laba 100% riil. |
+| 4 | **Pemotongan Stok Berbasis Resep Dapur** | **Di Kasir:** Terpotong saat bayar, bukan saat barista meracik. Sering selisih stok jika batal di dapur. | **Di KDS Barista (BR-12):** Terpotong presisi saat barista menyelesaikan tiket racikan di monitor dapur. |
+| 5 | **Resep Racikan Dapur (*Semi-Finished Prep*)** | **Terbatas Bahan Mentah:** Tidak mendukung batch olahan (simple syrup aren 1.2L, cold brew 24 jam, topping jelly). | **Mendukung Penuh:** Standar batch dapur dengan yield kuantitas, shelf-life chiller, dan HPP olahan per ml. |
+| 6 | **Kontrol Kas Kecil & Pencegahan Fraud** | **Pencatatan Biasa:** Tanpa batas persetujuan bertingkat otomatis. Rawan belanja lokal fiktif. | **Approval 3-Tier Otomatis:** Plafon nominal bertingkat (Store Manager -> Finance -> Owner) wajib unggah foto nota. |
+| 7 | **Transparansi Portal Investor Mitra** | **Tidak Ada:** Owner harus manual menyusun dan mengirim file Excel tiap bulan. | **Portal Mitra Read-Only:** Investor cabang memantau omzet harian, HPP riil, dan bagi hasil live tanpa risiko edit data. |
+| 8 | **Status Kepemilikan Sistem & Aset** | **Sewa Selamanya (Rental):** Jika berhenti bayar, akses mati total. Valuasi IT perusahaan = Rp 0. | **100% Hak Milik Kopi Jodi:** Seluruh source code dan database menjadi aset intelektual berharga milik Kopi Jodi. |
+| 9 | **Kustomisasi & Tambah Fitur Baru** | **Terkunci & Mustahil:** Software massal retail umum; request fitur kafe tidak akan dibuatkan. | **Bebas 100% (*Unlimited*):** Kopi Jodi bebas meminta fitur baru tanpa biaya tambahan (*zero change request fee*). |
+| 10 | **White-Label & Citra Merek (Branding)** | **Citra Retail UKM Biasa:** Logo Moka terlihat di mana-mana. | **Citra Korporasi Modern:** 100% brand Kopi Jodi di seluruh perangkat (setara Fore Coffee / Kopi Kenangan). |
+
+---
+
+## 6. Estimasi Biaya Pihak Ketiga (Infrastruktur & Lisensi)
 
 Biaya operasional pihak ketiga yang dibayarkan langsung ke penyedia resmi (tanpa markup vendor):
 
@@ -115,7 +150,7 @@ Biaya operasional pihak ketiga yang dibayarkan langsung ke penyedia resmi (tanpa
 
 ---
 
-## 6. Timeline Pengerjaan (Fase 1: 12 Minggu)
+## 7. Timeline Pengerjaan (Fase 1: 12 Minggu)
 
 ```
 [ Minggu 1 - 2 ]  Finalisasi Alur Operasional, Master Resep, & Desain Database
@@ -131,7 +166,7 @@ Biaya operasional pihak ketiga yang dibayarkan langsung ke penyedia resmi (tanpa
 
 ---
 
-## 7. Ketentuan Kerjasama & Pembayaran
+## 8. Ketentuan Kerjasama & Pembayaran
 
 ### A. Skema Beli Putus (Turnkey)
 - **Termin 1 (DP 30%):** Saat penandatanganan kontrak kerja (SPK).
@@ -144,7 +179,7 @@ Biaya operasional pihak ketiga yang dibayarkan langsung ke penyedia resmi (tanpa
 
 ---
 
-## 8. Lembar Konfirmasi & Persetujuan
+## 9. Lembar Konfirmasi & Persetujuan
 
 Silakan beri tanda centang `[ √ ]` pada opsi yang dipilih oleh Manajemen Kopi Jodi:
 
