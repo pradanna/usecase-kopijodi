@@ -16,6 +16,7 @@ import { BackofficeApp } from '../backoffice/BackofficeApp';
 import { OwnerApp } from '../owner/OwnerApp';
 import { PartnerApp } from '../partner/PartnerApp';
 import { CrmApp } from '../crm/CrmApp';
+import { ProposalApp } from '../proposal/ProposalApp';
 
 import {
   Play,
@@ -30,10 +31,14 @@ import {
   CheckCircle2,
   X,
   Coffee,
+  FileText,
 } from 'lucide-react';
 
 export const StageApp: React.FC = () => {
   const { brandId, dispatch } = useEcosystemStore();
+
+  // Top Mode: 'demo' (multi-device) | 'proposal' (resmi penawaran)
+  const [stageViewMode, setStageViewMode] = useState<'demo' | 'proposal'>('demo');
 
   const [activeLayout, setActiveLayout] = useState<'grid' | 'focus'>('grid');
   const [focusedApp, setFocusedApp] = useState<string | null>(null);
@@ -282,53 +287,86 @@ export const StageApp: React.FC = () => {
           </div>
         </div>
 
-        {/* Center: Presentation controls */}
-        <div className="flex items-center gap-2.5 bg-gray-900/80 p-1.5 rounded-2xl border border-gray-800">
-          <Button
-            size="sm"
-            variant={isPlayingAutoDemo ? 'danger' : 'primary'}
-            onClick={() => {
-              if (isPlayingAutoDemo) {
-                setIsPlayingAutoDemo(false);
-              } else {
-                handleStartAutoDemo();
-              }
-            }}
-            className="font-bold flex items-center gap-1.5 shadow-md"
-          >
-            {isPlayingAutoDemo ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
-            <span>{isPlayingAutoDemo ? 'Jeda Demo' : 'Play Demo Otomatis'}</span>
-          </Button>
+        {/* Center: Presentation controls + NEW TAB PROPOSAL SWITCHER */}
+        <div className="flex items-center gap-3">
+          {/* TAB BARU: Demo Multi-Perangkat vs Proposal Resmi */}
+          <div className="flex items-center rounded-xl bg-gray-950 p-1 border border-gray-800 shadow-inner">
+            <button
+              onClick={() => setStageViewMode('demo')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                stageViewMode === 'demo'
+                  ? 'bg-[var(--brand-600)] text-white shadow-xs'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Demo Perangkat</span>
+            </button>
+            <button
+              onClick={() => setStageViewMode('proposal')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                stageViewMode === 'proposal'
+                  ? 'bg-amber-600 text-white shadow-xs'
+                  : 'text-amber-400 hover:text-amber-300'
+              }`}
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Proposal Resmi</span>
+              <span className="px-1.5 py-0.2 rounded-full bg-amber-500/30 text-amber-300 text-[9px] font-black uppercase">
+                Tab Baru
+              </span>
+            </button>
+          </div>
 
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={handleToggleTheme}
-            className="text-xs font-semibold bg-gray-800 text-gray-200 border-gray-700 hover:bg-gray-700"
-          >
-            <Palette className="w-3.5 h-3.5" />
-            <span>White-Label</span>
-          </Button>
+          {stageViewMode === 'demo' && (
+            <div className="flex items-center gap-2 bg-gray-900/80 p-1.5 rounded-2xl border border-gray-800">
+              <Button
+                size="sm"
+                variant={isPlayingAutoDemo ? 'danger' : 'primary'}
+                onClick={() => {
+                  if (isPlayingAutoDemo) {
+                    setIsPlayingAutoDemo(false);
+                  } else {
+                    handleStartAutoDemo();
+                  }
+                }}
+                className="font-bold flex items-center gap-1.5 shadow-md"
+              >
+                {isPlayingAutoDemo ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
+                <span>{isPlayingAutoDemo ? 'Jeda Demo' : 'Play Demo Otomatis'}</span>
+              </Button>
 
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={handleResetDemo}
-            className="text-xs font-semibold bg-gray-800 text-rose-300 border-gray-700 hover:bg-gray-700"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset Demo</span>
-          </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={handleToggleTheme}
+                className="text-xs font-semibold bg-gray-800 text-gray-200 border-gray-700 hover:bg-gray-700"
+              >
+                <Palette className="w-3.5 h-3.5" />
+                <span>White-Label</span>
+              </Button>
 
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={() => setIsEventLogOpen(!isEventLogOpen)}
-            className="text-xs font-semibold bg-gray-800 text-gray-200 border-gray-700 hover:bg-gray-700"
-          >
-            <Terminal className="w-3.5 h-3.5" />
-            <span>Log ({liveEvents.length})</span>
-          </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={handleResetDemo}
+                className="text-xs font-semibold bg-gray-800 text-rose-300 border-gray-700 hover:bg-gray-700"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Reset Demo</span>
+              </Button>
+
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => setIsEventLogOpen(!isEventLogOpen)}
+                className="text-xs font-semibold bg-gray-800 text-gray-200 border-gray-700 hover:bg-gray-700"
+              >
+                <Terminal className="w-3.5 h-3.5" />
+                <span>Log ({liveEvents.length})</span>
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Quick App Switcher shortcuts */}
@@ -343,76 +381,91 @@ export const StageApp: React.FC = () => {
               {role}
             </button>
           ))}
+          <button
+            onClick={() => setStageViewMode('proposal')}
+            className="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-800/80 text-amber-300 text-xs font-bold cursor-pointer flex items-center gap-1"
+          >
+            <FileText className="w-3 h-3" />
+            <span>Proposal</span>
+          </button>
         </div>
       </div>
 
-      {/* Main Multi-Device Stage Canvas */}
-      <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
-        {/* Balanced Grid: Customer App (HP), POS (Tablet), KDS (Monitor/Tablet), Ops App (HP) */}
-        <div className="flex items-center gap-6 max-w-7xl mx-auto">
-          {/* 1. Customer Smartphone */}
-          <DeviceFrame
-            type="mobile"
-            title="App Pelanggan"
-            subtitle="PWA iOS / Android"
-            isActive={isPlayingAutoDemo && currentStepIndex === 0}
-          >
-            <CustomerApp />
-          </DeviceFrame>
-
-          {/* 2. Tablet POS Kasir */}
-          <DeviceFrame
-            type="tablet"
-            title="POS Kasir Outlet"
-            subtitle="Tablet Landscape Counter"
-            isActive={isPlayingAutoDemo && (currentStepIndex === 1 || currentStepIndex === 2)}
-          >
-            <PosApp />
-          </DeviceFrame>
-
-          {/* 3. KDS Barista */}
-          <DeviceFrame
-            type="tablet"
-            title="KDS Barista Dapur"
-            subtitle="Monitor Layar Dapur"
-            isActive={isPlayingAutoDemo && (currentStepIndex === 2 || currentStepIndex === 3)}
-          >
-            <KdsApp />
-          </DeviceFrame>
-
-          {/* 4. Store Manager Smartphone */}
-          <DeviceFrame
-            type="mobile"
-            title="App Operasi Outlet"
-            subtitle="Smartphone Store Manager"
-            isActive={isPlayingAutoDemo && (currentStepIndex === 4 || currentStepIndex === 5 || currentStepIndex === 6)}
-          >
-            <OpsApp />
-          </DeviceFrame>
+      {stageViewMode === 'proposal' ? (
+        <div className="flex-1 overflow-auto bg-[#F8FAFC]">
+          <ProposalApp onBackToDemo={() => setStageViewMode('demo')} />
         </div>
-      </div>
+      ) : (
+        <>
+          {/* Main Multi-Device Stage Canvas */}
+          <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
+            {/* Balanced Grid: Customer App (HP), POS (Tablet), KDS (Monitor/Tablet), Ops App (HP) */}
+            <div className="flex items-center gap-6 max-w-7xl mx-auto">
+              {/* 1. Customer Smartphone */}
+              <DeviceFrame
+                type="mobile"
+                title="App Pelanggan"
+                subtitle="PWA iOS / Android"
+                isActive={isPlayingAutoDemo && currentStepIndex === 0}
+              >
+                <CustomerApp />
+              </DeviceFrame>
 
-      {/* Bottom Subtitle / Live Narrative Bar */}
-      <div className="h-14 bg-[#161B26] border-t border-gray-800 px-6 flex items-center justify-between shrink-0 text-xs font-medium z-30">
-        <div className="flex items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-gray-300 font-bold">
-            {currentNarrative || 'Siap menjalankan demo. Tekan "Play Demo Otomatis" atau klik langsung di layar perangkat.'}
-          </span>
-        </div>
+              {/* 2. Tablet POS Kasir */}
+              <DeviceFrame
+                type="tablet"
+                title="POS Kasir Outlet"
+                subtitle="Tablet Landscape Counter"
+                isActive={isPlayingAutoDemo && (currentStepIndex === 1 || currentStepIndex === 2)}
+              >
+                <PosApp />
+              </DeviceFrame>
 
-        {isPlayingAutoDemo && (
-          <div className="flex items-center gap-2 font-mono text-amber-400 font-bold">
-            <span>Step {currentStepIndex + 1} of {steps.length}</span>
-            <div className="w-24 h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-amber-400 transition-all duration-300"
-                style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
-              />
+              {/* 3. KDS Barista */}
+              <DeviceFrame
+                type="tablet"
+                title="KDS Barista Dapur"
+                subtitle="Monitor Layar Dapur"
+                isActive={isPlayingAutoDemo && (currentStepIndex === 2 || currentStepIndex === 3)}
+              >
+                <KdsApp />
+              </DeviceFrame>
+
+              {/* 4. Store Manager Smartphone */}
+              <DeviceFrame
+                type="mobile"
+                title="App Operasi Outlet"
+                subtitle="Smartphone Store Manager"
+                isActive={isPlayingAutoDemo && (currentStepIndex === 4 || currentStepIndex === 5 || currentStepIndex === 6)}
+              >
+                <OpsApp />
+              </DeviceFrame>
             </div>
           </div>
-        )}
-      </div>
+
+          {/* Bottom Subtitle / Live Narrative Bar */}
+          <div className="h-14 bg-[#161B26] border-t border-gray-800 px-6 flex items-center justify-between shrink-0 text-xs font-medium z-30">
+            <div className="flex items-center gap-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-gray-300 font-bold">
+                {currentNarrative || 'Siap menjalankan demo. Tekan "Play Demo Otomatis" atau klik langsung di layar perangkat.'}
+              </span>
+            </div>
+
+            {isPlayingAutoDemo && (
+              <div className="flex items-center gap-2 font-mono text-amber-400 font-bold">
+                <span>Step {currentStepIndex + 1} of {steps.length}</span>
+                <div className="w-24 h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-amber-400 transition-all duration-300"
+                    style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </>
+      )}
 
       {/* Focus App Modal (Backoffice, Owner, Partner, CRM) */}
       {focusedApp && (
