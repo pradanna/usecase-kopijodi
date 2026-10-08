@@ -209,7 +209,7 @@ export const StageApp: React.FC = () => {
     // 2. PURCHASE & SUPPLY CHAIN FLOW
     {
       id: 'purchase_flow',
-      name: '2. Demo Purchase & Supply Chain',
+      name: '2. Purchase & Supply Chain',
       badge: 'Pengadaan & HPP',
       icon: <ShoppingBag className="w-4 h-4" />,
       tagline: 'PO tanpa harga (BR-04), terima fisik status Menunggu Nota (BR-05), hingga rekonsiliasi faktur & auto true-up HPP (BR-06).',
@@ -307,7 +307,7 @@ export const StageApp: React.FC = () => {
     // 3. HR, SHIFT & BARISTA GPS FLOW
     {
       id: 'hr_flow',
-      name: '3. Demo HR & Barista GPS',
+      name: '3. HR & Presensi Barista',
       badge: 'Presensi & KPI',
       icon: <Users className="w-4 h-4" />,
       tagline: 'Jadwal shift, presensi GPS geofencing radius 50m, live tracking output racikan cup, hingga SLA kecepatan barista.',
@@ -376,7 +376,7 @@ export const StageApp: React.FC = () => {
     // 4. CASHIER & FINANCE RECONCILIATION FLOW
     {
       id: 'finance_flow',
-      name: '4. Demo Finance & Kasir',
+      name: '4. Finance & Rekonsiliasi Kas',
       badge: 'Rekonsiliasi Kas',
       icon: <DollarSign className="w-4 h-4" />,
       tagline: 'Buka modal laci (Float), pencatatan transaksi kasir, tutup shift blind cash count, rekonsiliasi selisih Rp 0 & jurnal deposit bank.',
@@ -490,7 +490,7 @@ export const StageApp: React.FC = () => {
     // 5. PETTY CASH ANTI-FRAUD FLOW
     {
       id: 'petty_cash_flow',
-      name: '5. Demo Petty Cash Anti-Fraud',
+      name: '5. Petty Cash Anti-Fraud',
       badge: 'Kontrol Pengeluaran',
       icon: <ShieldCheck className="w-4 h-4" />,
       tagline: 'Pengajuan kas kecil darurat gerai, validasi plafon 3-tier, foto struk fisik, approval bertingkat & posting beban otomatis.',
@@ -608,60 +608,150 @@ export const StageApp: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen bg-[#0D1017] text-white overflow-hidden select-none">
-      {/* Top Stage Control Header */}
-      <div className="h-16 bg-[#161B26] border-b border-gray-800 px-6 flex items-center justify-between shrink-0 z-30">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[var(--brand-600)] flex items-center justify-center font-black shadow-md text-white">
-            <Coffee className="w-5 h-5" />
+      {/* 1. TOP MAIN NAVIGATION BAR (h-14, clean, balanced 3-col layout) */}
+      <div className="h-14 bg-[#11141C] border-b border-gray-800/90 px-4 sm:px-6 flex items-center justify-between shrink-0 z-30 gap-3">
+        {/* Left: Branding & Brand Theme Badge */}
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-black shadow-md text-white">
+            <Coffee className="w-4 h-4" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-base tracking-wide text-white">
-                DEMO STAGE ORCHESTRATOR
-              </span>
-              <Badge variant="brand" className="text-[10px] py-0 px-2 font-mono">
-                {brandId === 'jodi' ? 'Brand: Kopi Jodi' : 'Brand: Teras Kopi (Toska)'}
-              </Badge>
-            </div>
-            <div className="text-[11px] text-gray-400">
-              Katalog Multi-Skenario Demo Interaktif • Event-Driven Multi-Device Live Sync
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="font-extrabold text-sm tracking-wider text-white">
+              KOPI JODI
+            </span>
+            <span className="text-[11px] text-gray-400 font-medium hidden sm:inline">
+              ERP & POS
+            </span>
+            <Badge variant="brand" className="text-[9px] py-0 px-1.5 font-mono">
+              {brandId === 'jodi' ? 'Brand Jodi' : 'Teras Kopi'}
+            </Badge>
           </div>
         </div>
 
-        {/* Center: Presentation controls + NEW TAB PROPOSAL SWITCHER */}
-        <div className="flex items-center gap-3">
-          {/* TAB BARU: Demo Multi-Perangkat vs Proposal Resmi */}
-          <div className="flex items-center rounded-xl bg-gray-950 p-1 border border-gray-800 shadow-inner">
+        {/* Center: Main View Switcher (Demo Perangkat vs Proposal Resmi) */}
+        <div className="flex items-center rounded-xl bg-gray-950 p-1 border border-gray-800 shadow-inner shrink-0">
+          <button
+            onClick={() => setStageViewMode('demo')}
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              stageViewMode === 'demo'
+                ? 'bg-[var(--brand-600)] text-white shadow-xs'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Simulasi Perangkat</span>
+          </button>
+          <button
+            onClick={() => setStageViewMode('proposal')}
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              stageViewMode === 'proposal'
+                ? 'bg-amber-600 text-white shadow-xs'
+                : 'text-amber-400 hover:text-amber-300'
+            }`}
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>Proposal & Biaya</span>
+            <span className="px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[9px] font-mono font-bold border border-amber-500/30">
+              BARU
+            </span>
+          </button>
+        </div>
+
+        {/* Right: Quick Fullscreen Apps + Utilities */}
+        <div className="flex items-center gap-2 shrink-0">
+          {/* Fullscreen Apps Pills */}
+          <div className="hidden xl:flex items-center gap-1 bg-gray-950 p-1 rounded-xl border border-gray-800 text-xs">
+            <span className="text-[10px] text-gray-500 font-bold px-1.5 uppercase tracking-wider">Modul:</span>
+            {[
+              { id: 'Pusat Backoffice', label: 'Backoffice', icon: '🏢' },
+              { id: 'Dashboard Owner', label: 'Owner', icon: '👑' },
+              { id: 'Portal Mitra', label: 'Mitra', icon: '🤝' },
+              { id: 'Panel CRM', label: 'CRM', icon: '👥' },
+            ].map((app) => (
+              <button
+                key={app.id}
+                onClick={() => setFocusedApp(app.id)}
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-gray-300 hover:text-white hover:bg-gray-800 cursor-pointer transition-colors"
+              >
+                <span>{app.icon}</span>
+                <span>{app.label}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Quick Utility Icons */}
+          <div className="flex items-center gap-1 bg-gray-950 p-1 rounded-xl border border-gray-800">
             <button
-              onClick={() => setStageViewMode('demo')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                stageViewMode === 'demo'
-                  ? 'bg-[var(--brand-600)] text-white shadow-xs'
-                  : 'text-gray-400 hover:text-white'
-              }`}
+              onClick={handleToggleTheme}
+              title="Ganti Tema White-Label"
+              className="p-1.5 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-amber-400 cursor-pointer transition-colors text-xs flex items-center gap-1"
             >
-              <Layers className="w-3.5 h-3.5" />
-              <span>Demo Perangkat</span>
+              <Palette className="w-3.5 h-3.5" />
+              <span className="hidden 2xl:inline text-[10px]">Tema</span>
             </button>
             <button
-              onClick={() => setStageViewMode('proposal')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                stageViewMode === 'proposal'
-                  ? 'bg-amber-600 text-white shadow-xs'
-                  : 'text-amber-400 hover:text-amber-300'
-              }`}
+              onClick={handleResetDemo}
+              title="Reset Database Demo ke T0"
+              className="p-1.5 rounded-lg hover:bg-gray-800 text-rose-400 hover:text-rose-300 cursor-pointer transition-colors text-xs flex items-center gap-1"
             >
-              <FileText className="w-3.5 h-3.5" />
-              <span>Proposal Resmi</span>
-              <span className="px-1.5 py-0.2 rounded-full bg-amber-500/30 text-amber-300 text-[9px] font-black uppercase">
-                Tab Baru
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span className="hidden 2xl:inline text-[10px]">Reset T0</span>
+            </button>
+            <button
+              onClick={() => setIsEventLogOpen(!isEventLogOpen)}
+              title="Buka Live Event Log"
+              className="p-1.5 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-emerald-400 cursor-pointer transition-colors text-xs flex items-center gap-1"
+            >
+              <Terminal className="w-3.5 h-3.5" />
+              <span className="text-[10px] font-mono font-bold text-emerald-400 bg-gray-850 px-1.5 py-0.5 rounded">
+                {liveEvents.length}
               </span>
             </button>
           </div>
+        </div>
+      </div>
 
-          {stageViewMode === 'demo' && (
-            <div className="flex items-center gap-2 bg-gray-900/80 p-1.5 rounded-2xl border border-gray-800">
+      {stageViewMode === 'proposal' ? (
+        <div className="flex-1 overflow-auto bg-[#F8FAFC]">
+          <ProposalApp onBackToDemo={() => setStageViewMode('demo')} />
+        </div>
+      ) : (
+        <>
+          {/* 2. SCENARIO TOOLBAR & PLAYBACK CONTROLS (h-12, clean & compact) */}
+          <div className="h-12 bg-[#141822] border-b border-gray-800/80 px-4 sm:px-6 flex items-center justify-between shrink-0 z-20 gap-3">
+            {/* Left: 5 Scenario Segmented Tabs */}
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden sm:flex items-center gap-1 mr-1 shrink-0">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                Skenario:
+              </span>
+
+              {scenarios.map((scen, idx) => {
+                const isSelected = scen.id === selectedScenarioId;
+                return (
+                  <button
+                    key={scen.id}
+                    onClick={() => handleSelectScenario(scen.id)}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border shrink-0 ${
+                      isSelected
+                        ? 'bg-[var(--brand-600)] text-white border-[var(--brand-500)] shadow-md shadow-[var(--brand-900)]/40 ring-1 ring-[var(--brand-400)]/30'
+                        : 'bg-gray-900/80 text-gray-400 border-gray-800 hover:border-gray-700 hover:text-gray-200'
+                    }`}
+                  >
+                    <span className={`w-4 h-4 rounded-md flex items-center justify-center text-[10px] font-bold ${
+                      isSelected ? 'bg-white/20 text-white' : 'bg-gray-800 text-gray-400'
+                    }`}>
+                      {idx + 1}
+                    </span>
+                    <span className="shrink-0">{scen.icon}</span>
+                    <span>{scen.name.replace(/^\d+\.\s*/, '')}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right: Integrated Stepper Playback Controls */}
+            <div className="flex items-center gap-1.5 bg-gray-950 p-1 rounded-xl border border-gray-800/80 shadow-inner shrink-0">
               <Button
                 size="sm"
                 variant={isPlayingAutoDemo ? 'danger' : 'primary'}
@@ -672,146 +762,59 @@ export const StageApp: React.FC = () => {
                     handleStartAutoDemo();
                   }
                 }}
-                className="font-bold flex items-center gap-1.5 shadow-md"
+                className="font-bold flex items-center gap-1.5 shadow-xs px-2.5 py-1 text-xs rounded-lg"
               >
-                {isPlayingAutoDemo ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
-                <span>{isPlayingAutoDemo ? 'Jeda Demo' : 'Play Skenario'}</span>
+                {isPlayingAutoDemo ? <Pause className="w-3.5 h-3.5 fill-white" /> : <Play className="w-3.5 h-3.5 fill-white" />}
+                <span>{isPlayingAutoDemo ? 'Jeda' : 'Play Skenario'}</span>
               </Button>
 
               <Button
                 size="sm"
                 variant="secondary"
                 onClick={handleNextStep}
-                className="text-xs font-bold bg-gray-800 hover:bg-gray-700 text-amber-300 border-gray-700 flex items-center gap-1"
+                className="text-xs font-bold bg-gray-900 hover:bg-gray-800 text-amber-300 border-gray-700 flex items-center gap-1.5 px-2.5 py-1 rounded-lg"
                 title="Langkah berikutnya manual"
               >
-                <span>Langkah Berikutnya</span>
+                <span>Lanjut Step</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Button>
 
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={handleToggleTheme}
-                className="text-xs font-semibold bg-gray-800 text-gray-200 border-gray-700 hover:bg-gray-700"
-              >
-                <Palette className="w-3.5 h-3.5" />
-                <span>White-Label</span>
-              </Button>
-
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={handleResetDemo}
-                className="text-xs font-semibold bg-gray-800 text-rose-300 border-gray-700 hover:bg-gray-700"
+              <button
+                onClick={() => {
+                  setCurrentStepIndex(0);
+                  setIsPlayingAutoDemo(false);
+                  const current = steps[0];
+                  setCurrentNarrative(`${currentScenario.name}: ${current.title} — ${current.narration}`);
+                }}
+                title="Ulang Skenario ke Langkah 1"
+                className="p-1.5 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white cursor-pointer transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-                <span>Reset (T0)</span>
-              </Button>
+              </button>
 
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={() => setIsEventLogOpen(!isEventLogOpen)}
-                className="text-xs font-semibold bg-gray-800 text-gray-200 border-gray-700 hover:bg-gray-700"
-              >
-                <Terminal className="w-3.5 h-3.5" />
-                <span>Log ({liveEvents.length})</span>
-              </Button>
+              <div className="text-[11px] font-mono text-gray-400 bg-gray-900 px-2 py-1 rounded-lg border border-gray-800 font-bold shrink-0">
+                <span className="text-amber-400">{Math.min(currentStepIndex + 1, steps.length)}</span>/{steps.length}
+              </div>
             </div>
-          )}
-        </div>
+          </div>
 
-        {/* Quick App Switcher shortcuts */}
-        <div className="flex items-center gap-1.5">
-          <span className="text-[11px] text-gray-500 font-bold mr-1">Fokus Layar:</span>
-          {['Pusat Backoffice', 'Dashboard Owner', 'Portal Mitra', 'Panel CRM'].map((role) => (
-            <button
-              key={role}
-              onClick={() => setFocusedApp(role)}
-              className="px-2.5 py-1 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold cursor-pointer transition-colors"
-            >
-              {role}
-            </button>
-          ))}
-          <button
-            onClick={() => setStageViewMode('proposal')}
-            className="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-800/80 text-amber-300 text-xs font-bold cursor-pointer flex items-center gap-1 transition-colors"
-          >
-            <FileText className="w-3 h-3" />
-            <span>Proposal</span>
-          </button>
-        </div>
-      </div>
-
-      {stageViewMode === 'proposal' ? (
-        <div className="flex-1 overflow-auto bg-[#F8FAFC]">
-          <ProposalApp onBackToDemo={() => setStageViewMode('demo')} />
-        </div>
-      ) : (
-        <>
-          {/* Sub-Header: Interactive Scenario Selection Bar */}
-          <div className="bg-[#11141C] border-b border-gray-800/80 px-6 py-2.5 flex items-center justify-between shrink-0">
-            <div className="flex items-center gap-2 overflow-x-auto">
-              <span className="text-xs font-bold text-gray-400 mr-2 flex items-center gap-1 shrink-0">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                PILIH SKENARIO DEMO:
+          {/* 3. SLIM SCENARIO TAGLINE RIBBON */}
+          <div className="h-7 bg-[#0E1119] border-b border-gray-800/60 px-4 sm:px-6 flex items-center justify-between text-xs text-gray-400 shrink-0">
+            <div className="flex items-center gap-2 truncate">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+              <span className="text-gray-300 font-medium text-[11px] truncate">
+                {currentScenario.tagline}
               </span>
-
-              {scenarios.map((scen) => {
-                const isSelected = scen.id === selectedScenarioId;
-                return (
-                  <button
-                    key={scen.id}
-                    onClick={() => handleSelectScenario(scen.id)}
-                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border shrink-0 ${
-                      isSelected
-                        ? 'bg-[var(--brand-600)] text-white border-[var(--brand-500)] shadow-lg shadow-[var(--brand-900)]/30 scale-102'
-                        : 'bg-gray-900/90 text-gray-300 border-gray-800 hover:border-gray-700 hover:text-white'
-                    }`}
-                  >
-                    <span className={isSelected ? 'text-white' : 'text-amber-400'}>{scen.icon}</span>
-                    <span>{scen.name}</span>
-                    <span
-                      className={`text-[9px] px-1.5 py-0.2 rounded-full uppercase font-mono ${
-                        isSelected ? 'bg-white/20 text-white' : 'bg-gray-800 text-gray-400'
-                      }`}
-                    >
-                      {scen.badge}
-                    </span>
-                  </button>
-                );
-              })}
             </div>
-
-            <div className="text-[11px] text-gray-400 hidden xl:flex items-center gap-2 font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{steps.length} Langkah Terotomasi</span>
+            <div className="hidden md:flex items-center gap-3 text-[11px] text-gray-400 font-mono shrink-0">
+              <span>Fokus: <strong className="text-amber-300 font-semibold">{currentScenario.badge}</strong></span>
+              <span className="text-gray-600">•</span>
+              <span>{steps.length} Langkah Terpandu</span>
             </div>
           </div>
 
           {/* Main Multi-Device Stage Canvas */}
-          <div className="flex-1 overflow-auto p-6 flex flex-col items-center justify-center">
-            {/* Scenario Tagline Banner */}
-            <div className="mb-4 text-center max-w-3xl animate-fade-in">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-900 border border-gray-800 text-xs font-mono mb-2 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-                <span className="text-amber-400 font-bold uppercase">
-                  Tampilan Kanvas Khusus: {currentScenario.name}
-                </span>
-                <span className="text-gray-500">•</span>
-                <span className="text-gray-400">
-                  {selectedScenarioId === 'order_flow' && '4 Layar: Pelanggan • POS • KDS • Ops Gerai'}
-                  {selectedScenarioId === 'purchase_flow' && '3 Layar: Ops Gerai • Gudang Pusat • Finance True-Up'}
-                  {selectedScenarioId === 'hr_flow' && '3 Layar: Presensi GPS Barista • KDS Dapur • Dashboard Owner HR'}
-                  {selectedScenarioId === 'finance_flow' && '3 Layar: POS Kasir Laci • Audit Rekonsiliasi • Jurnal Akuntansi'}
-                  {selectedScenarioId === 'petty_cash_flow' && '3 Layar: Ops Gerai • Portal Approval 3-Tier • Dashboard Beban Cabang'}
-                </span>
-              </div>
-              <div className="text-xs text-gray-400">
-                {currentScenario.tagline}
-              </div>
-            </div>
+          <div className="flex-1 overflow-y-auto p-4 flex flex-col items-center justify-center no-scrollbar">
 
             {/* DYNAMIC SCENARIO CANVAS - TAMPILAN BERBEDA SESUAI DEMO YANG DIPILIH */}
             {selectedScenarioId === 'order_flow' && (
