@@ -30,13 +30,9 @@ import {
   AlertTriangle,
   TrendingDown,
   Lock,
-  Eye,
-  EyeOff,
 } from 'lucide-react';
 
 export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToDemo }) => {
-  const [showPricing, setShowPricing] = useState<boolean>(false); // Default false: fokus fitur tanpa harga
-  const [selectedTurnkeyPackage, setSelectedTurnkeyPackage] = useState<'bundling' | 'phase1' | 'phase2' | 'phase3'>('bundling');
   const [activeModuleTab, setActiveModuleTab] = useState<number>(0);
 
   // Daftar Modul
@@ -173,7 +169,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <div className="h-4 w-px bg-slate-300" />
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-sm text-slate-900 tracking-tight">
-                {showPricing ? 'PROPOSAL RESMI & BIAYA' : 'PROPOSAL FITUR & TEKNOLOGI'}
+                PROPOSAL FITUR & TEKNOLOGI
               </span>
               <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
                 Kopi Jodi Ecosystem
@@ -182,19 +178,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
 
           <div className="flex items-center gap-2.5">
-            {/* Toggle Tampilkan / Sembunyikan Harga */}
-            <button
-              onClick={() => setShowPricing(!showPricing)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
-                showPricing
-                  ? 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
-                  : 'bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100'
-              }`}
-              title={showPricing ? "Klik untuk sembunyikan rincian harga investasi" : "Klik untuk menampilkan angka investasi"}
-            >
-              {showPricing ? <EyeOff className="w-3.5 h-3.5 text-amber-700" /> : <Eye className="w-3.5 h-3.5 text-emerald-700" />}
-              <span>{showPricing ? 'Harga Aktif' : 'Fokus Fitur'}</span>
-            </button>
 
             {onBackToDemo && (
               <button
@@ -236,11 +219,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-xs font-bold backdrop-blur-sm">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>
-                  {showPricing
-                    ? 'Dokumen Resmi Penawaran Teknis & Komersial'
-                    : 'Dokumen Resmi Presentasi Teknis & Solusi Ekosistem'}
-                </span>
+                <span>Dokumen Resmi Presentasi Teknis & Solusi Ekosistem</span>
               </div>
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
                 Pengembangan Ekosistem Aplikasi & ERP Multi-Outlet Kopi Jodi
@@ -445,7 +424,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               </div>
               <div>
                 <h2 className="text-xl font-extrabold text-slate-900">
-                  {showPricing ? 'Investasi & Tahapan Milestone Pengembangan' : 'Roadmap & Tahapan Milestone Pengembangan'}
+                  Roadmap & Tahapan Milestone Pengembangan
                 </h2>
                 <p className="text-xs text-slate-500">
                   Tahapan delivery terukur dari fondasi operasional cabang hingga ekspansi multi-brand & ekosistem pelanggan
@@ -473,30 +452,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   Pengembangan sistem dibagi menjadi 3 milestone terukur dengan serah terima bertahap per fase agar operasional kafe langsung dapat menggunakan modul inti tanpa menunggu seluruh sistem selesai dibangun.
                 </p>
               </div>
-
-              {showPricing && (
-                <div className="text-right">
-                  <span className="text-[11px] font-bold text-slate-500 uppercase">
-                    Paket Bundling Seluruh Fase
-                  </span>
-                  <div className="text-2xl font-black text-emerald-700">Rp 135.000.000</div>
-                  <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
-                    Hemat Rp 15.000.000,- (Dari Total Rp 150 Jt)
-                  </span>
-                </div>
-              )}
             </div>
 
             {/* Grid 3 Milestone */}
             <div className="grid sm:grid-cols-3 gap-4">
-              <div
-                onClick={() => setSelectedTurnkeyPackage('phase1')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                  selectedTurnkeyPackage === 'phase1'
-                    ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
-                    : 'border-slate-200 hover:border-slate-300'
-                }`}
-              >
+              <div className="p-4 rounded-2xl border border-slate-200 bg-white">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-slate-500 uppercase">Fase 1 (Core)</span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
@@ -506,11 +466,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <div className="text-lg font-black text-slate-900 my-1.5">
                   Milestone 1 (Fondasi)
                 </div>
-                {showPricing && (
-                  <div className="text-sm font-black text-emerald-700 mb-1">
-                    Rp 75.000.000
-                  </div>
-                )}
                 <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
@@ -538,14 +493,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 </div>
               </div>
 
-              <div
-                onClick={() => setSelectedTurnkeyPackage('phase2')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                  selectedTurnkeyPackage === 'phase2'
-                    ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
-                    : 'border-slate-200 hover:border-slate-300'
-                }`}
-              >
+              <div className="p-4 rounded-2xl border border-slate-200 bg-white">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-slate-500 uppercase">Fase 2 (Omni)</span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
@@ -555,11 +503,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <div className="text-lg font-black text-slate-900 my-1.5">
                   Milestone 2 (Ekspansi)
                 </div>
-                {showPricing && (
-                  <div className="text-sm font-black text-emerald-700 mb-1">
-                    Rp 48.000.000
-                  </div>
-                )}
                 <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
@@ -580,14 +523,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 </div>
               </div>
 
-              <div
-                onClick={() => setSelectedTurnkeyPackage('phase3')}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                  selectedTurnkeyPackage === 'phase3'
-                    ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
-                    : 'border-slate-200 hover:border-slate-300'
-                }`}
-              >
+              <div className="p-4 rounded-2xl border border-slate-200 bg-white">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-slate-500 uppercase">Fase 3 (Scale)</span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
@@ -597,11 +533,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <div className="text-lg font-black text-slate-900 my-1.5">
                   Milestone 3 (Skalabilitas)
                 </div>
-                {showPricing && (
-                  <div className="text-sm font-black text-emerald-700 mb-1">
-                    Rp 27.000.000
-                  </div>
-                )}
                 <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
@@ -627,18 +558,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
               <div>
                 <div className="font-extrabold text-slate-900">
-                  {showPricing ? 'Termin Serah Terima & Pembayaran:' : 'Standar Serah Terima Setiap Milestone:'}
+                  Standar Serah Terima Setiap Milestone:
                 </div>
                 <div className="text-slate-600 mt-0.5">
-                  {showPricing ? (
-                    <>
-                      <strong>Termin 1 (30%)</strong> Kickoff & Desain &rarr; <strong>Termin 2 (40%)</strong> Modul Siap UAT Outlet &rarr; <strong>Termin 3 (30%)</strong> Go-Live & Training Selesai.
-                    </>
-                  ) : (
-                    <>
-                      Setiap fase melalui tahapan pengujian langsung (*UAT*) di pilot outlet, pelatihan barista/manager, dan pendampingan *go-live* sebelum aktivasi modul berikutnya.
-                    </>
-                  )}
+                  Setiap fase melalui tahapan pengujian langsung (<em>UAT</em>) di pilot outlet, pelatihan barista/manager, dan pendampingan <em>go-live</em> sebelum aktivasi modul berikutnya.
                 </div>
               </div>
               <div className="text-emerald-700 font-bold shrink-0 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
