@@ -648,44 +648,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 4: Timeline Pengerjaan Fase 1 (12 Minggu) */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
-              04
-            </div>
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-900">Timeline Implementasi Fase 1 (12 Minggu)</h2>
-              <p className="text-xs text-slate-500">Roadmap terstruktur dari perancangan hingga go-live di pilot outlet</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
-              {[
-                { week: 'M1 - M2', title: 'Perancangan & Resep', desc: 'Finalisasi alur operasional kafe, master resep BOM, skema database, dan UI/UX.' },
-                { week: 'M3 - M8', title: 'Core Development', desc: 'Pembuatan ERP Backoffice, POS Kasir Tablet, KDS Barista, dan Mobile Ops Manager.' },
-                { week: 'M9 - M10', title: 'Integrasi Hardware', desc: 'Pemasangan printer thermal bluetooth, QRIS gateway, dan stress-testing sistem.' },
-                { week: 'M11', title: 'UAT di Pilot Outlet', desc: 'Pengujian lapangan di 1 gerai fisik Kopi Jodi dengan transaksi sesungguhnya.' },
-                { week: 'M12', title: 'Training & Go-Live', desc: 'Pelatihan staf barista, kasir, store manager, serah terima, dan peluncuran resmi.' },
-              ].map((step, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200 relative">
-                  <span className="text-[10px] font-black uppercase text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
-                    {step.week}
-                  </span>
-                  <div className="font-extrabold text-slate-900 text-xs mt-2">{step.title}</div>
-                  <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section 5: Lembar Persetujuan & Konfirmasi */}
+        {/* Section 4: Lembar Persetujuan & Konfirmasi */}
         <section className="bg-white rounded-3xl border border-slate-300 p-8 shadow-sm space-y-6">
           <div className="flex items-center justify-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
-              05
+              04
             </div>
             <h2 className="text-xl font-black text-slate-900">Lembar Konfirmasi & Penandatanganan</h2>
           </div>
