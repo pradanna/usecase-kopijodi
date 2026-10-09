@@ -648,62 +648,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 4: Estimasi Kebutuhan Pihak Ketiga (Infrastruktur & Lisensi) */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
-              04
-            </div>
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-900">Estimasi Kebutuhan Pihak Ketiga (Infrastruktur & Lisensi)</h2>
-              <p className="text-xs text-slate-500">Layanan resmi yang dihubungkan langsung ke platform Kopi Jodi (transparan tanpa markup)</p>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Cloud Server & Database</div>
-              <div className="font-extrabold text-slate-900 text-sm">DigitalOcean / Lightsail</div>
-              <div className="text-amber-700 font-black text-xs">
-                {showPricing ? 'Rp 600rb - 1.2jt / bln' : 'At-Cost Sesuai Beban Cabang'}
-              </div>
-              <p className="text-[10px] text-slate-500">Langsung dibayar ke provider</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Payment Gateway QRIS</div>
-              <div className="font-extrabold text-slate-900 text-sm">Midtrans Indonesia</div>
-              <div className="text-emerald-700 font-black text-xs">
-                Tarif Bank Indonesia (0.7%)
-              </div>
-              <p className="text-[10px] text-slate-500">Tanpa biaya bulanan / setup</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Google Play Developer</div>
-              <div className="font-extrabold text-slate-900 text-sm">Google Play Store</div>
-              <div className="text-blue-700 font-black text-xs">
-                {showPricing ? '$25 USD (~Rp 400rb)' : 'Lisensi Resmi Akun Google ($25 Sekali)'}
-              </div>
-              <p className="text-[10px] text-slate-500">Sekali bayar seumur hidup</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Apple Developer Program</div>
-              <div className="font-extrabold text-slate-900 text-sm">Apple App Store (iOS)</div>
-              <div className="text-purple-700 font-black text-xs">
-                {showPricing ? '$99 USD (~Rp 1.6jt/thn)' : 'Lisensi Resmi Apple ($99/thn)'}
-              </div>
-              <p className="text-[10px] text-slate-500">Lisensi tahunan resmi Apple</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 5: Timeline Pengerjaan Fase 1 (12 Minggu) */}
+        {/* Section 4: Timeline Pengerjaan Fase 1 (12 Minggu) */}
         <section className="space-y-4">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
-              05
+              04
             </div>
             <div>
               <h2 className="text-xl font-extrabold text-slate-900">Timeline Implementasi Fase 1 (12 Minggu)</h2>
@@ -732,11 +681,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 6: Lembar Persetujuan & Konfirmasi */}
+        {/* Section 5: Lembar Persetujuan & Konfirmasi */}
         <section className="bg-white rounded-3xl border border-slate-300 p-8 shadow-sm space-y-6">
           <div className="flex items-center justify-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
-              06
+              05
             </div>
             <h2 className="text-xl font-black text-slate-900">Lembar Konfirmasi & Penandatanganan</h2>
           </div>
