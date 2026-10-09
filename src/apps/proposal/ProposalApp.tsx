@@ -50,10 +50,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
       icon: <Building2 className="w-5 h-5 text-indigo-600" />,
       phase: 'Fase 1 (Core)',
       features: [
+        'Integrasi Real-Time POS ke ERP: Seluruh transaksi & pendapatan harian outlet (Tunai & QRIS) otomatis masuk ke jurnal pendapatan (Akun 4101) & buku kas pusat tanpa rekonsiliasi manual.',
         'Master 25+ bahan baku, kemasan, & resep racikan otomatis (BOM).',
         'Verifikasi nota supplier fisik & koreksi HPP retrospektif (True-Up HPP).',
         'Buku kas kecil outlet dengan sistem persetujuan bertingkat.',
-        'Laporan laba/rugi, arus kas (cashflow), dan buku jurnal umum double-entry.',
+        'Laporan laba/rugi, arus kas (cashflow), dan buku jurnal umum double-entry multi-cabang.',
         'Manajemen hutang outlet ke gudang pusat & aging piutang.',
       ],
     },
@@ -65,11 +66,12 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
       icon: <Tablet className="w-5 h-5 text-amber-600" />,
       phase: 'Fase 1 (Core)',
       features: [
-        'Buka & tutup shift kasir dengan audit kas laci fisik (cash count).',
+        'Sinkronisasi Pendapatan Otomatis: Setiap transaksi kasir langsung membukukan omzet ke ERP dan mencatat kas masuk secara instan.',
+        'Buka & tutup shift kasir dengan audit kas laci fisik (cash count) & rekonsiliasi kasir otomatis.',
         'Kustomisasi varian (ukuran cup, takaran gula, opsi susu alternatif oatmilk).',
         'Pembayaran ganda: Tunai (auto kembalian) dan QRIS dinamis Midtrans.',
-        'Bekerja online maupun offline (tetap bisa transaksi saat internet mati).',
-        'Cetak struk thermal bluetooth dan sinkronisasi instan ke KDS.',
+        'Bekerja online maupun offline (tetap bisa transaksi saat internet mati, auto-sync saat online).',
+        'Cetak struk thermal bluetooth dan sinkronisasi instan ke KDS dapur.',
       ],
     },
     {
@@ -322,6 +324,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-rose-600 font-bold shrink-0">✕</span>
+                  <span><strong>Rekapitulasi Omzet Kasir Manual:</strong> Laporan penjualan outlet harus direkap manual tiap malam, rawan selisih kas fisik dan lambat masuk pembukuan pusat.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-rose-600 font-bold shrink-0">✕</span>
                   <span><strong>Kehilangan Loyalitas Pelanggan:</strong> Antrean kasir panjang saat jam sibuk dan tidak ada platform digital untuk pesan pick-up mandiri.</span>
                 </li>
               </ul>
@@ -341,6 +347,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <li className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
                   <span><strong>True-Up HPP Otomatis:</strong> Saat nota diverifikasi Finance, sistem mengoreksi HPP minuman yang sudah terjual secara retrospektif.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
+                  <span><strong>Integrasi Otomatis POS &rarr; ERP:</strong> Pendapatan transaksi outlet (Tunai & QRIS) otomatis terjurnal real-time ke akun pendapatan & kas ERP pusat.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
@@ -517,6 +527,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
                     <span>App Operasi Outlet (Manager)</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-emerald-700 font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+                    <span>Integrasi Pendapatan POS &rarr; ERP</span>
                   </div>
                 </div>
               </div>
