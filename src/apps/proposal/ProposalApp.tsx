@@ -38,7 +38,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
   const [showPricing, setShowPricing] = useState<boolean>(false); // Default false: fokus fitur tanpa harga
   const [selectedTurnkeyPackage, setSelectedTurnkeyPackage] = useState<'bundling' | 'phase1' | 'phase2' | 'phase3'>('bundling');
   const [activeModuleTab, setActiveModuleTab] = useState<number>(0);
-  const [comparisonOutletCount, setComparisonOutletCount] = useState<number>(5);
 
   // Daftar Modul
   const MODULES = [
@@ -649,334 +648,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 4: Komparasi Strategis Kopi Jodi vs Sewa Moka POS per Outlet */}
-        <section className="space-y-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">
-                04
-              </div>
-              <div>
-                <h2 className="text-xl font-extrabold text-slate-900">
-                  Analisis Strategis: Keunggulan Kopi Jodi vs Sewa Moka POS per Outlet
-                </h2>
-                <p className="text-xs text-slate-500">
-                  Mengapa menyewa POS retail umum per outlet membebani ekspansi cabang, dan bagaimana Kopi Jodi menghemat ratusan juta
-                </p>
-              </div>
-            </div>
-
-            {/* Outlet Selector Slider / Quick Select */}
-            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-xs">
-              <span className="text-xs font-bold text-slate-600">Simulasi Cabang:</span>
-              {[3, 5, 10, 20].map((num) => (
-                <button
-                  key={num}
-                  onClick={() => setComparisonOutletCount(num)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
-                    comparisonOutletCount === num
-                      ? 'bg-amber-600 text-white shadow-xs'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {num} Outlet
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Interactive Cost Simulation Cards */}
-          <div className="grid md:grid-cols-2 gap-5">
-            {/* Sisi Moka POS */}
-            <div className="bg-rose-50/60 border border-rose-200 rounded-3xl p-6 space-y-4 relative overflow-hidden">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] font-black uppercase text-rose-700 bg-rose-100 px-2 py-0.5 rounded-full border border-rose-200">
-                    Model Sewa POS Retail Umum (Moka POS)
-                  </span>
-                  <h3 className="text-base font-extrabold text-slate-900 mt-1.5">
-                    Biaya Membengkak per Penambahan Outlet
-                  </h3>
-                </div>
-                <div className="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold">
-                  <XCircle className="w-5 h-5" />
-                </div>
-              </div>
-
-              <div className="bg-white/80 rounded-2xl p-4 border border-rose-200 space-y-2">
-                <div className="flex justify-between text-xs text-slate-600">
-                  <span>Biaya Lisensi Dasar ({comparisonOutletCount} outlet):</span>
-                  <span className="font-bold">
-                    {showPricing
-                      ? `Rp ${(comparisonOutletCount * 299000).toLocaleString('id-ID')} /bln`
-                      : `Dihitung per outlet baru (~Rp 299rb x ${comparisonOutletCount} gerai)`}
-                  </span>
-                </div>
-                <div className="flex justify-between text-xs text-slate-600">
-                  <span>Add-on Wajib Kafe (KDS Dapur, Moka Order, BOM Inventory):</span>
-                  <span className="font-bold">
-                    {showPricing
-                      ? `Rp ${(comparisonOutletCount * 200000).toLocaleString('id-ID')} /bln`
-                      : `Dihitung per perangkat lisensi (~Rp 200rb x ${comparisonOutletCount} gerai)`}
-                  </span>
-                </div>
-                <div className="pt-2 border-t border-rose-200 flex justify-between items-center text-rose-900">
-                  <span className="text-xs font-bold">Total Biaya Sewa ({comparisonOutletCount} Outlet):</span>
-                  {showPricing ? (
-                    <span className="text-lg font-black">
-                      Rp {(comparisonOutletCount * 499000).toLocaleString('id-ID')} <span className="text-xs font-normal text-slate-500">/bln</span>
-                    </span>
-                  ) : (
-                    <span className="text-sm font-extrabold text-rose-800">
-                      Membengkak {comparisonOutletCount}x Lipat Setiap Bulan
-                    </span>
-                  )}
-                </div>
-                <div className="flex justify-between text-xs text-slate-500 pt-1">
-                  <span>Estimasi Biaya 5 Tahun:</span>
-                  <span className="font-extrabold text-rose-700">
-                    {showPricing
-                      ? `Rp ${(comparisonOutletCount * 499000 * 60).toLocaleString('id-ID')},-`
-                      : 'Akumulasi Ratusan Juta (Uang Hangus Tanpa Hak Milik)'}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2 text-xs text-slate-700">
-                <div className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold">✕</span>
-                  <span><strong>Hanya Mendapat Kasir Standar:</strong> Tidak termasuk Mobile App Pelanggan (PWA) resmi Kopi Jodi.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold">✕</span>
-                  <span><strong>Terkena Komisi Ojol 20-30%:</strong> Karena tidak ada App Pelanggan sendiri, pesanan online tetap bergantung pada GrabFood/GoFood.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold">✕</span>
-                  <span><strong>Uang Sewa Hangus:</strong> Membayar puluhan hingga ratusan juta tanpa memiliki source code atau aset teknologi.</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Sisi Kopi Jodi Ecosystem */}
-            <div className="bg-emerald-50/60 border border-emerald-300 rounded-3xl p-6 space-y-4 relative overflow-hidden">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] font-black uppercase text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200">
-                    Ekosistem Kopi Jodi (genossys)
-                  </span>
-                  <h3 className="text-base font-extrabold text-slate-900 mt-1.5">
-                    Biaya Flat Bebas Berapapun Jumlah Outlet
-                  </h3>
-                </div>
-                <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-              </div>
-
-              <div className="bg-white/80 rounded-2xl p-4 border border-emerald-300 space-y-2">
-                <div className="flex justify-between text-xs text-slate-600">
-                  <span>Biaya Lisensi per Outlet Baru:</span>
-                  <span className="font-extrabold text-emerald-700">Rp 0,- (GRATIS Selamanya)</span>
-                </div>
-                <div className="flex justify-between text-xs text-slate-600">
-                  <span>Skema Dedicated Programmer:</span>
-                  <span className="font-bold text-emerald-900">
-                    {showPricing
-                      ? 'Rp 5.000.000 /bln (FLAT untuk SEMUA CABANG)'
-                      : 'Biaya Flat untuk SEMUA Cabang (Bebas Tambah Gerai)'}
-                  </span>
-                </div>
-                <div className="pt-2 border-t border-emerald-200 flex justify-between items-center text-emerald-900">
-                  <span className="text-xs font-bold">Biaya per Outlet pada {comparisonOutletCount} Cabang:</span>
-                  {showPricing ? (
-                    <span className="text-lg font-black text-emerald-700">
-                      Rp {Math.round(5000000 / comparisonOutletCount).toLocaleString('id-ID')} <span className="text-xs font-normal text-slate-500">/outlet/bln</span>
-                    </span>
-                  ) : (
-                    <span className="text-sm font-extrabold text-emerald-700">
-                      Semakin Banyak Cabang, Semakin Murah Mendekati Nol
-                    </span>
-                  )}
-                </div>
-                <div className="flex justify-between text-xs text-slate-500 pt-1">
-                  <span>Opsi Beli Putus (Turnkey Sekali Bayar):</span>
-                  <span className="font-extrabold text-emerald-800">
-                    {showPricing
-                      ? 'Rp 135.000.000,- (Lunas Selamanya)'
-                      : 'Lunas Selamanya & 100% Hak Milik Source Code'}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2 text-xs text-slate-700">
-                <div className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>8 Aplikasi Lengkap Sekaligus:</strong> Sudah termasuk App Pelanggan (PWA), KDS Barista, ERP Backoffice, dan Portal Investor.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>Hemat Komisi Ojol 20-30%:</strong> Pelanggan pesan langsung via App Kopi Jodi tanpa potongan komisi pihak ketiga.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>100% Hak Milik Source Code:</strong> Menjadi aset teknologi berharga yang melipatgandakan valuasi perusahaan Kopi Jodi.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tabel Komparasi Head-to-Head 10 Aspek */}
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-            <div className="p-4 bg-slate-50 font-extrabold text-xs text-slate-800 uppercase tracking-wider border-b border-slate-200 flex items-center justify-between">
-              <span>Tabel Komparasi Fitur & Kapabilitas: Kopi Jodi vs Sewa Moka POS</span>
-              <span className="text-[10px] text-slate-500 font-normal">Standardisasi Jaringan Kafe Modern</span>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-slate-100/70 text-slate-600 font-bold border-b border-slate-200">
-                  <tr>
-                    <th className="p-3 w-1/4">Aspek Perbandingan</th>
-                    <th className="p-3 w-3/8 text-rose-800 bg-rose-50/40">Sewa Moka POS per Outlet</th>
-                    <th className="p-3 w-3/8 text-emerald-900 bg-emerald-50/60">Ekosistem Terintegrasi Kopi Jodi</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-200">
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">1. Skalabilitas Biaya Multi-Cabang</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Membengkak:</strong> Dikenakan biaya per outlet. Buka 10 cabang = bayar 10x lipat biaya sewa setiap bulan selamanya.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Biaya Flat:</strong> Mau 3, 10, 20, atau 50 cabang, biaya software Rp 0 per cabang tambahan. Semakin banyak cabang, biaya per outlet semakin murah mendekati nol.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">2. Mobile App Pelanggan (PWA Brand Sendiri)</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Tidak Ada:</strong> Pelanggan tidak punya aplikasi khusus Kopi Jodi. Harus antre fisik di kasir atau kafe dipotong komisi 20-30% oleh GoFood/GrabFood.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Tersedia (PWA iOS & Android):</strong> Pelanggan pesan pick-up tanpa antre, bayar QRIS instan, kustomisasi rasa, kumpulkan poin loyalty. Zero potongan komisi ojol!
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">3. Koreksi HPP Retrospektif (True-Up HPP)</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Tidak Ada:</strong> HPP statis. Jika nota fisik supplier terlambat dan harga susu naik, Moka tidak bisa mengoreksi HPP pesanan yang sudah terlanjur terjual. Muncul laba semu.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Otomatis (BR-06):</strong> Begitu nota riil diverifikasi Finance, sistem otomatis menghitung ulang HPP pesanan yang sudah terjual secara retrospektif. Laporan laba 100% akurat.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">4. Pemotongan Stok Berbasis Resep Dapur</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Di Kasir:</strong> Stok terpotong saat kasir klik bayar, bukan saat barista selesai meracik. Sering terjadi selisih stok jika ada pembatalan di meja racik.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Di KDS Barista / POS (BR-12):</strong> Untuk outlet besar, stok bahan baku (gramasi espresso, ml susu, sirup) terpotong presisi saat barista menyelesaikan tiket pesanan di layar KDS dapur; untuk gerai booth kecil otomatis terpotong saat transaksi kasir selesai.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">5. Resep Olahan Dapur (Semi-Finished Prep)</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Terbatas Bahan Mentah:</strong> Tidak mendukung resep olahan batch dapur sebelum buka (simple syrup aren batch 1.2L, cold brew 24 jam, topping jelly).
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Mendukung Penuh:</strong> Modul Racikan R&D mengelola resep batch olahan, kuantitas yield, shelf-life chiller, dan HPP bahan olahan per ml.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">6. Kontrol Kas Kecil & Pencegahan Fraud</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Pencatatan Biasa:</strong> Tanpa batas persetujuan berjenjang otomatis. Rawan belanja lokal tanpa kontrol.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Multi-Tier Approval Otomatis:</strong> Limit belanja tanpa approval diatur ketat; pengeluaran besar wajib approval Finance & Owner dengan foto nota fisik.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">7. Transparansi Portal Investor Mitra</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Tidak Ada:</strong> Owner harus repot menarik data Excel secara manual dan mengirimnya satu per satu ke setiap investor cabang.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Portal Mitra Read-Only:</strong> Investor cabang dapat memantau omzet harian, HPP riil, dan estimasi bagi hasil secara transparan tanpa risiko merusak data.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">8. Status Kepemilikan & Aset Perusahaan</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Hanya Sewa (Rental):</strong> Jika berhenti langganan, seluruh akses mati. Perusahaan tidak memiliki nilai aset teknologi sama sekali.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>100% Hak Milik Kopi Jodi:</strong> Seluruh source code, database, dan arsitektur adalah aset intelektual milik Kopi Jodi yang menaikkan valuasi bisnis di mata investor.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">9. Kustomisasi & Tambah Fitur Baru</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Terkunci & Mustahil:</strong> Moka adalah software massal retail umum. Request fitur khusus dari satu kafe tidak akan dibuatkan.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Bebas 100% (*Unlimited*):</strong> Kopi Jodi bebas meminta fitur baru, format laporan khusus, promo unik, atau integrasi apapun tanpa biaya tambahan (*zero change request fee*).
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">10. White-Label & Citra Merek (Branding)</td>
-                    <td className="p-3 text-slate-700 bg-rose-50/20">
-                      <strong>Citra Standar UKM:</strong> Pelanggan dan investor melihat logo Moka di struk dan sistem.
-                    </td>
-                    <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Citra Korporasi Modern:</strong> 100% brand Kopi Jodi di seluruh perangkat (setara teknologi Fore Coffee / Kopi Kenangan).
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* 3 Kesimpulan Finansial Kunci */}
-          <div className="grid sm:grid-cols-3 gap-4 pt-2">
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1.5">
-              <div className="flex items-center gap-2 text-emerald-700 font-extrabold text-xs">
-                <DollarSign className="w-4 h-4" />
-                <span>Penghematan Komisi Ojol (20-30%)</span>
-              </div>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Jika 1 gerai meraih omzet online Rp 30 Juta/bln di GoFood, potongan komisinya mencapai Rp 6-9 Juta/bln per gerai. Dengan App Pelanggan Kopi Jodi sendiri, omzet tersebut utuh 100%.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1.5">
-              <div className="flex items-center gap-2 text-indigo-700 font-extrabold text-xs">
-                <ShieldCheck className="w-4 h-4" />
-                <span>Zero Kebocoran Stok & Fraud Kas</span>
-              </div>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Auto-deduct BOM di KDS dan approval kas kecil multi-tier menyelamatkan potensi kehilangan bahan baku dan uang tunai senilai 5-10% omzet kafe setiap bulannya.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1.5">
-              <div className="flex items-center gap-2 text-amber-700 font-extrabold text-xs">
-                <Award className="w-4 h-4" />
-                <span>Valuasi Bisnis Waralaba Melonjak</span>
-              </div>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Calon investor waralaba/mitra cabang akan jauh lebih yakin bergabung karena Kopi Jodi memiliki ekosistem teknologi mandiri yang terbukti transparan dan terstandarisasi.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 5: Estimasi Biaya Pihak Ketiga (Infrastruktur & Lisensi) */}
+        {/* Section 4: Estimasi Kebutuhan Pihak Ketiga (Infrastruktur & Lisensi) */}
         <section className="space-y-4">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
-              05
+              04
             </div>
             <div>
               <h2 className="text-xl font-extrabold text-slate-900">Estimasi Kebutuhan Pihak Ketiga (Infrastruktur & Lisensi)</h2>
@@ -1023,11 +699,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 6: Timeline Pengerjaan Fase 1 (12 Minggu) */}
+        {/* Section 5: Timeline Pengerjaan Fase 1 (12 Minggu) */}
         <section className="space-y-4">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
-              06
+              05
             </div>
             <div>
               <h2 className="text-xl font-extrabold text-slate-900">Timeline Implementasi Fase 1 (12 Minggu)</h2>
@@ -1056,11 +732,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 7: Lembar Persetujuan & Konfirmasi */}
+        {/* Section 6: Lembar Persetujuan & Konfirmasi */}
         <section className="bg-white rounded-3xl border border-slate-300 p-8 shadow-sm space-y-6">
           <div className="flex items-center justify-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
-              07
+              06
             </div>
             <h2 className="text-xl font-black text-slate-900">Lembar Konfirmasi & Penandatanganan</h2>
           </div>
