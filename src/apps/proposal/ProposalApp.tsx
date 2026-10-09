@@ -36,7 +36,6 @@ import {
 
 export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToDemo }) => {
   const [showPricing, setShowPricing] = useState<boolean>(false); // Default false: fokus fitur tanpa harga
-  const [selectedScheme, setSelectedScheme] = useState<'turnkey' | 'dedicated'>('dedicated');
   const [selectedTurnkeyPackage, setSelectedTurnkeyPackage] = useState<'bundling' | 'phase1' | 'phase2' | 'phase3'>('bundling');
   const [activeModuleTab, setActiveModuleTab] = useState<number>(0);
   const [comparisonOutletCount, setComparisonOutletCount] = useState<number>(5);
@@ -439,307 +438,195 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   {showPricing ? 'Pilihan Skema Kerjasama & Investasi' : 'Pilihan Model Kerjasama & Delivery Sistem'}
                 </h2>
                 <p className="text-xs text-slate-500">
-                  {showPricing
-                    ? 'Pilih skema yang paling sesuai dengan strategi arus kas dan pertumbuhan Kopi Jodi'
-                    : 'Pilih model kolaborasi pengembangan teknologi jangka panjang untuk akselerasi pertumbuhan Kopi Jodi'}
+                  Tahapan delivery terukur dari fondasi operasional cabang hingga ekspansi multi-brand & ekosistem pelanggan
                 </p>
               </div>
             </div>
-
-            {/* Switcher Buttons */}
-            <div className="inline-flex rounded-xl bg-slate-200 p-1 print:hidden">
-              <button
-                onClick={() => setSelectedScheme('dedicated')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
-                  selectedScheme === 'dedicated'
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                ⭐ Opsi 2: Dedicated Programmer
-              </button>
-              <button
-                onClick={() => setSelectedScheme('turnkey')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
-                  selectedScheme === 'turnkey'
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Opsi 1: Beli Putus (Turnkey)
-              </button>
-            </div>
           </div>
 
-          {/* OPSI 2: Dedicated Programmer (Recommended) */}
-          {selectedScheme === 'dedicated' && (
-            <div className="bg-gradient-to-br from-amber-500/10 via-white to-amber-500/5 rounded-3xl p-6 sm:p-8 border-2 border-amber-400 shadow-md space-y-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-amber-500 text-slate-950 font-black text-[10px] uppercase px-4 py-1 rounded-bl-xl tracking-wider">
-                Rekomendasi Terbaik & Paling Efisien
+          {/* Kartu Utama Milestone Pengembangan */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-300 shadow-md space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold">
+                    Phased Rollout Delivery
+                  </span>
+                  <span className="text-xs font-bold text-slate-500">
+                    3 Milestone Terintegrasi
+                  </span>
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 mt-1">
+                  Implementasi Bertahap per Milestone
+                </h3>
+                <p className="text-xs text-slate-600 max-w-xl mt-1 leading-relaxed">
+                  Pengembangan sistem dibagi menjadi 3 milestone terukur dengan serah terima bertahap per fase agar operasional kafe langsung dapat menggunakan modul inti tanpa menunggu seluruh sistem selesai dibangun.
+                </p>
               </div>
 
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-amber-200/60 pb-6">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">OPSI 2</span>
-                    <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-extrabold">
-                      Dedicated Programmer Kerjasama 5 Tahun
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-black text-slate-900 mt-1">
-                    Sistem Berlangganan Bulanan Flat & Siaga
-                  </h3>
-                  <p className="text-xs text-slate-600 max-w-xl mt-1 leading-relaxed">
-                    Kopi Jodi memiliki Programmer Dedicated dari <strong>genossys</strong> untuk membangun seluruh ekosistem (Fase 1 s/d 3), merawat server, serta <strong>bebas menambah fitur baru apapun kapan saja</strong> tanpa biaya tambahan.
-                  </p>
-                </div>
-
-                <div className="bg-white rounded-2xl p-5 border border-amber-300 shadow-sm text-center min-w-[240px]">
-                  <div className="text-[11px] font-bold text-slate-500 uppercase">
-                    {showPricing ? 'Investasi Bulanan Flat' : 'Model Kerjasama'}
-                  </div>
-                  {showPricing ? (
-                    <>
-                      <div className="text-3xl font-black text-slate-900 my-1">
-                        Rp 5.000.000<span className="text-sm font-semibold text-slate-500">/bln</span>
-                      </div>
-                      <div className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 rounded-lg py-1 px-2 border border-emerald-200">
-                        Komitmen Kontrak: 5 Tahun (60 Bulan)
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-xl font-black text-amber-900 my-1">
-                        Dedicated Partner
-                      </div>
-                      <div className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 rounded-lg py-1 px-2.5 border border-emerald-200">
-                        Flat Bulanan & Siaga 5 Tahun
-                      </div>
-                      <div className="text-[10px] text-slate-500 mt-1 font-medium">
-                        (Detail nilai investasi pada sesi penawaran)
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* 4 Keuntungan Kunci Opsi 2 */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-2xl bg-white border border-amber-200 shadow-xs space-y-1.5">
-                  <div className="flex items-center gap-2 font-black text-slate-900 text-sm">
-                    <Zap className="w-4 h-4 text-amber-600" />
-                    <span>Bebas Tambah Fitur Apapun (Unlimited Requests)</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Kopi Jodi bebas meminta penambahan modul, laporan khusus, promo baru, maupun integrasi sistem apapun selama 5 tahun <strong>tanpa biaya tambahan sama sekali (*zero change request fee*)</strong>.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white border border-amber-200 shadow-xs space-y-1.5">
-                  <div className="flex items-center gap-2 font-black text-slate-900 text-sm">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                    <span>Maintenance & Siaga Bug Standby 5 Tahun</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Pemeliharaan sistem, monitoring server, pembaruan keamanan, dan penanganan kendala teknis ditangani langsung oleh tim <strong>genossys</strong> sepanjang masa kontrak tanpa perlu kontrak maintenance terpisah.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white border border-amber-200 shadow-xs space-y-1.5">
-                  <div className="flex items-center gap-2 font-black text-slate-900 text-sm">
-                    <DollarSign className="w-4 h-4 text-blue-600" />
-                    <span>Nol Beban HR, THR, BPJS & Laptop</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Kopi Jodi tidak perlu menanggung beban rekrutmen tim IT in-house, THR, asuransi, pesangon, maupun pengadaan perangkat laptop kerja developer bernilai puluhan juta.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white border border-amber-200 shadow-xs space-y-1.5">
-                  <div className="flex items-center gap-2 font-black text-slate-900 text-sm">
-                    <Award className="w-4 h-4 text-purple-600" />
-                    <span>Hak Milik Penuh Source Code</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Seluruh kode sumber (*source code*), skema database, dan aset digital yang dibangun adalah 100% hak milik Kopi Jodi (*non-vendor lock-in*).
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* OPSI 1: Beli Putus (Turnkey Fixed-Price) */}
-          {selectedScheme === 'turnkey' && (
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-300 shadow-md space-y-6">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">OPSI 1</span>
-                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 text-[10px] font-extrabold">
-                      Turnkey Fixed-Price Project
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-black text-slate-900 mt-1">
-                    Beli Putus Sekali Bayar per Fase
-                  </h3>
-                  <p className="text-xs text-slate-600 max-w-xl mt-1 leading-relaxed">
-                    Cocok untuk kepastian anggaran proyek satu kali bayar dengan serah terima penuh, garansi bug gratis 3-6 bulan, dan penyerahan seluruh source code.
-                  </p>
-                </div>
-
+              {showPricing && (
                 <div className="text-right">
                   <span className="text-[11px] font-bold text-slate-500 uppercase">
-                    {showPricing ? 'Paket Bundling Penuh' : 'Model Paket'}
+                    Paket Bundling Seluruh Fase
                   </span>
+                  <div className="text-2xl font-black text-emerald-700">Rp 135.000.000</div>
+                  <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
+                    Hemat Rp 15.000.000,- (Dari Total Rp 150 Jt)
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Grid 3 Milestone */}
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div
+                onClick={() => setSelectedTurnkeyPackage('phase1')}
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  selectedTurnkeyPackage === 'phase1'
+                    ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
+                    : 'border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-slate-500 uppercase">Fase 1 (Core)</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                    2.5 - 3 Bulan
+                  </span>
+                </div>
+                <div className="text-lg font-black text-slate-900 my-1.5">
+                  Milestone 1 (Fondasi)
+                </div>
+                {showPricing && (
+                  <div className="text-sm font-black text-emerald-700 mb-1">
+                    Rp 75.000.000
+                  </div>
+                )}
+                <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>ERP Backoffice & Finance</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>POS Kasir Tablet Counter</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>KDS Layar Barista Dapur</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>App Operasi Outlet (Manager)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedTurnkeyPackage('phase2')}
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  selectedTurnkeyPackage === 'phase2'
+                    ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
+                    : 'border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-slate-500 uppercase">Fase 2 (Omni)</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+                    2 Bulan
+                  </span>
+                </div>
+                <div className="text-lg font-black text-slate-900 my-1.5">
+                  Milestone 2 (Ekspansi)
+                </div>
+                {showPricing && (
+                  <div className="text-sm font-black text-emerald-700 mb-1">
+                    Rp 48.000.000
+                  </div>
+                )}
+                <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>Mobile App Pelanggan (PWA)</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>Online Pickup & Tracking</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>CRM & Promo Panel</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>Loyalty Point & E-Voucher</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedTurnkeyPackage('phase3')}
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  selectedTurnkeyPackage === 'phase3'
+                    ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
+                    : 'border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-slate-500 uppercase">Fase 3 (Scale)</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    1 - 1.5 Bulan
+                  </span>
+                </div>
+                <div className="text-lg font-black text-slate-900 my-1.5">
+                  Milestone 3 (Skalabilitas)
+                </div>
+                {showPricing && (
+                  <div className="text-sm font-black text-emerald-700 mb-1">
+                    Rp 27.000.000
+                  </div>
+                )}
+                <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>Portal Mitra / Investor Read-Only</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>Owner Executive Dashboard</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>HR Shift Barista & GPS Mobile</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>White-Label Multi-Brand Engine</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Serah Terima & Garansi */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+              <div>
+                <div className="font-extrabold text-slate-900">
+                  {showPricing ? 'Termin Serah Terima & Pembayaran:' : 'Standar Serah Terima Setiap Milestone:'}
+                </div>
+                <div className="text-slate-600 mt-0.5">
                   {showPricing ? (
                     <>
-                      <div className="text-2xl font-black text-emerald-700">Rp 135.000.000</div>
-                      <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
-                        Hemat Rp 15.000.000,-
-                      </span>
+                      <strong>Termin 1 (30%)</strong> Kickoff & Desain &rarr; <strong>Termin 2 (40%)</strong> Modul Siap UAT Outlet &rarr; <strong>Termin 3 (30%)</strong> Go-Live & Training Selesai.
                     </>
                   ) : (
                     <>
-                      <div className="text-xl font-black text-slate-800">Bundling Seluruh Fase</div>
-                      <span className="text-[10px] font-extrabold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
-                        Serah Terima Bertahap per Fase
-                      </span>
+                      Setiap fase melalui tahapan pengujian langsung (*UAT*) di pilot outlet, pelatihan barista/manager, dan pendampingan *go-live* sebelum aktivasi modul berikutnya.
                     </>
                   )}
                 </div>
               </div>
-
-              {/* Pilihan Paket Fase */}
-              <div className="grid sm:grid-cols-3 gap-4">
-                <div
-                  onClick={() => setSelectedTurnkeyPackage('phase1')}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                    selectedTurnkeyPackage === 'phase1'
-                      ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
-                      : 'border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <div className="text-[11px] font-bold text-slate-500 uppercase">Fase 1 (Core)</div>
-                  <div className="text-lg font-black text-slate-900 my-1">
-                    {showPricing ? 'Rp 75.000.000' : 'Milestone 1 (Fondasi)'}
-                  </div>
-                  <div className="text-[11px] text-slate-500 font-medium">Estimasi: 2.5 - 3 Bulan</div>
-                  <div className="mt-3 text-[11px] text-slate-600 space-y-1">
-                    <div>&bull; ERP Backoffice & Finance</div>
-                    <div>&bull; POS Kasir Tablet Counter</div>
-                    <div>&bull; KDS Layar Barista Dapur</div>
-                    <div>&bull; App Operasi Outlet (Manager)</div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setSelectedTurnkeyPackage('phase2')}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                    selectedTurnkeyPackage === 'phase2'
-                      ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
-                      : 'border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <div className="text-[11px] font-bold text-slate-500 uppercase">Fase 2 (Omni)</div>
-                  <div className="text-lg font-black text-slate-900 my-1">
-                    {showPricing ? 'Rp 48.000.000' : 'Milestone 2 (Ekspansi)'}
-                  </div>
-                  <div className="text-[11px] text-slate-500 font-medium">Estimasi: 2 Bulan</div>
-                  <div className="mt-3 text-[11px] text-slate-600 space-y-1">
-                    <div>&bull; Mobile App Pelanggan (PWA)</div>
-                    <div>&bull; Online Pickup & Tracking</div>
-                    <div>&bull; CRM & Promo Panel</div>
-                    <div>&bull; Loyalty Point & E-Voucher</div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setSelectedTurnkeyPackage('phase3')}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                    selectedTurnkeyPackage === 'phase3'
-                      ? 'border-[var(--brand-600,#C86D3B)] bg-amber-50/40 shadow-xs'
-                      : 'border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <div className="text-[11px] font-bold text-slate-500 uppercase">Fase 3 (Scale)</div>
-                  <div className="text-lg font-black text-slate-900 my-1">
-                    {showPricing ? 'Rp 27.000.000' : 'Milestone 3 (Skalabilitas)'}
-                  </div>
-                  <div className="text-[11px] text-slate-500 font-medium">Estimasi: 1 - 1.5 Bulan</div>
-                  <div className="mt-3 text-[11px] text-slate-600 space-y-1">
-                    <div>&bull; Portal Mitra / Investor Read-Only</div>
-                    <div>&bull; Owner Executive Dashboard</div>
-                    <div>&bull; HR Shift Barista & GPS Mobile</div>
-                    <div>&bull; White-Label Multi-Brand Engine</div>
-                  </div>
-                </div>
+              <div className="text-emerald-700 font-bold shrink-0 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+                Termasuk Garansi Bug 3 - 6 Bulan
               </div>
-
-              {/* Termin Pembayaran Beli Putus */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
-                <div>
-                  <div className="font-extrabold text-slate-900">Termin Serah Terima & Pembayaran Beli Putus:</div>
-                  <div className="text-slate-600 mt-0.5">
-                    <strong>Termin 1 (30%)</strong> Kickoff & Desain &rarr; <strong>Termin 2 (40%)</strong> Modul Siap UAT Outlet &rarr; <strong>Termin 3 (30%)</strong> Go-Live & Training Selesai.
-                  </div>
-                </div>
-                <div className="text-emerald-700 font-bold shrink-0 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
-                  Termasuk Garansi Bug 3 - 6 Bulan
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Matriks Perbandingan Cepat */}
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
-            <div className="p-4 bg-slate-50 font-extrabold text-xs text-slate-800 uppercase tracking-wider border-b border-slate-200">
-              Tabel Perbandingan: Opsi 1 (Beli Putus) vs Opsi 2 (Bulanan Dedicated)
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-slate-100/70 text-slate-600 font-bold border-b border-slate-200">
-                  <tr>
-                    <th className="p-3 w-1/4">Parameter Evaluasi</th>
-                    <th className="p-3 w-3/8">Opsi 1: Beli Putus (Turnkey)</th>
-                    <th className="p-3 w-3/8 bg-amber-50/60 text-amber-900">Opsi 2: Dedicated Programmer (Bulanan)</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-200">
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">Beban Arus Kas (Cashflow)</td>
-                    <td className="p-3 text-slate-700">
-                      {showPricing
-                        ? 'Modal besar per termin proyek (Rp 75 Jt s/d Rp 135 Jt)'
-                        : 'Sesuai termin serah terima modul (Milestone-based)'}
-                    </td>
-                    <td className="p-3 bg-amber-50/30 font-bold text-emerald-800">
-                      {showPricing
-                        ? 'Sangat Ringan (Flat Rp 5 Juta / bulan)'
-                        : 'Investasi bulanan flat terencana (OpEx-friendly & zero modal awal)'}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">Masa Kerjasama</td>
-                    <td className="p-3 text-slate-700">Selesai per fase proyek (~3 s/d 6 bulan)</td>
-                    <td className="p-3 bg-amber-50/30 text-slate-900">Minimal 5 Tahun (Kerjasama Jangka Panjang)</td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">Fleksibilitas Tambah Fitur</td>
-                    <td className="p-3 text-slate-700">Fitur terkunci di awal; ada biaya change-request tambahan</td>
-                    <td className="p-3 bg-amber-50/30 font-bold text-emerald-800">100% Bebas Tambah Fitur Kapan Saja (Unlimited & Gratis)</td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">Dukungan & Maintenance</td>
-                    <td className="p-3 text-slate-700">Garansi 3-6 bulan (setelahnya ada kontrak maintenance terpisah)</td>
-                    <td className="p-3 bg-amber-50/30 font-bold text-slate-900">Gratis & Siaga Penuh 5 Tahun oleh genossys</td>
-                  </tr>
-                  <tr>
-                    <td className="p-3 font-bold text-slate-900">Rekomendasi Utama</td>
-                    <td className="p-3 text-slate-700">Tepat jika ada dana investasi siap pakai dan ingin proyek tuntas cepat</td>
-                    <td className="p-3 bg-amber-50/30 font-bold text-amber-900">Sangat Tepat untuk inovasi tanpa batas & cashflow operasional aman</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </section>
@@ -1165,46 +1052,15 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto space-y-3 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
-            <label className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-400">
-              <input
-                type="radio"
-                name="proposal_choice"
-                checked={selectedScheme === 'dedicated'}
-                onChange={() => setSelectedScheme('dedicated')}
-                className="w-4 h-4 text-amber-600 focus:ring-amber-500"
-              />
-              <div className="flex-1">
-                <div className="font-extrabold text-slate-900">
-                  {showPricing
-                    ? 'OPSI 2: Sistem Bulanan Dedicated Programmer (Rp 5.000.000,- / bulan)'
-                    : 'OPSI 2: Sistem Kemitraan Dedicated Developer (Investasi Bulanan Flat & Bebas Tambah Fitur)'}
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Minimal Kontrak 5 Tahun (60 Bulan) &bull; Bebas Tambah Fitur Apapun (*Zero Change Request Fee*) &bull; Support Standby
-                </div>
-              </div>
-            </label>
-
-            <label className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-400">
-              <input
-                type="radio"
-                name="proposal_choice"
-                checked={selectedScheme === 'turnkey'}
-                onChange={() => setSelectedScheme('turnkey')}
-                className="w-4 h-4 text-amber-600 focus:ring-amber-500"
-              />
-              <div className="flex-1">
-                <div className="font-extrabold text-slate-900">
-                  {showPricing
-                    ? 'OPSI 1: Beli Putus Paket Bundling Lengkap (Rp 135.000.000,- Sekali Bayar)'
-                    : 'OPSI 1: Beli Putus Paket Turnkey Lengkap (Serah Terima per Milestone & 100% Hak Milik Source Code)'}
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Mencakup Seluruh Fase 1 + Fase 2 + Fase 3 &bull; Garansi Bug 6 Bulan &bull; Penyerahan Source Code Penuh
-                </div>
-              </div>
-            </label>
+          <div className="max-w-2xl mx-auto p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-center space-y-1.5">
+            <div className="font-extrabold text-slate-900 text-sm">
+              Konfirmasi Ruang Lingkup & Milestone Ekosistem Kopi Jodi
+            </div>
+            <p className="text-slate-600 leading-relaxed max-w-lg mx-auto">
+              {showPricing
+                ? 'Paket Bundling Penuh (Milestone 1, 2, dan 3): Rp 135.000.000,- dengan serah terima bertahap per fase, pelatihan staf, garansi bug 6 bulan, dan penyerahan seluruh source code.'
+                : 'Mencakup pengembangan bertahap 3 Milestone (Fase 1 Fondasi, Fase 2 Ekspansi, Fase 3 Skalabilitas) untuk 8 modul aplikasi terpadu, serah terima berkala per fase, dan garansi bug penuh.'}
+            </p>
           </div>
 
           {/* Tanda Tangan */}
