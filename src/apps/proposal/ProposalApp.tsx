@@ -647,60 +647,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             </div>
           </div>
         </section>
-
-        {/* Section 4: Lembar Persetujuan & Konfirmasi */}
-        <section className="bg-white rounded-3xl border border-slate-300 p-8 shadow-sm space-y-6">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
-              04
-            </div>
-            <h2 className="text-xl font-black text-slate-900">Lembar Konfirmasi & Penandatanganan</h2>
-          </div>
-          <div className="text-center max-w-lg mx-auto">
-            <p className="text-xs text-slate-500">
-              Silakan konfirmasi pilihan skema kerjasama untuk penerbitan Surat Perjanjian Kerjasama (SPK)
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-center space-y-1.5">
-            <div className="font-extrabold text-slate-900 text-sm">
-              Konfirmasi Ruang Lingkup & Milestone Ekosistem Kopi Jodi
-            </div>
-            <p className="text-slate-600 leading-relaxed max-w-lg mx-auto">
-              {showPricing
-                ? 'Paket Bundling Penuh (Milestone 1, 2, dan 3): Rp 135.000.000,- dengan serah terima bertahap per fase, pelatihan staf, garansi bug 6 bulan, dan penyerahan seluruh source code.'
-                : 'Mencakup pengembangan bertahap 3 Milestone (Fase 1 Fondasi, Fase 2 Ekspansi, Fase 3 Skalabilitas) untuk 8 modul aplikasi terpadu, serah terima berkala per fase, dan garansi bug penuh.'}
-            </p>
-          </div>
-
-          {/* Tanda Tangan */}
-          <div className="grid grid-cols-2 gap-8 pt-6 border-t border-slate-200 max-w-2xl mx-auto text-center text-xs">
-            <div className="space-y-16">
-              <div>
-                <div className="text-slate-400 uppercase text-[10px] font-bold">Disetujui Oleh (Klien)</div>
-                <div className="font-black text-slate-900 text-sm mt-0.5">Manajemen Kopi Jodi</div>
-              </div>
-              <div>
-                <div className="border-b border-slate-400 w-44 mx-auto" />
-                <div className="font-bold text-slate-800 mt-1.5">( _______________________ )</div>
-                <div className="text-[11px] text-slate-500">Direktur / Founder Kopi Jodi</div>
-              </div>
-            </div>
-
-            <div className="space-y-16">
-              <div>
-                <div className="text-slate-400 uppercase text-[10px] font-bold">Disiapkan Oleh (Pengembang)</div>
-                <div className="font-black text-slate-900 text-sm mt-0.5">genossys</div>
-                <div className="text-[10px] text-slate-500">Email: genossys2019@gmail.com</div>
-              </div>
-              <div>
-                <div className="border-b border-slate-400 w-44 mx-auto" />
-                <div className="font-bold text-slate-800 mt-1.5">Pradana Mahendra</div>
-                <div className="text-[11px] text-slate-500">Lead Solution Architect</div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* Footer */}
