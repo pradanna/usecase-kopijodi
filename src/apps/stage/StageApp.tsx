@@ -840,7 +840,7 @@ export const StageApp: React.FC = () => {
                 <DeviceFrame
                   type="tablet"
                   title="KDS Barista Dapur"
-                  subtitle="Monitor Dapur • Racik & Potong Stok Resep"
+                  subtitle="Monitor Dapur • Khusus Outlet Besar & Flagship"
                   isActive={isActiveDevice('kds')}
                 >
                   <KdsApp />
@@ -914,7 +914,7 @@ export const StageApp: React.FC = () => {
                 <DeviceFrame
                   type="tablet"
                   title="KDS Barista Dapur"
-                  subtitle="Live Counter Output Cup & Stopwatch SLA Kecepatan"
+                  subtitle="Monitor Dapur Outlet Besar • Output Cup & SLA Kecepatan"
                   isActive={isActiveDevice('kds')}
                 >
                   <KdsApp />

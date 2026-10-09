@@ -77,16 +77,17 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     {
       id: 3,
       name: 'KDS Layar Barista',
-      role: 'Head Barista & Barista Dapur',
-      device: 'Monitor Dapur / Tablet',
+      role: 'Head Barista & Dapur (Outlet Besar)',
+      device: 'Monitor Dapur / Tablet (Flagship & Outlet Besar)',
       icon: <Monitor className="w-5 h-5 text-emerald-600" />,
       phase: 'Fase 1 (Core)',
       features: [
+        'Diperuntukkan Khusus Outlet Besar / Flagship: Efektif untuk cabang dengan volume pesanan tinggi & area meja barista terpisah dari kasir.',
+        'Fleksibel untuk Outlet Kecil/Booth: Pada gerai kecil atau booth express, KDS ini opsional — barista dapat bekerja langsung dari struk POS kasir.',
         'Antrean tiket pesanan real-time tanpa kertas bon fisik.',
         'Status progres per pesanan: Dalam Antrean -> Sedang Diracik -> Siap Diambil.',
-        'Pemotongan stok bahan baku presisi dari resep saat pesanan selesai.',
-        'Timer SLA pembuatan minuman dengan peringatan warna keterlambatan.',
-        'Pemberitahuan audio/visual saat pesanan baru masuk dari kasir atau app.',
+        'Pemotongan stok bahan baku presisi dari resep saat pesanan selesai diracik.',
+        'Timer SLA pembuatan minuman dengan indikator warna keterlambatan.',
       ],
     },
     {
@@ -523,6 +524,9 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
                     <span>KDS Layar Barista Dapur</span>
+                    <span className="text-[9px] font-extrabold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                      Outlet Besar
+                    </span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
@@ -872,7 +876,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                       <strong>Di Kasir:</strong> Stok terpotong saat kasir klik bayar, bukan saat barista selesai meracik. Sering terjadi selisih stok jika ada pembatalan di meja racik.
                     </td>
                     <td className="p-3 font-bold text-emerald-800 bg-emerald-50/30">
-                      <strong>Di KDS Barista (BR-12):</strong> Stok bahan baku (gramasi espresso, ml susu, sirup) terpotong presisi saat barista menyelesaikan tiket pesanan di layar dapur.
+                      <strong>Di KDS Barista / POS (BR-12):</strong> Untuk outlet besar, stok bahan baku (gramasi espresso, ml susu, sirup) terpotong presisi saat barista menyelesaikan tiket pesanan di layar KDS dapur; untuk gerai booth kecil otomatis terpotong saat transaksi kasir selesai.
                     </td>
                   </tr>
                   <tr>
