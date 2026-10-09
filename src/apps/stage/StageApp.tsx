@@ -651,9 +651,6 @@ export const StageApp: React.FC = () => {
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Proposal Fitur & Solusi</span>
-            <span className="px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[9px] font-mono font-bold border border-amber-500/30">
-              PITCH
-            </span>
           </button>
         </div>
 

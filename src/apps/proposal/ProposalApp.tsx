@@ -35,7 +35,7 @@ import {
 } from 'lucide-react';
 
 export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToDemo }) => {
-  const [showPricing, setShowPricing] = useState<boolean>(false); // Default false: pitch mode tanpa harga!
+  const [showPricing, setShowPricing] = useState<boolean>(false); // Default false: fokus fitur tanpa harga
   const [selectedScheme, setSelectedScheme] = useState<'turnkey' | 'dedicated'>('dedicated');
   const [selectedTurnkeyPackage, setSelectedTurnkeyPackage] = useState<'bundling' | 'phase1' | 'phase2' | 'phase3'>('bundling');
   const [activeModuleTab, setActiveModuleTab] = useState<number>(0);
@@ -177,16 +177,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
                 Kopi Jodi Ecosystem
               </span>
-              {!showPricing && (
-                <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-extrabold hidden md:inline">
-                  Mode Pitching Fitur
-                </span>
-              )}
             </div>
           </div>
 
           <div className="flex items-center gap-2.5">
-            {/* Toggle Mode Pitching / Tampilkan Harga */}
+            {/* Toggle Tampilkan / Sembunyikan Harga */}
             <button
               onClick={() => setShowPricing(!showPricing)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
@@ -194,10 +189,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   ? 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
                   : 'bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100'
               }`}
-              title={showPricing ? "Klik untuk sembunyikan harga (Mode Pitching Fitur)" : "Klik untuk menampilkan angka investasi"}
+              title={showPricing ? "Klik untuk sembunyikan rincian harga investasi" : "Klik untuk menampilkan angka investasi"}
             >
               {showPricing ? <EyeOff className="w-3.5 h-3.5 text-amber-700" /> : <Eye className="w-3.5 h-3.5 text-emerald-700" />}
-              <span>{showPricing ? 'Harga Aktif' : 'Mode Pitching (Tanpa Harga)'}</span>
+              <span>{showPricing ? 'Harga Aktif' : 'Fokus Fitur'}</span>
             </button>
 
             {onBackToDemo && (
