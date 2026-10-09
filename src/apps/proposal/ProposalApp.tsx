@@ -435,7 +435,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               </div>
               <div>
                 <h2 className="text-xl font-extrabold text-slate-900">
-                  {showPricing ? 'Pilihan Skema Kerjasama & Investasi' : 'Pilihan Model Kerjasama & Delivery Sistem'}
+                  {showPricing ? 'Investasi & Tahapan Milestone Pengembangan' : 'Roadmap & Tahapan Milestone Pengembangan'}
                 </h2>
                 <p className="text-xs text-slate-500">
                   Tahapan delivery terukur dari fondasi operasional cabang hingga ekspansi multi-brand & ekosistem pelanggan
