@@ -1,6 +1,6 @@
 # Dokumentasi Ekosistem Kopi "Satu Gelas, Satu Cerita"
 
-Selamat datang di repositori dokumentasi perancangan dan spesifikasi ekosistem aplikasi kopi multi-outlet **Kopi Jodi / Kopi Jodi**. Dokumen-dokumen di dalam direktori `docs/` ini disusun secara modular berdasarkan fase implementasi dan arsitektur produk yang didefinisikan dalam [PRD.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/PRD.md).
+Selamat datang di repositori dokumentasi perancangan dan spesifikasi ekosistem aplikasi kopi multi-outlet **Kopi Seduhan Jodi**. Dokumen-dokumen di dalam direktori `docs/` ini disusun secara modular berdasarkan fase implementasi dan arsitektur produk yang didefinisikan dalam [PRD.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/PRD.md).
 
 ---
 
@@ -66,4 +66,4 @@ docs/
 ## 🔗 Referensi Dokumen Pendukung
 - **PRD Resmi**: [PRD.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/PRD.md)
 - **Catatan Perancangan Internal ERP**: [catatan-perancangan-erp-kopi.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/catatan-perancangan-erp-kopi.md)
-- **Draf Penawaran Komersial**: [draf-penawaran-aplikasi-kopi.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/draf-penawaran-aplikasi-kopi.md)
+- **Rekomendasi Solusi Teknologi**: [draf-penawaran-aplikasi-kopi.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/draf-penawaran-aplikasi-kopi.md)

@@ -103,7 +103,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     {
       id: 5,
       name: 'App Pelanggan (Customer)',
-      role: 'Pelanggan Kopi Jodi',
+      role: 'Pelanggan Kopi Seduhan Jodi',
       device: 'Mobile PWA iOS & Android',
       icon: <Users className="w-5 h-5 text-purple-600" />,
       phase: 'Fase 2 (Omni)',
@@ -169,10 +169,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <div className="h-4 w-px bg-slate-300" />
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-sm text-slate-900 tracking-tight">
-                PROPOSAL FITUR & TEKNOLOGI
+                REKOMENDASI SOLUSI TEKNOLOGI
               </span>
               <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
-                Kopi Jodi Ecosystem
+                Kopi Seduhan Jodi Ecosystem
               </span>
             </div>
           </div>
@@ -198,8 +198,8 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             </button>
 
             <a
-              href="/Penawaran_Ekosistem_Kopi_Jodi.docx"
-              download="Proposal_Fitur_Ekosistem_Kopi_Jodi.docx"
+              href="/Rekomendasi_Solusi_Teknologi_Kopi_Seduhan_Jodi.docx"
+              download="Rekomendasi_Solusi_Teknologi_Kopi_Seduhan_Jodi.docx"
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--brand-600,#C86D3B)] hover:bg-[var(--brand-700,#A85428)] text-white text-xs font-bold transition-all shadow-xs"
             >
               <Download className="w-3.5 h-3.5" />
@@ -215,14 +215,14 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-[#1e1b18] text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-700 relative overflow-hidden">
           <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-[var(--brand-600,#C86D3B)]/20 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8 border-b border-slate-700/80 pb-8">
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-xs font-bold backdrop-blur-sm">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Dokumen Resmi Presentasi Teknis & Solusi Ekosistem</span>
               </div>
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                Pengembangan Ekosistem Aplikasi & ERP Multi-Outlet Kopi Jodi
+                Pengembangan Ekosistem Aplikasi & ERP Multi-Outlet Kopi Seduhan Jodi
               </h1>
               <p className="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
                 Standardisasi Operasional Modern Setara Jaringan Kafe Nasional (Fore & Kopi Kenangan) — Terintegrasi Penuh dari Kasir POS, Barista KDS, Gudang, hingga Keuangan Pusat.
@@ -244,27 +244,8 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 </div>
               </div>
               <div className="pt-2 border-t border-white/10 text-[11px] text-slate-300">
-                <span className="text-slate-400">Untuk Klien:</span> <strong className="text-white">Founder Kopi Jodi</strong>
+                <span className="text-slate-400">Untuk Klien:</span> <strong className="text-white">Founder Kopi Seduhan Jodi</strong>
               </div>
-            </div>
-          </div>
-
-          <div className="relative z-10 pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <div className="text-xl sm:text-2xl font-black text-amber-400">8 Aplikasi</div>
-              <div className="text-xs text-slate-300 mt-0.5">Satu Ekosistem Terpadu</div>
-            </div>
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <div className="text-xl sm:text-2xl font-black text-emerald-400">100% Presisi</div>
-              <div className="text-xs text-slate-300 mt-0.5">Potong Stok Berbasis BOM</div>
-            </div>
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <div className="text-xl sm:text-2xl font-black text-blue-400">True-Up HPP</div>
-              <div className="text-xs text-slate-300 mt-0.5">Koreksi Margin Retrospektif</div>
-            </div>
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <div className="text-xl sm:text-2xl font-black text-rose-400">Zero Leakage</div>
-              <div className="text-xs text-slate-300 mt-0.5">Approval Kas Bertingkat</div>
             </div>
           </div>
         </div>
@@ -277,7 +258,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             </div>
             <div>
               <h2 className="text-xl font-extrabold text-slate-900">Tantangan Operasional & Solusi Terintegrasi</h2>
-              <p className="text-xs text-slate-500">Mencegah kebocoran profit dan memastikan skalabilitas cabang Kopi Jodi</p>
+              <p className="text-xs text-slate-500">Mencegah kebocoran profit dan memastikan skalabilitas cabang Kopi Seduhan Jodi</p>
             </div>
           </div>
 
@@ -316,7 +297,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-5 space-y-3.5">
               <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-sm">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
-                <span>Solusi Ekosistem Kopi Jodi oleh genossys:</span>
+                <span>Solusi Ekosistem Kopi Seduhan Jodi oleh genossys:</span>
               </div>
               <ul className="space-y-2.5 text-xs text-slate-700">
                 <li className="flex items-start gap-2">
@@ -574,7 +555,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400 print:hidden">
-        <p>&copy; 2026 genossys & Kopi Jodi. Seluruh hak cipta dilindungi undang-undang.</p>
+        <p>&copy; 2026 genossys & Kopi Seduhan Jodi. Seluruh hak cipta dilindungi undang-undang.</p>
       </footer>
     </div>
   );

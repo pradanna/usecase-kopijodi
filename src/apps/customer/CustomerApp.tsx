@@ -704,7 +704,7 @@ export const CustomerApp: React.FC = () => {
               <QrCode className="w-36 h-36 text-gray-900" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-white px-2 py-0.5 rounded-md shadow-xs border text-[10px] font-extrabold text-[var(--brand-700)]">
-                  Kopi Jodi
+                  Kopi Seduhan Jodi
                 </div>
               </div>
             </div>

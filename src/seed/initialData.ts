@@ -1,4 +1,4 @@
-// Realistic Initial Seed Data for Kopi Jodi Ecosystem (PRD Section 10)
+// Realistic Initial Seed Data for Kopi Seduhan Jodi Ecosystem (PRD Section 10)
 
 import type {
   Outlet,
@@ -20,7 +20,7 @@ import type {
 export const INITIAL_OUTLETS: Outlet[] = [
   {
     id: 'outlet-sudirman',
-    name: 'Kopi Jodi - Sudirman',
+    name: 'Kopi Seduhan Jodi - Sudirman',
     type: 'partner',
     ownershipPct: null, // "Belum Diatur"
     pettyCashLimit: 150000,
@@ -30,7 +30,7 @@ export const INITIAL_OUTLETS: Outlet[] = [
   },
   {
     id: 'outlet-senopati',
-    name: 'Kopi Jodi - Senopati',
+    name: 'Kopi Seduhan Jodi - Senopati',
     type: 'own',
     ownershipPct: null,
     pettyCashLimit: 200000,
@@ -40,7 +40,7 @@ export const INITIAL_OUTLETS: Outlet[] = [
   },
   {
     id: 'outlet-kemang',
-    name: 'Kopi Jodi - Kemang',
+    name: 'Kopi Seduhan Jodi - Kemang',
     type: 'partner',
     ownershipPct: null,
     pettyCashLimit: 150000,

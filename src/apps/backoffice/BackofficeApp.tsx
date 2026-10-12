@@ -295,7 +295,7 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
     {
       id: 'TRF-20261008-01',
       source: 'Gudang Pusat (Central DC)',
-      destination: 'Kopi Jodi - Sudirman',
+      destination: 'Kopi Seduhan Jodi - Sudirman',
       items: '15 kg Biji Kopi House Blend, 10 dus Cup 16oz',
       driver: 'Budi (Armada Logistik 1)',
       date: '08 Okt 2026 06:30',
@@ -304,7 +304,7 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
     {
       id: 'TRF-20261008-02',
       source: 'Gudang Pusat (Central DC)',
-      destination: 'Kopi Jodi - Senopati',
+      destination: 'Kopi Seduhan Jodi - Senopati',
       items: '20 karton Susu Fresh Milk Pasteurisasi',
       driver: 'Agus (Truk Pendingin 2)',
       date: '08 Okt 2026 07:15',
@@ -312,8 +312,8 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
     },
     {
       id: 'TRF-20261008-03',
-      source: 'Kopi Jodi - Senopati',
-      destination: 'Kopi Jodi - Kemang',
+      source: 'Kopi Seduhan Jodi - Senopati',
+      destination: 'Kopi Seduhan Jodi - Kemang',
       items: '2 botol Sirup Vanilla (Transfer Darurat Antar-Cabang)',
       driver: 'Kurir Internal',
       date: '08 Okt 2026 11:20',
@@ -325,7 +325,7 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
   const STOCK_OPNAMES = [
     {
       id: 'OPN-20261008-01',
-      outletName: 'Kopi Jodi - Sudirman',
+      outletName: 'Kopi Seduhan Jodi - Sudirman',
       ingredientName: 'Biji Kopi House Blend',
       systemQty: 45000,
       physicalQty: 44820,
@@ -336,7 +336,7 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
     },
     {
       id: 'OPN-20261008-02',
-      outletName: 'Kopi Jodi - Senopati',
+      outletName: 'Kopi Seduhan Jodi - Senopati',
       ingredientName: 'Susu Fresh Milk Pasteurisasi',
       systemQty: 24000,
       physicalQty: 23600,
@@ -347,7 +347,7 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
     },
     {
       id: 'OPN-20261008-03',
-      outletName: 'Kopi Jodi - Kemang',
+      outletName: 'Kopi Seduhan Jodi - Kemang',
       ingredientName: 'Cup Plastik 16oz',
       systemQty: 850,
       physicalQty: 848,
@@ -368,7 +368,7 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
           </div>
           <div>
             <div className="font-extrabold text-sm text-[var(--text)]">ERP BACKOFFICE</div>
-            <div className="text-[10px] text-[var(--brand-700)] font-semibold">Head Office Kopi Jodi</div>
+            <div className="text-[10px] text-[var(--brand-700)] font-semibold">Head Office Kopi Seduhan Jodi</div>
           </div>
         </div>
 
@@ -466,7 +466,7 @@ export const BackofficeApp: React.FC<BackofficeAppProps> = ({
 
         {/* Footer info */}
         <div className="p-3 border-t border-[var(--border)] text-[11px] text-gray-500">
-          <div className="font-bold text-[var(--text)]">Kopi Jodi Ecosystem</div>
+          <div className="font-bold text-[var(--text)]">Kopi Seduhan Jodi Ecosystem</div>
           <div className="text-[10px] text-gray-400">Multi-Outlet ERP v1.2</div>
         </div>
       </div>

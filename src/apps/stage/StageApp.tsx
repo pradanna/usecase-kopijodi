@@ -59,8 +59,11 @@ export interface DemoScenario {
 export const StageApp: React.FC = () => {
   const { brandId, dispatch } = useEcosystemStore();
 
-  // Top Mode: 'demo' (multi-device) | 'proposal' (resmi penawaran)
-  const [stageViewMode, setStageViewMode] = useState<'demo' | 'proposal'>('demo');
+  // Top Mode: 'demo' (multi-device) | 'proposal' (resmi rekomendasi solusi) — Default: 'proposal'
+  const [stageViewMode, setStageViewMode] = useState<'demo' | 'proposal'>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('view') === 'demo' ? 'demo' : 'proposal';
+  });
 
   const [focusedApp, setFocusedApp] = useState<string | null>(null);
 
@@ -617,18 +620,18 @@ export const StageApp: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-sm tracking-wider text-white">
-              KOPI JODI
+              KOPI SEDUHAN JODI
             </span>
             <span className="text-[11px] text-gray-400 font-medium hidden sm:inline">
               ERP & POS
             </span>
             <Badge variant="brand" className="text-[9px] py-0 px-1.5 font-mono">
-              {brandId === 'jodi' ? 'Brand Jodi' : 'Teras Kopi'}
+              {brandId === 'jodi' ? 'Brand Seduhan Jodi' : 'Teras Kopi'}
             </Badge>
           </div>
         </div>
 
-        {/* Center: Main View Switcher (Demo Perangkat vs Proposal Resmi) */}
+        {/* Center: Main View Switcher (Demo Perangkat vs Rekomendasi Solusi Teknologi) */}
         <div className="flex items-center rounded-xl bg-gray-950 p-1 border border-gray-800 shadow-inner shrink-0">
           <button
             onClick={() => setStageViewMode('demo')}
@@ -650,7 +653,7 @@ export const StageApp: React.FC = () => {
             }`}
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>Proposal Fitur & Solusi</span>
+            <span>Rekomendasi Solusi Teknologi</span>
           </button>
         </div>
 

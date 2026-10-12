@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Script to generate the official Proposal Document for Kopi Jodi Digital Ecosystem.
-Outputs: Penawaran_Pengembangan_Ekosistem_Aplikasi_Kopi_Jodi.docx
+Script to generate the official Rekomendasi Solusi Teknologi Document for Kopi Seduhan Jodi Digital Ecosystem.
+Outputs: Rekomendasi_Solusi_Teknologi_Kopi_Seduhan_Jodi.docx
 Author: genossys (genossys2019@gmail.com)
 """
 
@@ -220,7 +220,7 @@ def build_proposal_docx(file_path):
         header = section.header
         hp = header.paragraphs[0]
         hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        hrun = hp.add_run("KOPI JODI x GENOSSYS | Proposal Ringkas Ekosistem Aplikasi Terpadu")
+        hrun = hp.add_run("KOPI SEDUHAN JODI x GENOSSYS | Rekomendasi Solusi Teknologi Ekosistem Aplikasi Terpadu")
         hrun.font.name = 'Segoe UI'
         hrun.font.size = Pt(8)
         hrun.font.color.rgb = RGBColor(0x9C, 0xA3, 0xAF)
@@ -229,7 +229,7 @@ def build_proposal_docx(file_path):
         footer = section.footer
         fp = footer.paragraphs[0]
         fp.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-        frun1 = fp.add_run("Dipersiapkan oleh genossys (genossys2019@gmail.com) | Khusus Manajemen Kopi Jodi")
+        frun1 = fp.add_run("Dipersiapkan oleh genossys (genossys2019@gmail.com) | Khusus Manajemen Kopi Seduhan Jodi")
         frun1.font.name = 'Segoe UI'
         frun1.font.size = Pt(8)
         frun1.font.color.rgb = RGBColor(0x9C, 0xA3, 0xAF)
@@ -259,7 +259,7 @@ def build_proposal_docx(file_path):
     tp0.alignment = WD_ALIGN_PARAGRAPH.CENTER
     tp0.paragraph_format.space_before = Pt(2)
     tp0.paragraph_format.space_after = Pt(2)
-    tr0 = tp0.add_run("PROPOSAL PENAWARAN TEKNOLOGI & APLIKASI")
+    tr0 = tp0.add_run("REKOMENDASI SOLUSI TEKNOLOGI")
     tr0.bold = True
     tr0.font.name = 'Segoe UI'
     tr0.font.size = Pt(9.5)
@@ -269,7 +269,7 @@ def build_proposal_docx(file_path):
     tp1.alignment = WD_ALIGN_PARAGRAPH.CENTER
     tp1.paragraph_format.space_before = Pt(4)
     tp1.paragraph_format.space_after = Pt(4)
-    tr1 = tp1.add_run("EKOSISTEM DIGITAL KOPI JODI")
+    tr1 = tp1.add_run("EKOSISTEM DIGITAL KOPI SEDUHAN JODI")
     tr1.bold = True
     tr1.font.name = 'Segoe UI'
     tr1.font.size = Pt(19)
@@ -302,7 +302,7 @@ def build_proposal_docx(file_path):
     # Left: Client
     p_cl = meta_table.rows[0].cells[0].paragraphs[0]
     p_cl.add_run("Dipersiapkan Untuk: ").bold = True
-    p_cl.add_run("Founder & Manajemen Kopi Jodi")
+    p_cl.add_run("Founder & Manajemen Kopi Seduhan Jodi")
     
     # Right: Developer (genossys)
     p_dev = meta_table.rows[0].cells[1].paragraphs[0]
@@ -344,7 +344,7 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "Risiko Fraud Kas Kecil: ", "Pengeluaran darurat outlet belum memiliki batas plafon approval berjenjang.")
     add_bullet_p(doc, "Laporan Cabang Lambat: ", "Rekapitulasi omzet dan perhitungan bagi hasil dengan mitra/investor masih manual.")
     
-    add_callout(doc, "Solusi Ekosistem Kopi Jodi oleh genossys:", [
+    add_callout(doc, "Solusi Ekosistem Kopi Seduhan Jodi oleh genossys:", [
         "Membangun 1 platform terintegrasi (seperti Fore / Kopi Kenangan) yang menghubungkan Kasir POS, Layar Barista (KDS), Resep Otomatis, Approval Pembelian & Kas Kecil, hingga Portal Investor dalam satu database real-time."
     ], border_color="C27835", bg_color="FAF7F2")
 
@@ -366,7 +366,7 @@ def build_proposal_docx(file_path):
         ("2", "POS Kasir", "Tablet / PC Web\n(Kasir Outlet)", "Transaksi cepat, modifier (ice/sugar/size), kas laci, mode offline, cetak struk, QRIS Midtrans.", "Fase 1"),
         ("3", "Layar Barista (KDS)", "Tablet / Monitor\n(Barista)", "Antrean pesanan real-time, status pesanan (Queue -> In Progress -> Ready), tanpa kertas bon.", "Fase 1"),
         ("4", "App Operasi Outlet", "Mobile Android\n(Store Manager)", "Penerimaan barang (surat jalan), stock opname fisik, pencatatan waste, pengajuan kas kecil.", "Fase 1"),
-        ("5", "App Pelanggan", "iOS & Android\n(Pelanggan Kopi Jodi)", "Order online (Pick-up / Delivery), QRIS/E-Wallet, loyalty poin, e-voucher promo.", "Fase 2"),
+        ("5", "App Pelanggan", "iOS & Android\n(Pelanggan Kopi Seduhan Jodi)", "Order online (Pick-up / Delivery), QRIS/E-Wallet, loyalty poin, e-voucher promo.", "Fase 2"),
         ("6", "CRM & Promo Panel", "Web Backoffice\n(Tim Marketing)", "Kelola voucher diskon, blast push notification penawaran promo, segmentasi pelanggan.", "Fase 2"),
         ("7", "Portal Mitra / Investor", "Web Portal (Secure)\n(Mitra Pemilik Cabang)", "Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil.", "Fase 3"),
         ("8", "Owner Dashboard & HR", "Web / Mobile\n(Owner & HR)", "KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan.", "Fase 3")
@@ -392,7 +392,7 @@ def build_proposal_docx(file_path):
     # SECTION 3: SKEMA KERJASAMA & BIAYA
     # -------------------------------------------------------------
     style_heading(doc.add_paragraph(), "3. Pilihan Skema Kerjasama & Biaya", level=1)
-    add_body_p(doc, "Kami menyediakan 2 alternatif skema yang dapat disesuaikan dengan kebutuhan dan strategi cashflow Kopi Jodi:")
+    add_body_p(doc, "Kami menyediakan 2 alternatif skema yang dapat disesuaikan dengan kebutuhan dan strategi cashflow Kopi Seduhan Jodi:")
 
     # OPSI 1: Beli Putus
     style_heading(doc.add_paragraph(), "OPSI 1: Beli Putus — Turnkey Fixed-Price (Kepastian Budget Sekali Bayar)", level=2)
@@ -434,11 +434,11 @@ def build_proposal_docx(file_path):
         "• Biaya Bulanan: Rp 5.000.000,- / bulan (Flat)",
         "• Komitmen Kontrak: Minimal 5 Tahun (60 Bulan)",
         "• Total Nilai Kontrak (5 Tahun): Rp 300.000.000,- (dicicil flat Rp 5 Juta per bulan)",
-        "• BEBAS TAMBAH FITUR APAPUN (Unlimited Custom Features): Kopi Jodi bebas meminta penambahan modul/fitur baru atau integrasi kustom kapan saja tanpa batasan dan tanpa biaya tambahan (Zero Change Request Fee).",
+        "• BEBAS TAMBAH FITUR APAPUN (Unlimited Custom Features): Kopi Seduhan Jodi bebas meminta penambahan modul/fitur baru atau integrasi kustom kapan saja tanpa batasan dan tanpa biaya tambahan (Zero Change Request Fee).",
         "• Tim Dedicated dari genossys: Membangun seluruh ekosistem aplikasi secara bertahap (Fase 1, 2, hingga 3).",
         "• Maintenance & Support Siaga 5 Tahun: Pemeliharaan rutin, bug fixing, dan server monitoring standby selama 5 tahun.",
         "• Bebas Biaya HR: Tanpa beban rekrutmen, THR, BPJS, pesangon, maupun penyediaan laptop kerja programmer.",
-        "• Hak Milik: Seluruh source code yang dikembangkan menjadi milik Kopi Jodi."
+        "• Hak Milik: Seluruh source code yang dikembangkan menjadi milik Kopi Seduhan Jodi."
     ], border_color="059669", bg_color="ECFDF5")
 
     # Tabel Perbandingan
@@ -457,7 +457,7 @@ def build_proposal_docx(file_path):
         ("Masa Komitmen", "Selesai per milestone fase (~3 - 6 bulan)", "Minimal 5 Tahun (Kerjasama Jangka Panjang)"),
         ("Maintenance & Update", "Garansi 3 - 6 bulan (setelahnya kontrak terpisah)", "Gratis & Standby selama 5 Tahun oleh genossys"),
         ("Fleksibilitas Fitur", "Terkunci sesuai scope dokumen spesifikasi awal", "100% Bebas Tambah Fitur Apapun Kapan Saja (tanpa biaya ekstra per request)"),
-        ("Rekomendasi", "Sangat Tepat jika Kopi Jodi memiliki modal awal & ingin proyek selesai dalam target waktu.", "Sangat Tepat jika Kopi Jodi ingin inovasi bebas tanpa batas & cashflow bulanan ringan.")
+        ("Rekomendasi", "Sangat Tepat jika Kopi Seduhan Jodi memiliki modal awal & ingin proyek selesai dalam target waktu.", "Sangat Tepat jika Kopi Seduhan Jodi ingin inovasi bebas tanpa batas & cashflow bulanan ringan.")
     ]
     
     for r_idx, d in enumerate(cmp_data, start=1):
@@ -468,11 +468,11 @@ def build_proposal_docx(file_path):
     # -------------------------------------------------------------
     # SECTION 4: KOMPARASI STRATEGIS VS MOKA POS PER OUTLET
     # -------------------------------------------------------------
-    style_heading(doc.add_paragraph(), "4. Komparasi Strategis: Mengapa Ekosistem Kopi Jodi Jauh Lebih Unggul & Menguntungkan Dibanding Sewa Moka POS per Outlet?", level=1)
+    style_heading(doc.add_paragraph(), "4. Komparasi Strategis: Mengapa Ekosistem Kopi Seduhan Jodi Jauh Lebih Unggul & Menguntungkan Dibanding Sewa Moka POS per Outlet?", level=1)
     add_body_p(doc, "Banyak jaringan kafe pemula terjebak menyewa POS retail umum seperti Moka POS yang memungut biaya per outlet / per kasir. Untuk kafe multi-outlet yang agresif berekspansi, model sewa per outlet memiliki kelemahan finansial dan operasional yang fatal:")
 
     moka_sim_table = doc.add_table(rows=5, cols=4)
-    moka_headers = ["Jumlah Outlet", "Sewa Moka POS / Bln (~Rp 499rb/bln)", "Total Sewa Moka (5 Tahun)", "Ekosistem Kopi Jodi (genossys)"]
+    moka_headers = ["Jumlah Outlet", "Sewa Moka POS / Bln (~Rp 499rb/bln)", "Total Sewa Moka (5 Tahun)", "Ekosistem Kopi Seduhan Jodi (genossys)"]
     moka_widths = [1.2, 1.8, 1.7, 1.57]
     moka_align = [WD_ALIGN_PARAGRAPH.CENTER, WD_ALIGN_PARAGRAPH.RIGHT, WD_ALIGN_PARAGRAPH.RIGHT, WD_ALIGN_PARAGRAPH.LEFT]
     for i, h in enumerate(moka_headers):
@@ -481,7 +481,7 @@ def build_proposal_docx(file_path):
         ("3 Outlet", "Rp 1.497.000 / bln", "Rp 89.820.000,-", "Rp 5 Juta/bln flat (8 Apps + Hak Milik)"),
         ("5 Outlet", "Rp 2.495.000 / bln", "Rp 149.700.000,-", "Rp 5 Juta/bln flat (Hemat komisi ojol)"),
         ("10 Outlet", "Rp 4.990.000 / bln", "Rp 299.400.000,-", "BIAYA SAMA, TAPI DAPAT DEDICATED DEV 5 TAHUN + BEBAS TAMBAH FITUR!"),
-        ("20 Outlet", "Rp 9.980.000 / bln", "Rp 598.800.000,-", "KOPI JODI 50% LEBIH HEMAT (Hemat Rp 300 Juta!)")
+        ("20 Outlet", "Rp 9.980.000 / bln", "Rp 598.800.000,-", "KOPI SEDUHAN JODI 50% LEBIH HEMAT (Hemat Rp 300 Juta!)")
     ]
     for r_idx, d in enumerate(moka_data, start=1):
         row = moka_sim_table.rows[r_idx]
@@ -490,9 +490,9 @@ def build_proposal_docx(file_path):
     format_table(moka_sim_table, moka_widths, moka_align, header_bg="2C1810")
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
-    style_heading(doc.add_paragraph(), "Perbandingan 10 Aspek Fundamental: Kopi Jodi vs Sewa Moka POS", level=2)
+    style_heading(doc.add_paragraph(), "Perbandingan 10 Aspek Fundamental: Kopi Seduhan Jodi vs Sewa Moka POS", level=2)
     moka_cmp_table = doc.add_table(rows=11, cols=3)
-    mc_headers = ["Aspek Perbandingan", "Sewa Moka POS per Outlet", "Ekosistem Terintegrasi Kopi Jodi"]
+    mc_headers = ["Aspek Perbandingan", "Sewa Moka POS per Outlet", "Ekosistem Terintegrasi Kopi Seduhan Jodi"]
     mc_widths = [1.8, 2.2, 2.27]
     mc_align = [WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.LEFT]
     for i, h in enumerate(mc_headers):
@@ -505,9 +505,9 @@ def build_proposal_docx(file_path):
         ("5. Resep Olahan Batch Dapur", "Terbatas Bahan Mentah: Tidak mendukung resep olahan batch dapur sebelum buka.", "Mendukung Penuh: Resep batch simple syrup aren 1.2L, cold brew 24h, topping jelly lengkap dengan yield & HPP."),
         ("6. Kontrol Kas Kecil (Petty Cash)", "Pencatatan Biasa: Tanpa approval limit bertingkat. Rawan pengeluaran lokal fiktif.", "Approval 3-Tier Otomatis: Plafon bertingkat (Store Manager -> Finance -> Owner) wajib unggah foto nota."),
         ("7. Portal Investor Mitra", "Tidak Ada: Owner harus manual rekap dan kirim Excel setiap bulan.", "Portal Mitra Read-Only: Investor memantau omzet harian, HPP riil, dan bagi hasil live tanpa risiko edit data."),
-        ("8. Status Kepemilikan Sistem", "Sewa Selamanya: Jika stop bayar, sistem mati total. Valuasi IT perusahaan = Rp 0.", "100% Hak Milik Kopi Jodi: Source code dan database menjadi aset intelektual berharga perusahaan."),
-        ("9. Fleksibilitas Tambah Fitur", "Terkunci: Software massal retail umum; request fitur kafe tidak akan dibuatkan.", "Bebas 100% (Unlimited): Kopi Jodi bebas minta modul & fitur baru apapun tanpa biaya tambahan."),
-        ("10. Branding & Citra Usaha", "Citra UKM Retail Biasa: Logo vendor Moka terlihat di struk dan sistem.", "Citra Korporasi Modern: 100% brand Kopi Jodi di seluruh perangkat (setara Fore / Kopi Kenangan).")
+        ("8. Status Kepemilikan Sistem", "Sewa Selamanya: Jika stop bayar, sistem mati total. Valuasi IT perusahaan = Rp 0.", "100% Hak Milik Kopi Seduhan Jodi: Source code dan database menjadi aset intelektual berharga perusahaan."),
+        ("9. Fleksibilitas Tambah Fitur", "Terkunci: Software massal retail umum; request fitur kafe tidak akan dibuatkan.", "Bebas 100% (Unlimited): Kopi Seduhan Jodi bebas minta modul & fitur baru apapun tanpa biaya tambahan."),
+        ("10. Branding & Citra Usaha", "Citra UKM Retail Biasa: Logo vendor Moka terlihat di struk dan sistem.", "Citra Korporasi Modern: 100% brand Kopi Seduhan Jodi di seluruh perangkat (setara Fore / Kopi Kenangan).")
     ]
     for r_idx, d in enumerate(mc_data, start=1):
         row = moka_cmp_table.rows[r_idx]
@@ -555,7 +555,7 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "Minggu 1 - 2: ", "Finalisasi alur operasional outlet, master resep, dan perancangan database.")
     add_bullet_p(doc, "Minggu 3 - 8: ", "Pengembangan Core ERP Backoffice, POS Tablet kasir, dan Layar Barista (KDS).")
     add_bullet_p(doc, "Minggu 9 - 10: ", "Integrasi hardware kasir (printer thermal, QRIS) dan Quality Assurance.")
-    add_bullet_p(doc, "Minggu 11: ", "Uji coba lapangan (UAT) di 1 pilot outlet Kopi Jodi.")
+    add_bullet_p(doc, "Minggu 11: ", "Uji coba lapangan (UAT) di 1 pilot outlet Kopi Seduhan Jodi.")
     add_bullet_p(doc, "Minggu 12: ", "Pelatihan staf (Training) dan Go-Live resmi sistem.")
     
     add_body_p(doc, "Ketentuan Pembayaran:", bold_prefix="Ringkasan Ketentuan: ")
@@ -568,7 +568,7 @@ def build_proposal_docx(file_path):
     # SECTION 7: LEMBAR PERSETUJUAN
     # -------------------------------------------------------------
     style_heading(doc.add_paragraph(), "7. Lembar Konfirmasi & Persetujuan", level=1)
-    add_body_p(doc, "Silakan beri tanda centang pada opsi yang dipilih oleh Manajemen Kopi Jodi:")
+    add_body_p(doc, "Silakan beri tanda centang pada opsi yang dipilih oleh Manajemen Kopi Seduhan Jodi:")
 
     opt_table = doc.add_table(rows=4, cols=3)
     opt_headers = ["Pilihan", "Opsi Skema Investasi", "Keterangan"]
@@ -598,7 +598,7 @@ def build_proposal_docx(file_path):
     sig_widths = [3.13, 3.14]
     
     sig_table.cell(0, 0).paragraphs[0].add_run("Pihak Pertama (Klien):").bold = True
-    sig_table.cell(0, 0).add_paragraph("Manajemen / Pemilik Bisnis Kopi Jodi")
+    sig_table.cell(0, 0).add_paragraph("Manajemen / Pemilik Bisnis Kopi Seduhan Jodi")
     
     sig_table.cell(0, 1).paragraphs[0].add_run("Pihak Kedua (Pengembang):").bold = True
     p_dev_sig = sig_table.cell(0, 1).add_paragraph("genossys (Technology Partner)")
@@ -635,5 +635,11 @@ def build_proposal_docx(file_path):
         print(f"File asli sedang dibuka di Microsoft Word. Dokumen terbaru disimpan di: {alt_path}")
 
 if __name__ == "__main__":
-    out_path = r"c:\PROJECT\WEBSITE\kopi-jodi\Penawaran_Pengembangan_Ekosistem_Aplikasi_Kopi_Jodi.docx"
+    out_path = r"c:\PROJECT\WEBSITE\kopi-jodi\Rekomendasi_Solusi_Teknologi_Kopi_Seduhan_Jodi.docx"
     build_proposal_docx(out_path)
+    # Also save to public for frontend download
+    pub_path = r"c:\PROJECT\WEBSITE\kopi-jodi\public\Rekomendasi_Solusi_Teknologi_Kopi_Seduhan_Jodi.docx"
+    build_proposal_docx(pub_path)
+    # Also keep Penawaran_Ekosistem_Kopi_Jodi.docx updated for backward compatibility
+    compat_path = r"c:\PROJECT\WEBSITE\kopi-jodi\public\Penawaran_Ekosistem_Kopi_Jodi.docx"
+    build_proposal_docx(compat_path)

@@ -660,7 +660,7 @@ export const PosApp: React.FC = () => {
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-xs w-full shadow-2xl text-xs space-y-3">
             <div className="text-center pb-2 border-b border-dashed border-gray-300">
-              <div className="font-extrabold text-base text-[var(--brand-700)]">KOPI JODI</div>
+              <div className="font-extrabold text-base text-[var(--brand-700)]">KOPI SEDUHAN JODI</div>
               <div className="text-[10px] text-gray-500">{selectedOutlet.name}</div>
               <div className="text-[10px] text-gray-400 mt-1">Struk Pembayaran Sah</div>
             </div>

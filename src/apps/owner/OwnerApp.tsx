@@ -87,7 +87,7 @@ export const OwnerApp: React.FC<OwnerAppProps> = ({ initialTab = 'cockpit' }) =>
           </div>
           <div>
             <div className="font-extrabold text-sm text-[var(--text)]">OWNER DASHBOARD & HR</div>
-            <div className="text-[10px] text-gray-500 font-semibold">Executive Cockpit Jaringan Kopi Jodi</div>
+            <div className="text-[10px] text-gray-500 font-semibold">Executive Cockpit Jaringan Kopi Seduhan Jodi</div>
           </div>
         </div>
 
