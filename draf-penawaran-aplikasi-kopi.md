@@ -31,7 +31,7 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 
 | # | Modul | Platform & Pengguna | Fungsi Utama | Fase |
 |---|---|---|---|:---:|
-| 1 | **ERP Backoffice** | Web (Owner, Finance, Admin) | Master menu & resep, stok otomatis, verifikasi nota, kas kecil bertingkat, & laba/rugi cabang. | Fase 1 |
+| 1 | **ERP Backoffice & Finance** | Web (Owner, Finance, Admin Pusat, Store Manager) | Pusat kendali stok, pembelian (tanpa harga), True-Up HPP, kas kecil berjenjang, & laporan keuangan multi-cabang. | Fase 1 |
 | 2 | **POS Kasir** | Tablet / PC (Kasir Outlet) | Transaksi cepat, modifier (ice/sugar/size), kas laci, mode offline, cetak struk, QRIS Midtrans. | Fase 1 |
 | 3 | **Layar Barista (KDS)** | Tablet / Monitor (Barista) | Antrean pesanan real-time, status pesanan (*Queue -> In Progress -> Ready*), tanpa kertas bon. | Fase 1 |
 | 4 | **App Operasi Outlet** | Mobile Android (Store Manager) | Penerimaan barang (surat jalan), stock opname fisik, pencatatan waste, pengajuan kas kecil. | Fase 1 |
@@ -42,12 +42,26 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 
 ---
 
-## 3. Fitur Kunci Pengendalian Biaya & Stok (ERP Core)
+## 3. Fitur Kunci ERP Backoffice & Finance (Fase 1 Core)
 
-1. **Pemotongan Stok Otomatis Berbasis Resep:** Tiap transaksi kasir otomatis memotong gramatur kopi, ml susu, sirup, dan cup secara presisi.
-2. **Alur Pembelian Transparan (*True-Up HPP*):** Permintaan bahan (tanpa harga) -> Terima barang fisik -> Upload foto nota -> Verifikasi Finance -> HPP riil terkoreksi otomatis.
-3. **Approval Kas Kecil Berjenjang:** Nominal kecil (Store Manager), nominal menengah (Finance), nominal besar (Owner) wajib lampirkan foto nota fisik.
-4. **Multi-Outlet & Multi-Investor:** Pemisahan pembukuan cabang milik sendiri vs outlet kemitraan/investor secara transparan.
+**Pengguna:** Owner, Finance, Admin Pusat, Store Manager (akses terbatas per outlet) • **Platform:** Desktop Web Browser  
+**Pusat kendali stok, pembelian, HPP, dan keuangan seluruh outlet dalam satu sistem.**  
+
+> **Alur Utama:** Pesan Barang → Terima Barang → Input Nota → HPP Terkoreksi → Laporan Keuangan
+
+1. **Stok Terpisah per Outlet, Terpantau Terpusat:** Stok tiap outlet tercatat di satu sistem. Bertambah saat barang diterima di outlet dan berkurang otomatis sesuai resep setiap minuman terjual. Pusat memantau semua outlet secara live dengan peringatan stok menipis, sedangkan tiap outlet hanya melihat stoknya sendiri.
+2. **Pemesanan Barang Tanpa Harga:** Outlet memesan ke gudang pusat cukup dengan jenis dan jumlah barang. Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.
+3. **Koreksi HPP Otomatis (True-Up HPP):** Modal sementara memakai harga terakhir, lalu dikoreksi otomatis saat nota supplier diinput, sehingga laporan margin selalu akurat.
+4. **Resep, Bahan & Menu:** Master 25+ bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, bahan olahan seperti sirup dan cold brew, serta menu khusus outlet yang disetujui pusat.
+5. **Kas Kecil & Persetujuan Berjenjang:** Belanja kebutuhan kecil outlet dibatasi nominalnya. Pembelian di luar gudang pusat dan transaksi di atas batas wajib disetujui Finance atau pimpinan sebelum diproses.
+6. **Hutang ke Gudang Pusat:** Pantau tagihan tiap outlet beserta umur hutang (aging). Pembayaran dicatat fleksibel, per periode atau per nota.
+7. **Jurnal Otomatis & Laporan Keuangan:** Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat dengan minim rekonsiliasi manual. Tersedia laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.
+8. **Hak Akses & Fleksibilitas:** Hak akses diatur per peran dan per outlet. Fitur dapat dihidupkan atau dimatikan sesuai kebutuhan, dan outlet milik sendiri maupun mitra dikelola dalam satu sistem.
+
+### Catatan Cakupan:
+- **Perpajakan (PPN/PPh):** pengaturan tersedia di Fase 1, perhitungan lengkap pada tahap berikutnya.
+- **Sistem gudang pusat tidak termasuk:** Pembayaran ke pusat dicatat di ERP tanpa integrasi ke sistem gudang.
+- **Skema bagi hasil mitra:** dibahas pada tahap berikutnya. Data kepemilikan outlet sudah disiapkan.
 
 ---
 

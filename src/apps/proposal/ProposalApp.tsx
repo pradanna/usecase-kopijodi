@@ -30,25 +30,53 @@ import {
   Lock,
 } from 'lucide-react';
 
+interface ModuleItem {
+  id: number;
+  name: string;
+  role: string;
+  device: string;
+  icon: React.ReactNode;
+  phase: string;
+  summary?: string;
+  workflow?: string[];
+  features: string[];
+  scopeNotes?: string[];
+}
+
 export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToDemo }) => {
   const [activeModuleTab, setActiveModuleTab] = useState<number>(0);
 
   // Daftar Modul
-  const MODULES = [
+  const MODULES: ModuleItem[] = [
     {
       id: 1,
       name: 'ERP Backoffice & Finance',
-      role: 'Owner, Finance, Admin Pusat',
+      role: 'Owner, Finance, Admin Pusat, Store Manager (akses terbatas per outlet)',
       device: 'Desktop Web Browser',
       icon: <Building2 className="w-5 h-5 text-indigo-600" />,
       phase: 'Fase 1 (Core)',
+      summary: 'Pusat kendali stok, pembelian, HPP, dan keuangan seluruh outlet dalam satu sistem.',
+      workflow: [
+        'Pesan Barang',
+        'Terima Barang',
+        'Input Nota',
+        'HPP Terkoreksi',
+        'Laporan Keuangan',
+      ],
       features: [
-        'Integrasi Real-Time POS ke ERP: Seluruh transaksi & pendapatan harian outlet (Tunai & QRIS) otomatis masuk ke jurnal pendapatan (Akun 4101) & buku kas pusat tanpa rekonsiliasi manual.',
-        'Master 25+ bahan baku, kemasan, & resep racikan otomatis (BOM).',
-        'Verifikasi nota supplier fisik & koreksi HPP retrospektif (True-Up HPP).',
-        'Buku kas kecil outlet dengan sistem persetujuan bertingkat.',
-        'Laporan laba/rugi, arus kas (cashflow), dan buku jurnal umum double-entry multi-cabang.',
-        'Manajemen hutang outlet ke gudang pusat & aging piutang.',
+        'Stok Terpisah per Outlet, Terpantau Terpusat: Stok tiap outlet tercatat di satu sistem. Bertambah saat barang diterima di outlet dan berkurang otomatis sesuai resep setiap minuman terjual. Pusat memantau semua outlet secara live dengan peringatan stok menipis, sedangkan tiap outlet hanya melihat stoknya sendiri.',
+        'Pemesanan Barang Tanpa Harga: Outlet memesan ke gudang pusat cukup dengan jenis dan jumlah barang. Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.',
+        'Koreksi HPP Otomatis (True-Up HPP): Modal sementara memakai harga terakhir, lalu dikoreksi otomatis saat nota supplier diinput, sehingga laporan margin selalu akurat.',
+        'Resep, Bahan & Menu: Master 25+ bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, bahan olahan seperti sirup dan cold brew, serta menu khusus outlet yang disetujui pusat.',
+        'Kas Kecil & Persetujuan Berjenjang: Belanja kebutuhan kecil outlet dibatasi nominalnya. Pembelian di luar gudang pusat dan transaksi di atas batas wajib disetujui Finance atau pimpinan sebelum diproses.',
+        'Hutang ke Gudang Pusat: Pantau tagihan tiap outlet beserta umur hutang (aging). Pembayaran dicatat fleksibel, per periode atau per nota.',
+        'Jurnal Otomatis & Laporan Keuangan: Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat dengan minim rekonsiliasi manual. Tersedia laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.',
+        'Hak Akses & Fleksibilitas: Hak akses diatur per peran dan per outlet. Fitur dapat dihidupkan atau dimatikan sesuai kebutuhan, dan outlet milik sendiri maupun mitra dikelola dalam satu sistem.',
+      ],
+      scopeNotes: [
+        'Perpajakan (PPN/PPh): pengaturan tersedia di Fase 1, perhitungan lengkap pada tahap berikutnya.',
+        'Sistem gudang pusat tidak termasuk. Pembayaran ke pusat dicatat di ERP tanpa integrasi ke sistem gudang.',
+        'Skema bagi hasil mitra dibahas pada tahap berikutnya. Data kepemilikan outlet sudah disiapkan.',
       ],
     },
     {
@@ -289,28 +317,97 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 const current = MODULES[activeModuleTab];
                 return (
                   <div className="space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                      <div>
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-3 border-b border-slate-100">
+                      <div className="space-y-1">
                         <div className="flex items-center gap-2">
                           <h3 className="text-base font-extrabold text-slate-900">{current.name}</h3>
                           <span className="px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 font-bold text-[10px] border border-indigo-200">
                             {current.phase}
                           </span>
                         </div>
-                        <div className="text-xs text-slate-500 mt-0.5">
+                        <div className="text-xs text-slate-500">
                           <strong>Pengguna:</strong> {current.role} &bull; <strong>Platform:</strong> {current.device}
                         </div>
+                        {current.summary && (
+                          <p className="text-xs text-slate-600 font-medium pt-0.5">
+                            {current.summary}
+                          </p>
+                        )}
                       </div>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-2.5">
-                      {current.features.map((feat, i) => (
-                        <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          <span className="text-slate-700 leading-relaxed">{feat}</span>
+                    {/* Alur Utama jika ada */}
+                    {current.workflow && current.workflow.length > 0 && (
+                      <div className="p-3 rounded-xl bg-gradient-to-r from-indigo-50/80 via-purple-50/40 to-blue-50/70 border border-indigo-100 text-xs">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                          <div className="flex items-center gap-1.5 text-indigo-900 font-bold shrink-0">
+                            <span className="w-2 h-2 rounded-full bg-indigo-600" />
+                            <span>Alur Utama:</span>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            {current.workflow.map((step, idx) => (
+                              <React.Fragment key={idx}>
+                                <span className="px-2.5 py-0.5 bg-white rounded-md border border-indigo-200/80 shadow-2xs text-slate-800 font-semibold text-[11px]">
+                                  {step}
+                                </span>
+                                {idx < current.workflow!.length - 1 && (
+                                  <ChevronRight className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                                )}
+                              </React.Fragment>
+                            ))}
+                          </div>
                         </div>
-                      ))}
+                      </div>
+                    )}
+
+                    <div className="grid sm:grid-cols-2 gap-2.5">
+                      {current.features.map((feat, i) => {
+                        let title = '';
+                        let desc = feat;
+                        const colonIdx = feat.indexOf(': ');
+                        if (colonIdx > 0) {
+                          title = feat.slice(0, colonIdx);
+                          desc = feat.slice(colonIdx + 2);
+                        }
+                        return (
+                          <div
+                            key={i}
+                            className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs hover:border-slate-200 transition-colors"
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                            <div className="leading-relaxed text-slate-700">
+                              {title ? (
+                                <>
+                                  <strong className="block text-slate-900 font-bold mb-0.5">
+                                    {title}
+                                  </strong>
+                                  <span className="text-slate-600">{desc}</span>
+                                </>
+                              ) : (
+                                <span className="text-slate-700">{desc}</span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
+
+                    {/* Catatan Cakupan jika ada */}
+                    {current.scopeNotes && current.scopeNotes.length > 0 && (
+                      <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs space-y-2 mt-3">
+                        <div className="flex items-center gap-2 text-amber-900 font-bold">
+                          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                          <span>Catatan cakupan:</span>
+                        </div>
+                        <ul className="space-y-1.5 text-slate-700 pl-5 list-disc marker:text-amber-500">
+                          {current.scopeNotes.map((note, idx) => (
+                            <li key={idx} className="leading-relaxed">
+                              {note}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 );
               })()}

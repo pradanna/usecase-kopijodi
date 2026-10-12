@@ -382,11 +382,25 @@ def build_proposal_docx(file_path):
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
     # Fitur Kunci
-    style_heading(doc.add_paragraph(), "Fitur Kunci Pengendalian Biaya & Stok (ERP Core):", level=2)
-    add_bullet_p(doc, "Potong Stok Resep Otomatis: ", "Tiap transaksi kasir langsung memotong gramatur kopi, ml susu, sirup, dan cup secara otomatis.")
-    add_bullet_p(doc, "Alur Pembelian Transparan (True-Up HPP): ", "Request bahan (tanpa harga) -> Terima barang fisik -> Upload foto bon -> Finance verifikasi -> HPP riil terkoreksi otomatis.")
-    add_bullet_p(doc, "Approval Kas Kecil Berjenjang: ", "Nominal kecil (Store Manager), nominal menengah (Finance), nominal besar (Owner) wajib lampirkan foto bon.")
-    add_bullet_p(doc, "Multi-Outlet & Multi-Investor: ", "Pemisahan pembukuan cabang milik sendiri vs mitra waralaba secara transparan.")
+    style_heading(doc.add_paragraph(), "Fitur Kunci ERP Backoffice & Finance (Fase 1 Core):", level=2)
+    add_callout(doc, "Alur Utama ERP Core:", [
+        "Pesan Barang → Terima Barang → Input Nota → HPP Terkoreksi → Laporan Keuangan"
+    ], border_color="4F46E5", bg_color="EEF2FF")
+    
+    add_bullet_p(doc, "1. Stok Terpisah per Outlet, Terpantau Terpusat: ", "Stok tiap outlet tercatat di satu sistem. Bertambah saat barang diterima di outlet dan berkurang otomatis sesuai resep setiap minuman terjual. Pusat memantau semua outlet secara live dengan peringatan stok menipis, sedangkan tiap outlet hanya melihat stoknya sendiri.")
+    add_bullet_p(doc, "2. Pemesanan Barang Tanpa Harga: ", "Outlet memesan ke gudang pusat cukup dengan jenis dan jumlah barang. Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.")
+    add_bullet_p(doc, "3. Koreksi HPP Otomatis (True-Up HPP): ", "Modal sementara memakai harga terakhir, lalu dikoreksi otomatis saat nota supplier diinput, sehingga laporan margin selalu akurat.")
+    add_bullet_p(doc, "4. Resep, Bahan & Menu: ", "Master 25+ bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, bahan olahan seperti sirup dan cold brew, serta menu khusus outlet yang disetujui pusat.")
+    add_bullet_p(doc, "5. Kas Kecil & Persetujuan Berjenjang: ", "Belanja kebutuhan kecil outlet dibatasi nominalnya. Pembelian di luar gudang pusat dan transaksi di atas batas wajib disetujui Finance atau pimpinan sebelum diproses.")
+    add_bullet_p(doc, "6. Hutang ke Gudang Pusat: ", "Pantau tagihan tiap outlet beserta umur hutang (aging). Pembayaran dicatat fleksibel, per periode atau per nota.")
+    add_bullet_p(doc, "7. Jurnal Otomatis & Laporan Keuangan: ", "Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat dengan minim rekonsiliasi manual. Tersedia laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.")
+    add_bullet_p(doc, "8. Hak Akses & Fleksibilitas: ", "Hak akses diatur per peran dan per outlet. Fitur dapat dihidupkan atau dimatikan sesuai kebutuhan, dan outlet milik sendiri maupun mitra dikelola dalam satu sistem.")
+
+    add_callout(doc, "Catatan Cakupan Modul:", [
+        "• Perpajakan (PPN/PPh): pengaturan tersedia di Fase 1, perhitungan lengkap pada tahap berikutnya.",
+        "• Sistem gudang pusat tidak termasuk: Pembayaran ke pusat dicatat di ERP tanpa integrasi ke sistem gudang.",
+        "• Skema bagi hasil mitra dibahas pada tahap berikutnya. Data kepemilikan outlet sudah disiapkan."
+    ], border_color="D97706", bg_color="FFFBEB")
 
     # -------------------------------------------------------------
     # SECTION 3: SKEMA KERJASAMA & BIAYA
