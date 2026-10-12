@@ -111,7 +111,7 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 2. **Pembayaran Tunai & QRIS:** Tunai dengan hitungan kembalian otomatis, atau QRIS dinamis Midtrans.
 3. **Voucher & Promo:** Voucher global maupun khusus outlet langsung diterapkan di keranjang.
 4. **Menu Habis Otomatis:** Stok berkurang sesuai resep setiap minuman terjual. Menu otomatis ditandai habis bila bahannya tidak cukup.
-5. **Struk & Tiket ke Dapur:** Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista.
+5. **Struk & Tiket ke Dapur:** Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista (khusus outlet besar/flagship).
 6. **Tetap Berjalan Saat Offline:** Transaksi tunai tetap bisa dilakukan saat internet mati dan tersinkron otomatis begitu kembali online.
 
 ---
@@ -123,6 +123,22 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 2. **Otorisasi Pembatalan & Refund:** Pembatalan dan refund transaksi hanya bisa diproses setelah disetujui supervisor.
 3. **Pendapatan Tercatat Otomatis ke ERP:** Setiap transaksi langsung membukukan omzet ke ERP dan mencatat kas masuk, tanpa input ulang.
 4. **Riwayat & Laporan Shift:** Telusuri semua transaksi per shift dan per kasir, lengkap dengan ringkasan tunai dan QRIS.
+
+---
+
+## 3c. Fitur Kunci KDS Layar Barista (Fase 1 Core)
+
+**Pengguna:** Barista  
+**Platform:** Monitor Dapur / Tablet  
+**Layar dapur yang menggantikan kertas bon, sehingga pesanan mengalir cepat dari kasir ke barista tanpa salah baca.**  
+
+> **Alur Utama:** Pesanan Masuk → Tiket di Layar → Sedang Diracik → Siap Diambil
+
+---
+
+1. **Antrean Tiket Real-Time:** Pesanan dari kasir muncul otomatis di layar tanpa kertas bon, lengkap dengan varian dan catatan pelanggan.
+2. **Status Progres per Pesanan:** Ubah status dengan satu sentuhan: Dalam Antrean → Sedang Diracik → Siap Diambil. Perubahan langsung terlihat di POS kasir.
+3. **Timer Waktu Penyajian:** Setiap pesanan punya penghitung waktu, dan warnanya berubah saat mendekati atau melewati target waktu pembuatan.
 
 ---
 

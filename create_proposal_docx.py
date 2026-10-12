@@ -430,7 +430,7 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "2. Pembayaran Tunai & QRIS: ", "Tunai dengan hitungan kembalian otomatis, atau QRIS dinamis Midtrans.")
     add_bullet_p(doc, "3. Voucher & Promo: ", "Voucher global maupun khusus outlet langsung diterapkan di keranjang.")
     add_bullet_p(doc, "4. Menu Habis Otomatis: ", "Stok berkurang sesuai resep setiap minuman terjual. Menu otomatis ditandai habis bila bahannya tidak cukup.")
-    add_bullet_p(doc, "5. Struk & Tiket ke Dapur: ", "Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista.")
+    add_bullet_p(doc, "5. Struk & Tiket ke Dapur: ", "Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista (khusus outlet besar/flagship).")
     add_bullet_p(doc, "6. Tetap Berjalan Saat Offline: ", "Transaksi tunai tetap bisa dilakukan saat internet mati dan tersinkron otomatis begitu kembali online.")
 
     style_heading(doc.add_paragraph(), "B. STORE MANAGER / SUPERVISOR (Mengawasi Kas dan Transaksi Outlet)", level=3)
@@ -438,6 +438,18 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "2. Otorisasi Pembatalan & Refund: ", "Pembatalan dan refund transaksi hanya bisa diproses setelah disetujui supervisor.")
     add_bullet_p(doc, "3. Pendapatan Tercatat Otomatis ke ERP: ", "Setiap transaksi langsung membukukan omzet ke ERP dan mencatat kas masuk, tanpa input ulang.")
     add_bullet_p(doc, "4. Riwayat & Laporan Shift: ", "Telusuri semua transaksi per shift dan per kasir, lengkap dengan ringkasan tunai dan QRIS.")
+
+    # KDS LAYAR BARISTA
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+    style_heading(doc.add_paragraph(), "Fitur Kunci KDS Layar Barista (Fase 1 Core):", level=2)
+    add_body_p(doc, "Pengguna: Barista • Platform: Monitor Dapur / Tablet\nLayar dapur yang menggantikan kertas bon, sehingga pesanan mengalir cepat dari kasir ke barista tanpa salah baca.")
+    add_callout(doc, "Alur Utama KDS Barista:", [
+        "Pesanan Masuk → Tiket di Layar → Sedang Diracik → Siap Diambil"
+    ], border_color="059669", bg_color="ECFDF5")
+
+    add_bullet_p(doc, "1. Antrean Tiket Real-Time: ", "Pesanan dari kasir muncul otomatis di layar tanpa kertas bon, lengkap dengan varian dan catatan pelanggan.")
+    add_bullet_p(doc, "2. Status Progres per Pesanan: ", "Ubah status dengan satu sentuhan: Dalam Antrean → Sedang Diracik → Siap Diambil. Perubahan langsung terlihat di POS kasir.")
+    add_bullet_p(doc, "3. Timer Waktu Penyajian: ", "Setiap pesanan punya penghitung waktu, dan warnanya berubah saat mendekati atau melewati target waktu pembuatan.")
 
     # -------------------------------------------------------------
     # SECTION 3: SKEMA KERJASAMA & BIAYA

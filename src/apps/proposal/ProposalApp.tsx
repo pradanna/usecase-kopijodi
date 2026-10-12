@@ -158,7 +158,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             'Pembayaran Tunai & QRIS: Tunai dengan hitungan kembalian otomatis, atau QRIS dinamis Midtrans.',
             'Voucher & Promo: Voucher global maupun khusus outlet langsung diterapkan di keranjang.',
             'Menu Habis Otomatis: Stok berkurang sesuai resep setiap minuman terjual. Menu otomatis ditandai habis bila bahannya tidak cukup.',
-            'Struk & Tiket ke Dapur: Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista.',
+            'Struk & Tiket ke Dapur: Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista (khusus outlet besar/flagship).',
             'Tetap Berjalan Saat Offline: Transaksi tunai tetap bisa dilakukan saat internet mati dan tersinkron otomatis begitu kembali online.',
           ],
         },
@@ -180,17 +180,21 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     {
       id: 3,
       name: 'KDS Layar Barista',
-      role: 'Head Barista & Dapur (Outlet Besar)',
-      device: 'Monitor Dapur / Tablet (Flagship & Outlet Besar)',
+      role: 'Barista',
+      device: 'Monitor Dapur / Tablet',
       icon: <Monitor className="w-5 h-5 text-emerald-600" />,
       phase: 'Fase 1 (Core)',
+      summary: 'Layar dapur yang menggantikan kertas bon, sehingga pesanan mengalir cepat dari kasir ke barista tanpa salah baca.',
+      workflow: [
+        'Pesanan Masuk',
+        'Tiket di Layar',
+        'Sedang Diracik',
+        'Siap Diambil',
+      ],
       features: [
-        'Diperuntukkan Khusus Outlet Besar / Flagship: Efektif untuk cabang dengan volume pesanan tinggi & area meja barista terpisah dari kasir.',
-        'Fleksibel untuk Outlet Kecil/Booth: Pada gerai kecil atau booth express, KDS ini opsional — barista dapat bekerja langsung dari struk POS kasir.',
-        'Antrean tiket pesanan real-time tanpa kertas bon fisik.',
-        'Status progres per pesanan: Dalam Antrean -> Sedang Diracik -> Siap Diambil.',
-        'Pemotongan stok bahan baku presisi dari resep saat pesanan selesai diracik.',
-        'Timer SLA pembuatan minuman dengan indikator warna keterlambatan.',
+        'Antrean Tiket Real-Time: Pesanan dari kasir muncul otomatis di layar tanpa kertas bon, lengkap dengan varian dan catatan pelanggan.',
+        'Status Progres per Pesanan: Ubah status dengan satu sentuhan: Dalam Antrean → Sedang Diracik → Siap Diambil. Perubahan langsung terlihat di POS kasir.',
+        'Timer Waktu Penyajian: Setiap pesanan punya penghitung waktu, dan warnanya berubah saat mendekati atau melewati target waktu pembuatan.',
       ],
     },
     {
@@ -557,13 +561,15 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                           return (
                             <div
                               key={i}
-                              className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs hover:border-slate-200 transition-colors"
+                              className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/70 border border-slate-200/80 hover:bg-white hover:border-slate-300 hover:shadow-xs transition-all text-xs"
                             >
-                              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                              <div className="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-[10px] font-black text-slate-700 shrink-0 mt-0.5 shadow-2xs">
+                                {i + 1}
+                              </div>
                               <div className="leading-relaxed text-slate-700">
                                 {title ? (
                                   <>
-                                    <strong className="block text-slate-900 font-bold mb-0.5">
+                                    <strong className="block text-slate-900 font-extrabold mb-0.5">
                                       {title}
                                     </strong>
                                     <span className="text-slate-600">{desc}</span>
