@@ -11,7 +11,6 @@ import {
   Building2,
   DollarSign,
   Calendar,
-  Check,
   ChevronRight,
   ExternalLink,
   HelpCircle,
@@ -248,87 +247,12 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </div>
 
-        {/* Section 1: Masalah & Solusi */}
-        <section className="space-y-5">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-sm">
-              01
-            </div>
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-900">Tantangan Operasional & Solusi Terintegrasi</h2>
-              <p className="text-xs text-slate-500">Mencegah kebocoran profit dan memastikan skalabilitas cabang Kopi Seduhan Jodi</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-5">
-            {/* Masalah */}
-            <div className="bg-rose-50/70 border border-rose-200 rounded-2xl p-5 space-y-3.5">
-              <div className="flex items-center gap-2 text-rose-800 font-extrabold text-sm">
-                <span className="w-2.5 h-2.5 rounded-full bg-rose-600" />
-                <span>Masalah Nyata Coffee Shop Multi-Outlet:</span>
-              </div>
-              <ul className="space-y-2.5 text-xs text-slate-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold shrink-0">✕</span>
-                  <span><strong>Kebocoran Stok Bahan Baku:</strong> Pemakaian susu, biji kopi, sirup, dan cup tidak pernah cocok dengan laporan penjualan kasir.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold shrink-0">✕</span>
-                  <span><strong>HPP Bias & Laba Semu:</strong> Nota pembelian fisik dari supplier sering terlambat masuk ke Finance, membuat laporan margin tidak akurat.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold shrink-0">✕</span>
-                  <span><strong>Fraud Kas Kecil (Petty Cash):</strong> Belanja lokal darurat oleh cabang rawan penyalahgunaan tanpa approval limit bertingkat.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold shrink-0">✕</span>
-                  <span><strong>Rekapitulasi Omzet Kasir Manual:</strong> Laporan penjualan outlet harus direkap manual tiap malam, rawan selisih kas fisik dan lambat masuk pembukuan pusat.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-rose-600 font-bold shrink-0">✕</span>
-                  <span><strong>Kehilangan Loyalitas Pelanggan:</strong> Antrean kasir panjang saat jam sibuk dan tidak ada platform digital untuk pesan pick-up mandiri.</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Solusi genossys */}
-            <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-5 space-y-3.5">
-              <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-sm">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
-                <span>Solusi Ekosistem Kopi Seduhan Jodi oleh genossys:</span>
-              </div>
-              <ul className="space-y-2.5 text-xs text-slate-700">
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>Auto-Deduct Berbasis Resep (BOM):</strong> Begitu pesanan selesai di KDS Barista, gramasi kopi & ml susu langsung terpotong akurat.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>True-Up HPP Otomatis:</strong> Saat nota diverifikasi Finance, sistem mengoreksi HPP minuman yang sudah terjual secara retrospektif.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>Integrasi Otomatis POS &rarr; ERP:</strong> Pendapatan transaksi outlet (Tunai & QRIS) otomatis terjurnal real-time ke akun pendapatan & kas ERP pusat.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>Governance Kas Kecil Multi-Tier:</strong> Limit belanja tanpa persetujuan diatur ketat; nominal besar wajib approval Finance & Owner.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
-                  <span><strong>Omni-Channel Customer Experience:</strong> Pelanggan dapat memesan lewat smartphone (PWA) sebelum tiba di outlet dengan QRIS instan.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: Cakupan 8 Modul & Ekosistem */}
+        {/* Section 1: Cakupan 8 Modul & Ekosistem */}
         <section className="space-y-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">
-                02
+                01
               </div>
               <div>
                 <h2 className="text-xl font-extrabold text-slate-900">Arsitektur & Cakupan 8 Modul Aplikasi</h2>
@@ -394,12 +318,12 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
           </div>
         </section>
 
-        {/* Section 3: Pilihan Skema Kerjasama & Delivery (Interactive Switcher) */}
+        {/* Section 2: Pilihan Skema Kerjasama & Delivery (Interactive Switcher) */}
         <section className="space-y-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
-                03
+                02
               </div>
               <div>
                 <h2 className="text-xl font-extrabold text-slate-900">
