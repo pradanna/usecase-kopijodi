@@ -134,17 +134,47 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     {
       id: 2,
       name: 'POS Kasir Outlet',
-      role: 'Kasir & Frontliner',
+      role: 'Kasir, Store Manager / Supervisor',
       device: 'Tablet Landscape Counter',
       icon: <Tablet className="w-5 h-5 text-amber-600" />,
       phase: 'Fase 1 (Core)',
-      features: [
-        'Sinkronisasi Pendapatan Otomatis: Setiap transaksi kasir langsung membukukan omzet ke ERP dan mencatat kas masuk secara instan.',
-        'Buka & tutup shift kasir dengan audit kas laci fisik (cash count) & rekonsiliasi kasir otomatis.',
-        'Kustomisasi varian (ukuran cup, takaran gula, opsi susu alternatif oatmilk).',
-        'Pembayaran ganda: Tunai (auto kembalian) dan QRIS dinamis Midtrans.',
-        'Bekerja online maupun offline (tetap bisa transaksi saat internet mati, auto-sync saat online).',
-        'Cetak struk thermal bluetooth dan sinkronisasi instan ke KDS dapur.',
+      summary: 'Kasir cepat di outlet yang langsung terhubung ke dapur, stok, dan keuangan.',
+      workflow: [
+        'Pilih Menu',
+        'Bayar',
+        'Struk & Tiket KDS',
+        'Stok Berkurang',
+        'Omzet Masuk ERP',
+      ],
+      roleGroups: [
+        {
+          role: 'KASIR',
+          tagline: 'Melayani pelanggan dengan cepat',
+          headerClass: 'bg-amber-50/90 border-amber-200 text-amber-950',
+          badgeClass: 'bg-amber-100 text-amber-800 border-amber-300',
+          icon: <Tablet className="w-4 h-4 text-amber-700" />,
+          features: [
+            'Transaksi Cepat dengan Varian: Menu tampil sesuai outlet. Atur varian per minuman: ukuran cup, takaran gula, opsi susu alternatif seperti oatmilk, plus catatan khusus.',
+            'Pembayaran Tunai & QRIS: Tunai dengan hitungan kembalian otomatis, atau QRIS dinamis Midtrans.',
+            'Voucher & Promo: Voucher global maupun khusus outlet langsung diterapkan di keranjang.',
+            'Menu Habis Otomatis: Stok berkurang sesuai resep setiap minuman terjual. Menu otomatis ditandai habis bila bahannya tidak cukup.',
+            'Struk & Tiket ke Dapur: Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista.',
+            'Tetap Berjalan Saat Offline: Transaksi tunai tetap bisa dilakukan saat internet mati dan tersinkron otomatis begitu kembali online.',
+          ],
+        },
+        {
+          role: 'STORE MANAGER / SUPERVISOR',
+          tagline: 'Mengawasi kas dan transaksi outlet',
+          headerClass: 'bg-blue-50/90 border-blue-200 text-blue-950',
+          badgeClass: 'bg-blue-100 text-blue-800 border-blue-300',
+          icon: <ShieldCheck className="w-4 h-4 text-blue-700" />,
+          features: [
+            'Shift & Audit Kas Laci: Buka dan tutup shift dengan hitung kas laci fisik (cash count). Selisih terdeteksi lewat rekonsiliasi kasir otomatis.',
+            'Otorisasi Pembatalan & Refund: Pembatalan dan refund transaksi hanya bisa diproses setelah disetujui supervisor.',
+            'Pendapatan Tercatat Otomatis ke ERP: Setiap transaksi langsung membukukan omzet ke ERP dan mencatat kas masuk, tanpa input ulang.',
+            'Riwayat & Laporan Shift: Telusuri semua transaksi per shift dan per kasir, lengkap dengan ringkasan tunai dan QRIS.',
+          ],
+        },
       ],
     },
     {
@@ -347,7 +377,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
               {MODULES.map((mod, idx) => (
                 <button
                   key={mod.id}
-                  onClick={() => setActiveModuleTab(idx)}
+                  onClick={() => {
+                    setActiveModuleTab(idx);
+                    setSelectedRoleFilter('ALL');
+                  }}
                   className={`p-3 text-left border-r border-b sm:border-b-0 border-slate-200 transition-all cursor-pointer ${
                     activeModuleTab === idx
                       ? 'bg-white font-extrabold text-slate-900 border-t-2 border-t-[var(--brand-600,#C86D3B)] shadow-xs'

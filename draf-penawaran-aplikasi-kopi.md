@@ -95,6 +95,37 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 
 ---
 
+## 3b. Fitur Kunci POS Kasir Outlet (Fase 1 Core)
+
+**Platform:** Tablet Landscape Counter  
+**Kasir cepat di outlet yang langsung terhubung ke dapur, stok, dan keuangan.**  
+
+> **Alur Utama:** Pilih Menu → Bayar → Struk & Tiket KDS → Stok Berkurang → Omzet Masuk ERP
+
+---
+
+### A. KASIR
+*Melayani pelanggan dengan cepat*
+
+1. **Transaksi Cepat dengan Varian:** Menu tampil sesuai outlet. Atur varian per minuman: ukuran cup, takaran gula, opsi susu alternatif seperti oatmilk, plus catatan khusus.
+2. **Pembayaran Tunai & QRIS:** Tunai dengan hitungan kembalian otomatis, atau QRIS dinamis Midtrans.
+3. **Voucher & Promo:** Voucher global maupun khusus outlet langsung diterapkan di keranjang.
+4. **Menu Habis Otomatis:** Stok berkurang sesuai resep setiap minuman terjual. Menu otomatis ditandai habis bila bahannya tidak cukup.
+5. **Struk & Tiket ke Dapur:** Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista.
+6. **Tetap Berjalan Saat Offline:** Transaksi tunai tetap bisa dilakukan saat internet mati dan tersinkron otomatis begitu kembali online.
+
+---
+
+### B. STORE MANAGER / SUPERVISOR
+*Mengawasi kas dan transaksi outlet*
+
+1. **Shift & Audit Kas Laci:** Buka dan tutup shift dengan hitung kas laci fisik (cash count). Selisih terdeteksi lewat rekonsiliasi kasir otomatis.
+2. **Otorisasi Pembatalan & Refund:** Pembatalan dan refund transaksi hanya bisa diproses setelah disetujui supervisor.
+3. **Pendapatan Tercatat Otomatis ke ERP:** Setiap transaksi langsung membukukan omzet ke ERP dan mencatat kas masuk, tanpa input ulang.
+4. **Riwayat & Laporan Shift:** Telusuri semua transaksi per shift dan per kasir, lengkap dengan ringkasan tunai dan QRIS.
+
+---
+
 ## 4. Pilihan Skema Kerjasama & Biaya
 
 Kami menyediakan **2 alternatif skema investasi** yang dapat disesuaikan dengan strategi finansial dan arus kas (*cashflow*) Kopi Seduhan Jodi:

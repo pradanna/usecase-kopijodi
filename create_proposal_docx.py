@@ -419,6 +419,26 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "5. Usulan Menu Khusus Outlet: ", "Usulkan menu dan resep khusus outlet untuk disetujui pusat.")
     add_bullet_p(doc, "6. Pengajuan Pembelian di Luar Gudang Pusat: ", "Ajukan pembelian ke toko lain dengan alasan, untuk disetujui pimpinan.")
 
+    # POS KASIR OUTLET
+    style_heading(doc.add_paragraph(), "Fitur Kunci POS Kasir Outlet (Fase 1 Core) per Peran:", level=2)
+    add_callout(doc, "Alur Utama POS Kasir:", [
+        "Pilih Menu → Bayar → Struk & Tiket KDS → Stok Berkurang → Omzet Masuk ERP"
+    ], border_color="D97706", bg_color="FFFBEB")
+
+    style_heading(doc.add_paragraph(), "A. KASIR (Melayani Pelanggan dengan Cepat)", level=3)
+    add_bullet_p(doc, "1. Transaksi Cepat dengan Varian: ", "Menu tampil sesuai outlet. Atur varian per minuman: ukuran cup, takaran gula, opsi susu alternatif seperti oatmilk, plus catatan khusus.")
+    add_bullet_p(doc, "2. Pembayaran Tunai & QRIS: ", "Tunai dengan hitungan kembalian otomatis, atau QRIS dinamis Midtrans.")
+    add_bullet_p(doc, "3. Voucher & Promo: ", "Voucher global maupun khusus outlet langsung diterapkan di keranjang.")
+    add_bullet_p(doc, "4. Menu Habis Otomatis: ", "Stok berkurang sesuai resep setiap minuman terjual. Menu otomatis ditandai habis bila bahannya tidak cukup.")
+    add_bullet_p(doc, "5. Struk & Tiket ke Dapur: ", "Cetak struk thermal bluetooth, dan pesanan langsung muncul di layar KDS barista.")
+    add_bullet_p(doc, "6. Tetap Berjalan Saat Offline: ", "Transaksi tunai tetap bisa dilakukan saat internet mati dan tersinkron otomatis begitu kembali online.")
+
+    style_heading(doc.add_paragraph(), "B. STORE MANAGER / SUPERVISOR (Mengawasi Kas dan Transaksi Outlet)", level=3)
+    add_bullet_p(doc, "1. Shift & Audit Kas Laci: ", "Buka dan tutup shift dengan hitung kas laci fisik (cash count). Selisih terdeteksi lewat rekonsiliasi kasir otomatis.")
+    add_bullet_p(doc, "2. Otorisasi Pembatalan & Refund: ", "Pembatalan dan refund transaksi hanya bisa diproses setelah disetujui supervisor.")
+    add_bullet_p(doc, "3. Pendapatan Tercatat Otomatis ke ERP: ", "Setiap transaksi langsung membukukan omzet ke ERP dan mencatat kas masuk, tanpa input ulang.")
+    add_bullet_p(doc, "4. Riwayat & Laporan Shift: ", "Telusuri semua transaksi per shift dan per kasir, lengkap dengan ringkasan tunai dan QRIS.")
+
     # -------------------------------------------------------------
     # SECTION 3: SKEMA KERJASAMA & BIAYA
     # -------------------------------------------------------------
