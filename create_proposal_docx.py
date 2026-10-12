@@ -353,7 +353,7 @@ def build_proposal_docx(file_path):
     # -------------------------------------------------------------
     style_heading(doc.add_paragraph(), "2. Cakupan Modul & Aplikasi", level=1)
 
-    app_table = doc.add_table(rows=9, cols=5)
+    app_table = doc.add_table(rows=8, cols=5)
     headers = ["#", "Modul Aplikasi", "Platform & Pengguna", "Fungsi Utama", "Fase"]
     col_widths = [0.35, 1.4, 1.35, 2.6, 0.57]
     col_align = [WD_ALIGN_PARAGRAPH.CENTER, WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.CENTER]
@@ -365,11 +365,10 @@ def build_proposal_docx(file_path):
         ("1", "ERP Backoffice", "Web Responsive\n(Owner, Finance, Admin)", "Master menu & resep, stok otomatis, verifikasi nota, kas kecil bertingkat, & laba/rugi cabang.", "Fase 1"),
         ("2", "POS Kasir", "Tablet / PC Web\n(Kasir Outlet)", "Transaksi cepat, modifier (ice/sugar/size), kas laci, mode offline, cetak struk, QRIS Midtrans.", "Fase 1"),
         ("3", "Layar Barista (KDS)", "Tablet / Monitor\n(Barista)", "Antrean pesanan real-time, status pesanan (Queue -> In Progress -> Ready), tanpa kertas bon.", "Fase 1"),
-        ("4", "App Operasi Outlet", "Mobile Android\n(Store Manager)", "Penerimaan barang (surat jalan), stock opname fisik, pencatatan waste, pengajuan kas kecil.", "Fase 1"),
-        ("5", "App Pelanggan", "iOS & Android\n(Pelanggan Kopi Seduhan Jodi)", "Order online (Pick-up / Delivery), QRIS/E-Wallet, loyalty poin, e-voucher promo.", "Fase 2"),
-        ("6", "CRM & Promo Panel", "Web Backoffice\n(Tim Marketing)", "Kelola voucher diskon, blast push notification penawaran promo, segmentasi pelanggan.", "Fase 2"),
-        ("7", "Portal Mitra / Investor", "Web Portal (Secure)\n(Mitra Pemilik Cabang)", "Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil.", "Fase 3"),
-        ("8", "Owner Dashboard & HR", "Web / Mobile\n(Owner & HR)", "KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan.", "Fase 3")
+        ("4", "App Pelanggan", "iOS & Android\n(Pelanggan Kopi Seduhan Jodi)", "Order online (Pick-up / Delivery), QRIS/E-Wallet, loyalty poin, e-voucher promo.", "Fase 2"),
+        ("5", "CRM & Promo Panel", "Web Backoffice\n(Tim Marketing)", "Kelola voucher diskon, blast push notification penawaran promo, segmentasi pelanggan.", "Fase 2"),
+        ("6", "Portal Mitra / Investor", "Web Portal (Secure)\n(Mitra Pemilik Cabang)", "Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil.", "Fase 3"),
+        ("7", "Owner Dashboard & HR", "Web / Mobile\n(Owner & HR)", "KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan.", "Fase 3")
     ]
     
     for row_idx, data in enumerate(app_data, start=1):
@@ -470,7 +469,7 @@ def build_proposal_docx(file_path):
         bp_table.cell(0, i).paragraphs[0].text = h
         
     bp_data = [
-        ("Fase 1 (Core)", "ERP Backoffice, POS Kasir, KDS Barista, App Operasi Outlet", "2.5 - 3 Bulan", "Rp 75.000.000,-"),
+        ("Fase 1 (Core)", "ERP Backoffice, POS Kasir, KDS Barista", "2.5 - 3 Bulan", "Rp 75.000.000,-"),
         ("Fase 2 (Omni)", "Mobile App Pelanggan (iOS & Android) + Panel Promo CRM", "2 Bulan", "Rp 48.000.000,-"),
         ("Fase 3 (Scale)", "Portal Mitra/Investor + Owner Dashboard & HR Shift", "1 - 1.5 Bulan", "Rp 27.000.000,-"),
         ("PAKET BUNDLING\n(Fase 1 + 2 + 3)", "Seluruh Ekosistem Lengkap (Diskon Khusus Rp 15 Juta)", "± 6 Bulan", "Rp 135.000.000,-\n(Net)")

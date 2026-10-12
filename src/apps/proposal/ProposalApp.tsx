@@ -17,7 +17,6 @@ import {
   TrendingUp,
   Cpu,
   Mail,
-  Smartphone,
   Tablet,
   Monitor,
   Store,
@@ -199,21 +198,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     },
     {
       id: 4,
-      name: 'App Operasi Outlet',
-      role: 'Store Manager Outlet',
-      device: 'Smartphone Android/iOS',
-      icon: <Smartphone className="w-5 h-5 text-blue-600" />,
-      phase: 'Fase 1 (Core)',
-      features: [
-        'Penerimaan kiriman barang dari gudang pusat (foto surat jalan & nota).',
-        'Pengajuan permintaan restock bahan (PO Cabang Tanpa Harga).',
-        'Audit fisik berkala (stock opname) & pencatatan waste/susut kalibrasi.',
-        'Pengajuan klaim kas kecil belanja darurat lokal.',
-        'Usulan menu kreasi khas outlet ke tim R&D pusat.',
-      ],
-    },
-    {
-      id: 5,
       name: 'App Pelanggan (Customer)',
       role: 'Pelanggan Kopi Seduhan Jodi',
       device: 'Mobile PWA iOS & Android',
@@ -228,7 +212,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
       ],
     },
     {
-      id: 6,
+      id: 5,
       name: 'CRM & Promo Panel',
       role: 'Tim Marketing & Promosi',
       device: 'Desktop Web Browser',
@@ -242,7 +226,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
       ],
     },
     {
-      id: 7,
+      id: 6,
       name: 'Portal Mitra Investor',
       role: 'Investor / Mitra Cabang',
       device: 'Desktop Web Browser',
@@ -256,7 +240,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
       ],
     },
     {
-      id: 8,
+      id: 7,
       name: 'Owner Dashboard & HR',
       role: 'Founder, Direksi & HR',
       device: 'Desktop & Tablet',
@@ -369,7 +353,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 01
               </div>
               <div>
-                <h2 className="text-xl font-extrabold text-slate-900">Arsitektur & Cakupan 8 Modul Aplikasi</h2>
+                <h2 className="text-xl font-extrabold text-slate-900">Arsitektur & Cakupan 7 Modul Aplikasi</h2>
                 <p className="text-xs text-slate-500">Seluruh modul saling terhubung tanpa perantara perulangan data manual</p>
               </div>
             </div>
@@ -385,7 +369,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                     setActiveModuleTab(idx);
                     setSelectedRoleFilter('ALL');
                   }}
-                  className={`p-3 text-left border-r border-b sm:border-b-0 border-slate-200 transition-all cursor-pointer ${
+                  className={`p-3 text-left border-r border-b border-slate-200 transition-all cursor-pointer ${
                     activeModuleTab === idx
                       ? 'bg-white font-extrabold text-slate-900 border-t-2 border-t-[var(--brand-600,#C86D3B)] shadow-xs'
                       : 'text-slate-600 hover:bg-slate-100/70 font-semibold'
@@ -656,10 +640,6 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                     <span className="text-[9px] font-extrabold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                       Outlet Besar
                     </span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>App Operasi Outlet (Manager)</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-emerald-700 font-bold">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />

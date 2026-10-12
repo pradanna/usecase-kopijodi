@@ -34,11 +34,10 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 | 1 | **ERP Backoffice & Finance** | Web (Owner, Finance, Admin Pusat, Store Manager) | Pusat kendali stok, pembelian (tanpa harga), True-Up HPP, kas kecil berjenjang, & laporan keuangan multi-cabang. | Fase 1 |
 | 2 | **POS Kasir** | Tablet / PC (Kasir Outlet) | Transaksi cepat, modifier (ice/sugar/size), kas laci, mode offline, cetak struk, QRIS Midtrans. | Fase 1 |
 | 3 | **Layar Barista (KDS)** | Tablet / Monitor (Barista) | Antrean pesanan real-time, status pesanan (*Queue -> In Progress -> Ready*), tanpa kertas bon. | Fase 1 |
-| 4 | **App Operasi Outlet** | Mobile Android (Store Manager) | Penerimaan barang (surat jalan), stock opname fisik, pencatatan waste, pengajuan kas kecil. | Fase 1 |
-| 5 | **App Pelanggan** | iOS & Android (Pelanggan) | Order online (*Pick-up / Delivery*), QRIS/E-Wallet, poin loyalitas, e-voucher promo. | Fase 2 |
-| 6 | **CRM & Promo Panel** | Web (Marketing) | Kelola voucher diskon, blast promo push notification, segmentasi pelanggan. | Fase 2 |
-| 7 | **Portal Mitra / Investor** | Web (Investor Cabang) | Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil. | Fase 3 |
-| 8 | **Owner Dashboard & HR** | Web / Mobile (Owner & HR) | KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan. | Fase 3 |
+| 4 | **App Pelanggan** | iOS & Android (Pelanggan) | Order online (*Pick-up / Delivery*), QRIS/E-Wallet, poin loyalitas, e-voucher promo. | Fase 2 |
+| 5 | **CRM & Promo Panel** | Web (Marketing) | Kelola voucher diskon, blast promo push notification, segmentasi pelanggan. | Fase 2 |
+| 6 | **Portal Mitra / Investor** | Web (Investor Cabang) | Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil. | Fase 3 |
+| 7 | **Owner Dashboard & HR** | Web / Mobile (Owner & HR) | KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan. | Fase 3 |
 
 ---
 
@@ -154,7 +153,7 @@ Kami menyediakan **2 alternatif skema investasi** yang dapat disesuaikan dengan 
 
 | Paket | Cakupan Modul | Estimasi Waktu | Biaya Standar |
 |---|---|:---:|:---:|
-| **Fase 1 (Core)** | ERP Backoffice, POS Kasir, KDS Barista, App Operasi Outlet | 2.5 - 3 Bulan | **Rp 75.000.000,-** |
+| **Fase 1 (Core)** | ERP Backoffice, POS Kasir, KDS Barista | 2.5 - 3 Bulan | **Rp 75.000.000,-** |
 | **Fase 2 (Omni)** | Mobile App Pelanggan (iOS & Android) + Panel Promo CRM | 2 Bulan | **Rp 48.000.000,-** |
 | **Fase 3 (Scale)**| Portal Mitra/Investor + Owner Dashboard & HR Shift | 1 - 1.5 Bulan | **Rp 27.000.000,-** |
 | **TOTAL NORMAL** | **Seluruh Ekosistem Lengkap (Fase 1 + 2 + 3)** | **± 6 Bulan** | **Rp 150.000.000,-** |
