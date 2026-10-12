@@ -382,25 +382,42 @@ def build_proposal_docx(file_path):
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
     # Fitur Kunci
-    style_heading(doc.add_paragraph(), "Fitur Kunci ERP Backoffice & Finance (Fase 1 Core):", level=2)
+    style_heading(doc.add_paragraph(), "Fitur Kunci ERP Backoffice & Finance (Fase 1 Core) per Peran:", level=2)
     add_callout(doc, "Alur Utama ERP Core:", [
         "Pesan Barang → Terima Barang → Input Nota → HPP Terkoreksi → Laporan Keuangan"
     ], border_color="4F46E5", bg_color="EEF2FF")
     
-    add_bullet_p(doc, "1. Stok Terpisah per Outlet, Terpantau Terpusat: ", "Stok tiap outlet tercatat di satu sistem. Bertambah saat barang diterima di outlet dan berkurang otomatis sesuai resep setiap minuman terjual. Pusat memantau semua outlet secara live dengan peringatan stok menipis, sedangkan tiap outlet hanya melihat stoknya sendiri.")
-    add_bullet_p(doc, "2. Pemesanan Barang Tanpa Harga: ", "Outlet memesan ke gudang pusat cukup dengan jenis dan jumlah barang. Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.")
-    add_bullet_p(doc, "3. Koreksi HPP Otomatis (True-Up HPP): ", "Modal sementara memakai harga terakhir, lalu dikoreksi otomatis saat nota supplier diinput, sehingga laporan margin selalu akurat.")
-    add_bullet_p(doc, "4. Resep, Bahan & Menu: ", "Master 25+ bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, bahan olahan seperti sirup dan cold brew, serta menu khusus outlet yang disetujui pusat.")
-    add_bullet_p(doc, "5. Kas Kecil & Persetujuan Berjenjang: ", "Belanja kebutuhan kecil outlet dibatasi nominalnya. Pembelian di luar gudang pusat dan transaksi di atas batas wajib disetujui Finance atau pimpinan sebelum diproses.")
-    add_bullet_p(doc, "6. Hutang ke Gudang Pusat: ", "Pantau tagihan tiap outlet beserta umur hutang (aging). Pembayaran dicatat fleksibel, per periode atau per nota.")
-    add_bullet_p(doc, "7. Jurnal Otomatis & Laporan Keuangan: ", "Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat dengan minim rekonsiliasi manual. Tersedia laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.")
-    add_bullet_p(doc, "8. Hak Akses & Fleksibilitas: ", "Hak akses diatur per peran dan per outlet. Fitur dapat dihidupkan atau dimatikan sesuai kebutuhan, dan outlet milik sendiri maupun mitra dikelola dalam satu sistem.")
+    # OWNER / PIMPINAN
+    style_heading(doc.add_paragraph(), "A. OWNER / PIMPINAN (Memantau dan Memutuskan)", level=3)
+    add_bullet_p(doc, "1. Pantau Semua Outlet Secara Live: ", "Lihat stok dan penjualan seluruh outlet dalam satu layar, lengkap dengan peringatan stok menipis.")
+    add_bullet_p(doc, "2. Persetujuan Pembelian & Transaksi Besar: ", "Setujui pembelian di luar gudang pusat dan transaksi di atas batas nominal sebelum diproses.")
+    add_bullet_p(doc, "3. Margin & Kinerja Outlet: ", "Bandingkan margin dan laba/rugi tiap outlet dengan HPP yang sudah terkoreksi, sehingga angkanya akurat.")
+    add_bullet_p(doc, "4. Outlet Sendiri & Mitra dalam Satu Sistem: ", "Kelola outlet milik sendiri maupun mitra dalam satu sistem, dengan data kepemilikan yang sudah disiapkan.")
 
-    add_callout(doc, "Catatan Cakupan Modul:", [
-        "• Perpajakan (PPN/PPh): pengaturan tersedia di Fase 1, perhitungan lengkap pada tahap berikutnya.",
-        "• Sistem gudang pusat tidak termasuk: Pembayaran ke pusat dicatat di ERP tanpa integrasi ke sistem gudang.",
-        "• Skema bagi hasil mitra dibahas pada tahap berikutnya. Data kepemilikan outlet sudah disiapkan."
-    ], border_color="D97706", bg_color="FFFBEB")
+    # ADMIN PUSAT
+    style_heading(doc.add_paragraph(), "B. ADMIN PUSAT (Mengatur Data Induk dan Aturan Sistem)", level=3)
+    add_bullet_p(doc, "1. Daftar Bahan, Resep & Menu: ", "Kelola daftar induk bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, serta bahan olahan seperti sirup dan cold brew.")
+    add_bullet_p(doc, "2. Persetujuan Menu Khusus Outlet: ", "Tinjau menu dan resep yang diusulkan outlet, lalu setujui sebelum tampil di outlet tersebut.")
+    add_bullet_p(doc, "3. Hak Akses per Peran & Outlet: ", "Atur siapa boleh melihat dan mengerjakan apa, per peran dan per outlet.")
+    add_bullet_p(doc, "4. Fitur Hidup/Mati: ", "Aktifkan atau matikan fitur sesuai kebutuhan bisnis tanpa mengubah sistem.")
+
+    # FINANCE
+    style_heading(doc.add_paragraph(), "C. FINANCE (Memastikan Angka Akurat dan Terkendali)", level=3)
+    add_bullet_p(doc, "1. Input Nota & Koreksi HPP Otomatis (True-Up HPP): ", "Modal sementara memakai harga terakhir, lalu dikoreksi otomatis begitu nota supplier diinput.")
+    add_bullet_p(doc, "2. Hutang ke Gudang Pusat: ", "Pantau tagihan tiap outlet beserta umur hutang (aging).")
+    add_bullet_p(doc, "3. Catat Pembayaran ke Pusat: ", "Catat pembayaran secara fleksibel, per periode atau per nota.")
+    add_bullet_p(doc, "4. Kas Kecil & Persetujuan Berjenjang: ", "Setujui belanja kebutuhan kecil outlet yang melewati batas nominal sebelum dana dicairkan.")
+    add_bullet_p(doc, "5. Jurnal Otomatis: ", "Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat, dengan minim rekonsiliasi manual.")
+    add_bullet_p(doc, "6. Laporan Keuangan Lengkap: ", "Laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.")
+
+    # STORE MANAGER
+    style_heading(doc.add_paragraph(), "D. STORE MANAGER (Mengelola Operasional Outlet Sendiri - Akses Terbatas)", level=3)
+    add_bullet_p(doc, "1. Stok Outlet Sendiri: ", "Lihat stok outlet dan terima peringatan saat stok menipis.")
+    add_bullet_p(doc, "2. Pemesanan Barang Tanpa Harga: ", "Pesan ke gudang pusat cukup dengan jenis dan jumlah barang.")
+    add_bullet_p(doc, "3. Penerimaan Barang: ", "Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.")
+    add_bullet_p(doc, "4. Belanja Kebutuhan Kecil: ", "Catat belanja harian outlet dalam batas nominal yang berlaku, dan ajukan persetujuan bila melewati batas.")
+    add_bullet_p(doc, "5. Usulan Menu Khusus Outlet: ", "Usulkan menu dan resep khusus outlet untuk disetujui pusat.")
+    add_bullet_p(doc, "6. Pengajuan Pembelian di Luar Gudang Pusat: ", "Ajukan pembelian ke toko lain dengan alasan, untuk disetujui pimpinan.")
 
     # -------------------------------------------------------------
     # SECTION 3: SKEMA KERJASAMA & BIAYA

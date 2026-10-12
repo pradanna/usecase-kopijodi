@@ -25,33 +25,42 @@ import {
   PieChart,
   Award,
   XCircle,
-  AlertTriangle,
   TrendingDown,
   Lock,
 } from 'lucide-react';
 
+interface RoleGroup {
+  role: string;
+  tagline: string;
+  headerClass: string;
+  badgeClass: string;
+  icon: React.ReactNode;
+  features: string[];
+}
+
 interface ModuleItem {
   id: number;
   name: string;
-  role: string;
+  role?: string;
   device: string;
   icon: React.ReactNode;
   phase: string;
   summary?: string;
   workflow?: string[];
-  features: string[];
-  scopeNotes?: string[];
+  features?: string[];
+  roleGroups?: RoleGroup[];
 }
 
 export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToDemo }) => {
   const [activeModuleTab, setActiveModuleTab] = useState<number>(0);
+  const [selectedRoleFilter, setSelectedRoleFilter] = useState<string>('ALL');
 
   // Daftar Modul
   const MODULES: ModuleItem[] = [
     {
       id: 1,
       name: 'ERP Backoffice & Finance',
-      role: 'Owner, Finance, Admin Pusat, Store Manager (akses terbatas per outlet)',
+      role: 'Owner, Admin Pusat, Finance, Store Manager (akses terbatas per outlet)',
       device: 'Desktop Web Browser',
       icon: <Building2 className="w-5 h-5 text-indigo-600" />,
       phase: 'Fase 1 (Core)',
@@ -63,20 +72,63 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
         'HPP Terkoreksi',
         'Laporan Keuangan',
       ],
-      features: [
-        'Stok Terpisah per Outlet, Terpantau Terpusat: Stok tiap outlet tercatat di satu sistem. Bertambah saat barang diterima di outlet dan berkurang otomatis sesuai resep setiap minuman terjual. Pusat memantau semua outlet secara live dengan peringatan stok menipis, sedangkan tiap outlet hanya melihat stoknya sendiri.',
-        'Pemesanan Barang Tanpa Harga: Outlet memesan ke gudang pusat cukup dengan jenis dan jumlah barang. Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.',
-        'Koreksi HPP Otomatis (True-Up HPP): Modal sementara memakai harga terakhir, lalu dikoreksi otomatis saat nota supplier diinput, sehingga laporan margin selalu akurat.',
-        'Resep, Bahan & Menu: Master 25+ bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, bahan olahan seperti sirup dan cold brew, serta menu khusus outlet yang disetujui pusat.',
-        'Kas Kecil & Persetujuan Berjenjang: Belanja kebutuhan kecil outlet dibatasi nominalnya. Pembelian di luar gudang pusat dan transaksi di atas batas wajib disetujui Finance atau pimpinan sebelum diproses.',
-        'Hutang ke Gudang Pusat: Pantau tagihan tiap outlet beserta umur hutang (aging). Pembayaran dicatat fleksibel, per periode atau per nota.',
-        'Jurnal Otomatis & Laporan Keuangan: Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat dengan minim rekonsiliasi manual. Tersedia laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.',
-        'Hak Akses & Fleksibilitas: Hak akses diatur per peran dan per outlet. Fitur dapat dihidupkan atau dimatikan sesuai kebutuhan, dan outlet milik sendiri maupun mitra dikelola dalam satu sistem.',
-      ],
-      scopeNotes: [
-        'Perpajakan (PPN/PPh): pengaturan tersedia di Fase 1, perhitungan lengkap pada tahap berikutnya.',
-        'Sistem gudang pusat tidak termasuk. Pembayaran ke pusat dicatat di ERP tanpa integrasi ke sistem gudang.',
-        'Skema bagi hasil mitra dibahas pada tahap berikutnya. Data kepemilikan outlet sudah disiapkan.',
+      roleGroups: [
+        {
+          role: 'OWNER / PIMPINAN',
+          tagline: 'Memantau dan memutuskan',
+          headerClass: 'bg-amber-50/90 border-amber-200 text-amber-950',
+          badgeClass: 'bg-amber-100 text-amber-800 border-amber-300',
+          icon: <Award className="w-4 h-4 text-amber-700" />,
+          features: [
+            'Pantau Semua Outlet Secara Live: Lihat stok dan penjualan seluruh outlet dalam satu layar, lengkap dengan peringatan stok menipis.',
+            'Persetujuan Pembelian & Transaksi Besar: Setujui pembelian di luar gudang pusat dan transaksi di atas batas nominal sebelum diproses.',
+            'Margin & Kinerja Outlet: Bandingkan margin dan laba/rugi tiap outlet dengan HPP yang sudah terkoreksi, sehingga angkanya akurat.',
+            'Outlet Sendiri & Mitra dalam Satu Sistem: Kelola outlet milik sendiri maupun mitra dalam satu sistem, dengan data kepemilikan yang sudah disiapkan.',
+          ],
+        },
+        {
+          role: 'ADMIN PUSAT',
+          tagline: 'Mengatur data induk dan aturan sistem',
+          headerClass: 'bg-purple-50/90 border-purple-200 text-purple-950',
+          badgeClass: 'bg-purple-100 text-purple-800 border-purple-300',
+          icon: <Layers className="w-4 h-4 text-purple-700" />,
+          features: [
+            'Daftar Bahan, Resep & Menu: Kelola daftar induk bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, serta bahan olahan seperti sirup dan cold brew.',
+            'Persetujuan Menu Khusus Outlet: Tinjau menu dan resep yang diusulkan outlet, lalu setujui sebelum tampil di outlet tersebut.',
+            'Hak Akses per Peran & Outlet: Atur siapa boleh melihat dan mengerjakan apa, per peran dan per outlet.',
+            'Fitur Hidup/Mati: Aktifkan atau matikan fitur sesuai kebutuhan bisnis tanpa mengubah sistem.',
+          ],
+        },
+        {
+          role: 'FINANCE',
+          tagline: 'Memastikan angka akurat dan terkendali',
+          headerClass: 'bg-emerald-50/90 border-emerald-200 text-emerald-950',
+          badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+          icon: <DollarSign className="w-4 h-4 text-emerald-700" />,
+          features: [
+            'Input Nota & Koreksi HPP Otomatis (True-Up HPP): Modal sementara memakai harga terakhir, lalu dikoreksi otomatis begitu nota supplier diinput.',
+            'Hutang ke Gudang Pusat: Pantau tagihan tiap outlet beserta umur hutang (aging).',
+            'Catat Pembayaran ke Pusat: Catat pembayaran secara fleksibel, per periode atau per nota.',
+            'Kas Kecil & Persetujuan Berjenjang: Setujui belanja kebutuhan kecil outlet yang melewati batas nominal sebelum dana dicairkan.',
+            'Jurnal Otomatis: Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat, dengan minim rekonsiliasi manual.',
+            'Laporan Keuangan Lengkap: Laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.',
+          ],
+        },
+        {
+          role: 'STORE MANAGER',
+          tagline: 'Mengelola operasional outlet sendiri (akses terbatas per outlet)',
+          headerClass: 'bg-blue-50/90 border-blue-200 text-blue-950',
+          badgeClass: 'bg-blue-100 text-blue-800 border-blue-300',
+          icon: <Store className="w-4 h-4 text-blue-700" />,
+          features: [
+            'Stok Outlet Sendiri: Lihat stok outlet dan terima peringatan saat stok menipis.',
+            'Pemesanan Barang Tanpa Harga: Pesan ke gudang pusat cukup dengan jenis dan jumlah barang.',
+            'Penerimaan Barang: Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.',
+            'Belanja Kebutuhan Kecil: Catat belanja harian outlet dalam batas nominal yang berlaku, dan ajukan persetujuan bila melewati batas.',
+            'Usulan Menu Khusus Outlet: Usulkan menu dan resep khusus outlet untuk disetujui pusat.',
+            'Pengajuan Pembelian di Luar Gudang Pusat: Ajukan pembelian ke toko lain dengan alasan, untuk disetujui pimpinan.',
+          ],
+        },
       ],
     },
     {
@@ -360,52 +412,136 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                       </div>
                     )}
 
-                    <div className="grid sm:grid-cols-2 gap-2.5">
-                      {current.features.map((feat, i) => {
-                        let title = '';
-                        let desc = feat;
-                        const colonIdx = feat.indexOf(': ');
-                        if (colonIdx > 0) {
-                          title = feat.slice(0, colonIdx);
-                          desc = feat.slice(colonIdx + 2);
-                        }
-                        return (
-                          <div
-                            key={i}
-                            className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs hover:border-slate-200 transition-colors"
+                    {current.roleGroups && current.roleGroups.length > 0 ? (
+                      <div className="space-y-4">
+                        {/* Filter Peran Pill Tabs */}
+                        <div className="flex flex-wrap items-center gap-1.5 pb-1">
+                          <span className="text-[11px] text-slate-400 font-bold mr-1">Filter Peran:</span>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedRoleFilter('ALL')}
+                            className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                              selectedRoleFilter === 'ALL'
+                                ? 'bg-slate-900 text-white shadow-xs'
+                                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                            }`}
                           >
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                            <div className="leading-relaxed text-slate-700">
-                              {title ? (
-                                <>
-                                  <strong className="block text-slate-900 font-bold mb-0.5">
-                                    {title}
-                                  </strong>
-                                  <span className="text-slate-600">{desc}</span>
-                                </>
-                              ) : (
-                                <span className="text-slate-700">{desc}</span>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Catatan Cakupan jika ada */}
-                    {current.scopeNotes && current.scopeNotes.length > 0 && (
-                      <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs space-y-2 mt-3">
-                        <div className="flex items-center gap-2 text-amber-900 font-bold">
-                          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
-                          <span>Catatan cakupan:</span>
-                        </div>
-                        <ul className="space-y-1.5 text-slate-700 pl-5 list-disc marker:text-amber-500">
-                          {current.scopeNotes.map((note, idx) => (
-                            <li key={idx} className="leading-relaxed">
-                              {note}
-                            </li>
+                            Semua Peran ({current.roleGroups.length})
+                          </button>
+                          {current.roleGroups.map((rg) => (
+                            <button
+                              key={rg.role}
+                              type="button"
+                              onClick={() => setSelectedRoleFilter(rg.role)}
+                              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                                selectedRoleFilter === rg.role
+                                  ? 'bg-[var(--brand-600,#C86D3B)] text-white shadow-xs'
+                                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                              }`}
+                            >
+                              {rg.role}
+                            </button>
                           ))}
-                        </ul>
+                        </div>
+
+                        {/* Role Cards List */}
+                        <div className="space-y-4">
+                          {current.roleGroups
+                            .filter((rg) => selectedRoleFilter === 'ALL' || selectedRoleFilter === rg.role)
+                            .map((rg) => (
+                              <div
+                                key={rg.role}
+                                className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs"
+                              >
+                                {/* Role Header Banner */}
+                                <div
+                                  className={`px-4 sm:px-5 py-3 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${rg.headerClass}`}
+                                >
+                                  <div className="flex items-center gap-2.5">
+                                    <div className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center shadow-2xs">
+                                      {rg.icon}
+                                    </div>
+                                    <div>
+                                      <h4 className="font-black text-sm tracking-wide">{rg.role}</h4>
+                                      <p className="text-xs text-slate-600 font-medium">{rg.tagline}</p>
+                                    </div>
+                                  </div>
+                                  <span
+                                    className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border w-fit ${rg.badgeClass}`}
+                                  >
+                                    {rg.features.length} Fitur
+                                  </span>
+                                </div>
+
+                                {/* Features in 2 columns */}
+                                <div className="p-4 sm:p-5 grid sm:grid-cols-2 gap-2.5">
+                                  {rg.features.map((feat, idx) => {
+                                    let title = '';
+                                    let desc = feat;
+                                    const colonIdx = feat.indexOf(': ');
+                                    if (colonIdx > 0) {
+                                      title = feat.slice(0, colonIdx);
+                                      desc = feat.slice(colonIdx + 2);
+                                    }
+                                    return (
+                                      <div
+                                        key={idx}
+                                        className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50/70 border border-slate-200/80 hover:bg-white hover:border-slate-300 hover:shadow-xs transition-all text-xs"
+                                      >
+                                        <div className="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-[10px] font-black text-slate-700 shrink-0 mt-0.5 shadow-2xs">
+                                          {idx + 1}
+                                        </div>
+                                        <div className="leading-relaxed text-slate-700">
+                                          {title ? (
+                                            <>
+                                              <strong className="block text-slate-900 font-extrabold mb-0.5">
+                                                {title}
+                                              </strong>
+                                              <span className="text-slate-600">{desc}</span>
+                                            </>
+                                          ) : (
+                                            <span className="text-slate-700">{desc}</span>
+                                          )}
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="grid sm:grid-cols-2 gap-2.5">
+                        {current.features?.map((feat, i) => {
+                          let title = '';
+                          let desc = feat;
+                          const colonIdx = feat.indexOf(': ');
+                          if (colonIdx > 0) {
+                            title = feat.slice(0, colonIdx);
+                            desc = feat.slice(colonIdx + 2);
+                          }
+                          return (
+                            <div
+                              key={i}
+                              className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs hover:border-slate-200 transition-colors"
+                            >
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                              <div className="leading-relaxed text-slate-700">
+                                {title ? (
+                                  <>
+                                    <strong className="block text-slate-900 font-bold mb-0.5">
+                                      {title}
+                                    </strong>
+                                    <span className="text-slate-600">{desc}</span>
+                                  </>
+                                ) : (
+                                  <span className="text-slate-700">{desc}</span>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
                   </div>

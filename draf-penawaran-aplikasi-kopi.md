@@ -44,24 +44,54 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 
 ## 3. Fitur Kunci ERP Backoffice & Finance (Fase 1 Core)
 
-**Pengguna:** Owner, Finance, Admin Pusat, Store Manager (akses terbatas per outlet) • **Platform:** Desktop Web Browser  
+**Platform:** Desktop Web Browser  
 **Pusat kendali stok, pembelian, HPP, dan keuangan seluruh outlet dalam satu sistem.**  
 
 > **Alur Utama:** Pesan Barang → Terima Barang → Input Nota → HPP Terkoreksi → Laporan Keuangan
 
-1. **Stok Terpisah per Outlet, Terpantau Terpusat:** Stok tiap outlet tercatat di satu sistem. Bertambah saat barang diterima di outlet dan berkurang otomatis sesuai resep setiap minuman terjual. Pusat memantau semua outlet secara live dengan peringatan stok menipis, sedangkan tiap outlet hanya melihat stoknya sendiri.
-2. **Pemesanan Barang Tanpa Harga:** Outlet memesan ke gudang pusat cukup dengan jenis dan jumlah barang. Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.
-3. **Koreksi HPP Otomatis (True-Up HPP):** Modal sementara memakai harga terakhir, lalu dikoreksi otomatis saat nota supplier diinput, sehingga laporan margin selalu akurat.
-4. **Resep, Bahan & Menu:** Master 25+ bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, bahan olahan seperti sirup dan cold brew, serta menu khusus outlet yang disetujui pusat.
-5. **Kas Kecil & Persetujuan Berjenjang:** Belanja kebutuhan kecil outlet dibatasi nominalnya. Pembelian di luar gudang pusat dan transaksi di atas batas wajib disetujui Finance atau pimpinan sebelum diproses.
-6. **Hutang ke Gudang Pusat:** Pantau tagihan tiap outlet beserta umur hutang (aging). Pembayaran dicatat fleksibel, per periode atau per nota.
-7. **Jurnal Otomatis & Laporan Keuangan:** Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat dengan minim rekonsiliasi manual. Tersedia laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.
-8. **Hak Akses & Fleksibilitas:** Hak akses diatur per peran dan per outlet. Fitur dapat dihidupkan atau dimatikan sesuai kebutuhan, dan outlet milik sendiri maupun mitra dikelola dalam satu sistem.
+---
 
-### Catatan Cakupan:
-- **Perpajakan (PPN/PPh):** pengaturan tersedia di Fase 1, perhitungan lengkap pada tahap berikutnya.
-- **Sistem gudang pusat tidak termasuk:** Pembayaran ke pusat dicatat di ERP tanpa integrasi ke sistem gudang.
-- **Skema bagi hasil mitra:** dibahas pada tahap berikutnya. Data kepemilikan outlet sudah disiapkan.
+### A. OWNER / PIMPINAN
+*Memantau dan memutuskan*
+
+1. **Pantau Semua Outlet Secara Live:** Lihat stok dan penjualan seluruh outlet dalam satu layar, lengkap dengan peringatan stok menipis.
+2. **Persetujuan Pembelian & Transaksi Besar:** Setujui pembelian di luar gudang pusat dan transaksi di atas batas nominal sebelum diproses.
+3. **Margin & Kinerja Outlet:** Bandingkan margin dan laba/rugi tiap outlet dengan HPP yang sudah terkoreksi, sehingga angkanya akurat.
+4. **Outlet Sendiri & Mitra dalam Satu Sistem:** Kelola outlet milik sendiri maupun mitra dalam satu sistem, dengan data kepemilikan yang sudah disiapkan.
+
+---
+
+### B. ADMIN PUSAT
+*Mengatur data induk dan aturan sistem*
+
+1. **Daftar Bahan, Resep & Menu:** Kelola daftar induk bahan baku dan kemasan, resep racikan (BOM) yang menghitung modal per gelas, serta bahan olahan seperti sirup dan cold brew.
+2. **Persetujuan Menu Khusus Outlet:** Tinjau menu dan resep yang diusulkan outlet, lalu setujui sebelum tampil di outlet tersebut.
+3. **Hak Akses per Peran & Outlet:** Atur siapa boleh melihat dan mengerjakan apa, per peran dan per outlet.
+4. **Fitur Hidup/Mati:** Aktifkan atau matikan fitur sesuai kebutuhan bisnis tanpa mengubah sistem.
+
+---
+
+### C. FINANCE
+*Memastikan angka akurat dan terkendali*
+
+1. **Input Nota & Koreksi HPP Otomatis (True-Up HPP):** Modal sementara memakai harga terakhir, lalu dikoreksi otomatis begitu nota supplier diinput.
+2. **Hutang ke Gudang Pusat:** Pantau tagihan tiap outlet beserta umur hutang (aging).
+3. **Catat Pembayaran ke Pusat:** Catat pembayaran secara fleksibel, per periode atau per nota.
+4. **Kas Kecil & Persetujuan Berjenjang:** Setujui belanja kebutuhan kecil outlet yang melewati batas nominal sebelum dana dicairkan.
+5. **Jurnal Otomatis:** Penjualan harian outlet (Tunai & QRIS) tercatat otomatis ke jurnal pendapatan dan buku kas pusat, dengan minim rekonsiliasi manual.
+6. **Laporan Keuangan Lengkap:** Laporan laba/rugi, arus kas, dan jurnal umum multi-cabang.
+
+---
+
+### D. STORE MANAGER
+*Mengelola operasional outlet sendiri (akses terbatas per outlet)*
+
+1. **Stok Outlet Sendiri:** Lihat stok outlet dan terima peringatan saat stok menipis.
+2. **Pemesanan Barang Tanpa Harga:** Pesan ke gudang pusat cukup dengan jenis dan jumlah barang.
+3. **Penerimaan Barang:** Saat barang diterima, stok langsung bertambah dengan status “menunggu nota”.
+4. **Belanja Kebutuhan Kecil:** Catat belanja harian outlet dalam batas nominal yang berlaku, dan ajukan persetujuan bila melewati batas.
+5. **Usulan Menu Khusus Outlet:** Usulkan menu dan resep khusus outlet untuk disetujui pusat.
+6. **Pengajuan Pembelian di Luar Gudang Pusat:** Ajukan pembelian ke toko lain dengan alasan, untuk disetujui pimpinan.
 
 ---
 
