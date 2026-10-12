@@ -21,6 +21,7 @@ import {
   Monitor,
   Store,
   Users,
+  QrCode,
   PieChart,
   Award,
   XCircle,
@@ -198,17 +199,26 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     },
     {
       id: 4,
-      name: 'App Pelanggan (Customer)',
+      name: 'Menu QR (Self-Order)',
       role: 'Pelanggan Kopi Seduhan Jodi',
-      device: 'Mobile PWA iOS & Android',
-      icon: <Users className="w-5 h-5 text-purple-600" />,
+      device: 'Web Mobile (tanpa instal aplikasi)',
+      icon: <QrCode className="w-5 h-5 text-purple-600" />,
       phase: 'Fase 2 (Omni)',
+      summary: 'Pelanggan memesan dan membayar sendiri dari HP lewat scan QR, pesanan langsung masuk ke kasir dan dapur.',
+      workflow: [
+        'Scan QR',
+        'Pilih Menu',
+        'Bayar',
+        'Pantau Status',
+        'Ambil Pesanan',
+      ],
       features: [
-        'Pencarian outlet terdekat dengan deteksi jarak GPS.',
-        'Pemesanan pick-up mandiri (ambil tanpa antre) & delivery.',
-        'Integrasi pembayaran QRIS & E-Wallet instan.',
-        'Pelacakan status racikan minuman secara live.',
-        'Poin loyalitas, membership tiering, & klaim e-voucher promo.',
+        'Scan QR, Langsung Pesan: Cukup scan QR di meja atau counter, tanpa unduh aplikasi dan tanpa daftar akun. Pelanggan memilih makan di tempat atau bawa pulang.',
+        'Menu Lengkap dengan Varian: Menu tampil sesuai outlet, lengkap dengan foto, harga, dan varian (ukuran cup, takaran gula, susu alternatif seperti oatmilk). Menu yang bahannya habis otomatis ditandai habis.',
+        'Bayar Langsung di HP: Pembayaran QRIS dan e-wallet lewat Midtrans, langsung dari halaman pesanan.',
+        'Pesanan Langsung ke Kasir & Dapur: Setelah pembayaran berhasil, pesanan masuk otomatis ke POS dan layar barista tanpa diketik ulang, sehingga antrean di kasir berkurang.',
+        'Pantau Status Pesanan Live: Pelanggan melihat progres minumannya: Dalam Antrean → Sedang Diracik → Siap Diambil.',
+        'Voucher & Promo: Pelanggan memasukkan kode voucher saat memesan. Promo dibuat dan dikelola dari Panel CRM.',
       ],
     },
     {
@@ -661,11 +671,11 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>Mobile App Pelanggan (PWA)</span>
+                    <span>Menu QR Self-Order (Web Mobile)</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>Online Pickup & Tracking</span>
+                    <span>Pesan Meja / Bawa Pulang QRIS</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
@@ -673,7 +683,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>Loyalty Point & E-Voucher</span>
+                    <span>Pantau Status Pesanan Live</span>
                   </div>
                 </div>
               </div>

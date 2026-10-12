@@ -365,7 +365,7 @@ def build_proposal_docx(file_path):
         ("1", "ERP Backoffice", "Web Responsive\n(Owner, Finance, Admin)", "Master menu & resep, stok otomatis, verifikasi nota, kas kecil bertingkat, & laba/rugi cabang.", "Fase 1"),
         ("2", "POS Kasir", "Tablet / PC Web\n(Kasir Outlet)", "Transaksi cepat, modifier (ice/sugar/size), kas laci, mode offline, cetak struk, QRIS Midtrans.", "Fase 1"),
         ("3", "Layar Barista (KDS)", "Tablet / Monitor\n(Barista)", "Antrean pesanan real-time, status pesanan (Queue -> In Progress -> Ready), tanpa kertas bon.", "Fase 1"),
-        ("4", "App Pelanggan", "iOS & Android\n(Pelanggan Kopi Seduhan Jodi)", "Order online (Pick-up / Delivery), QRIS/E-Wallet, loyalty poin, e-voucher promo.", "Fase 2"),
+        ("4", "Menu QR (Self-Order)", "Web Mobile\n(Pelanggan - Tanpa Install)", "Scan QR meja/counter, pilih menu & varian, bayar QRIS/e-wallet, status pesanan live.", "Fase 2"),
         ("5", "CRM & Promo Panel", "Web Backoffice\n(Tim Marketing)", "Kelola voucher diskon, blast push notification penawaran promo, segmentasi pelanggan.", "Fase 2"),
         ("6", "Portal Mitra / Investor", "Web Portal (Secure)\n(Mitra Pemilik Cabang)", "Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil.", "Fase 3"),
         ("7", "Owner Dashboard & HR", "Web / Mobile\n(Owner & HR)", "KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan.", "Fase 3")
@@ -450,6 +450,21 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "2. Status Progres per Pesanan: ", "Ubah status dengan satu sentuhan: Dalam Antrean → Sedang Diracik → Siap Diambil. Perubahan langsung terlihat di POS kasir.")
     add_bullet_p(doc, "3. Timer Waktu Penyajian: ", "Setiap pesanan punya penghitung waktu, dan warnanya berubah saat mendekati atau melewati target waktu pembuatan.")
 
+    # MENU QR SELF-ORDER
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+    style_heading(doc.add_paragraph(), "Fitur Kunci Menu QR Self-Order (Fase 2 Omni):", level=2)
+    add_body_p(doc, "Pengguna: Pelanggan Kopi Seduhan Jodi • Platform: Web Mobile (tanpa instal aplikasi)\nPelanggan memesan dan membayar sendiri dari HP lewat scan QR, pesanan langsung masuk ke kasir dan dapur.")
+    add_callout(doc, "Alur Utama Menu QR:", [
+        "Scan QR → Pilih Menu → Bayar → Pantau Status → Ambil Pesanan"
+    ], border_color="7C3AED", bg_color="F5F3FF")
+
+    add_bullet_p(doc, "1. Scan QR, Langsung Pesan: ", "Cukup scan QR di meja atau counter, tanpa unduh aplikasi dan tanpa daftar akun. Pelanggan memilih makan di tempat atau bawa pulang.")
+    add_bullet_p(doc, "2. Menu Lengkap dengan Varian: ", "Menu tampil sesuai outlet, lengkap dengan foto, harga, dan varian (ukuran cup, takaran gula, susu alternatif seperti oatmilk). Menu yang bahannya habis otomatis ditandai habis.")
+    add_bullet_p(doc, "3. Bayar Langsung di HP: ", "Pembayaran QRIS dan e-wallet lewat Midtrans, langsung dari halaman pesanan.")
+    add_bullet_p(doc, "4. Pesanan Langsung ke Kasir & Dapur: ", "Setelah pembayaran berhasil, pesanan masuk otomatis ke POS dan layar barista tanpa diketik ulang, sehingga antrean di kasir berkurang.")
+    add_bullet_p(doc, "5. Pantau Status Pesanan Live: ", "Pelanggan melihat progres minumannya: Dalam Antrean → Sedang Diracik → Siap Diambil.")
+    add_bullet_p(doc, "6. Voucher & Promo: ", "Pelanggan memasukkan kode voucher saat memesan. Promo dibuat dan dikelola dari Panel CRM.")
+
     # -------------------------------------------------------------
     # SECTION 3: SKEMA KERJASAMA & BIAYA
     # -------------------------------------------------------------
@@ -470,7 +485,7 @@ def build_proposal_docx(file_path):
         
     bp_data = [
         ("Fase 1 (Core)", "ERP Backoffice, POS Kasir, KDS Barista", "2.5 - 3 Bulan", "Rp 75.000.000,-"),
-        ("Fase 2 (Omni)", "Mobile App Pelanggan (iOS & Android) + Panel Promo CRM", "2 Bulan", "Rp 48.000.000,-"),
+        ("Fase 2 (Omni)", "Menu QR Self-Order (Web Mobile) + Panel Promo CRM", "2 Bulan", "Rp 48.000.000,-"),
         ("Fase 3 (Scale)", "Portal Mitra/Investor + Owner Dashboard & HR Shift", "1 - 1.5 Bulan", "Rp 27.000.000,-"),
         ("PAKET BUNDLING\n(Fase 1 + 2 + 3)", "Seluruh Ekosistem Lengkap (Diskon Khusus Rp 15 Juta)", "± 6 Bulan", "Rp 135.000.000,-\n(Net)")
     ]
