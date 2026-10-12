@@ -199,17 +199,17 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     },
     {
       id: 4,
-      name: 'Menu QR (Self-Order)',
+      name: 'Menu QR (Web App)',
       role: 'Pelanggan Kopi Seduhan Jodi',
       device: 'Web Mobile (tanpa instal aplikasi)',
       icon: <QrCode className="w-5 h-5 text-purple-600" />,
       phase: 'Fase 2 (Omni)',
-      summary: 'Pelanggan memesan dan membayar sendiri dari HP lewat scan QR, pesanan langsung masuk ke kasir dan dapur.',
+      summary: 'Pelanggan memesan dan membayar sendiri dari HP lewat scan QR (membuka Web App tanpa perlu unduh/instal aplikasi), pesanan langsung masuk ke kasir dan dapur.',
       workflow: [
-        'Scan QR',
-        'Pilih Menu',
-        'Bayar',
-        'Pantau Status',
+        'Scan QR Meja / Counter',
+        'Buka Web App Menu',
+        'Pilih & Bayar QRIS di HP',
+        'Pantau Status Live',
         'Ambil Pesanan',
       ],
       features: [

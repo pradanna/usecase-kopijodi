@@ -365,7 +365,7 @@ def build_proposal_docx(file_path):
         ("1", "ERP Backoffice", "Web Responsive\n(Owner, Finance, Admin)", "Master menu & resep, stok otomatis, verifikasi nota, kas kecil bertingkat, & laba/rugi cabang.", "Fase 1"),
         ("2", "POS Kasir", "Tablet / PC Web\n(Kasir Outlet)", "Transaksi cepat, modifier (ice/sugar/size), kas laci, mode offline, cetak struk, QRIS Midtrans.", "Fase 1"),
         ("3", "Layar Barista (KDS)", "Tablet / Monitor\n(Barista)", "Antrean pesanan real-time, status pesanan (Queue -> In Progress -> Ready), tanpa kertas bon.", "Fase 1"),
-        ("4", "Menu QR (Self-Order)", "Web Mobile\n(Pelanggan - Tanpa Install)", "Scan QR meja/counter, pilih menu & varian, bayar QRIS/e-wallet, status pesanan live.", "Fase 2"),
+        ("4", "Menu QR (Web App)", "Web Mobile\n(Pelanggan - Tanpa Install)", "Scan QR buka Web App menu di browser HP, pilih varian, bayar QRIS, status live.", "Fase 2"),
         ("5", "CRM & Promo Panel", "Web Backoffice\n(Tim Marketing)", "Kelola voucher diskon, blast push notification penawaran promo, segmentasi pelanggan.", "Fase 2"),
         ("6", "Portal Mitra / Investor", "Web Portal (Secure)\n(Mitra Pemilik Cabang)", "Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil.", "Fase 3"),
         ("7", "Owner Dashboard & HR", "Web / Mobile\n(Owner & HR)", "KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan.", "Fase 3")
