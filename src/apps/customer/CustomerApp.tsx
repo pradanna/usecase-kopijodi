@@ -9,7 +9,6 @@ import {
   ShoppingBag,
   MapPin,
   Clock,
-  Sparkles,
   QrCode,
   CheckCircle2,
   ChevronRight,
@@ -286,8 +285,7 @@ export const CustomerApp: React.FC = () => {
         {activeOrder && activeOrder.status !== 'PICKED_UP' && (
           <div className="bg-[var(--brand-50)] border-2 border-[var(--brand-600)] rounded-2xl p-3 shadow-md animate-pulse-subtle">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold text-[var(--brand-700)] uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
+              <span className="text-xs font-bold text-[var(--brand-700)] uppercase tracking-wider">
                 Live Status Pesanan {activeOrder.ticketNumber}
               </span>
               <Badge

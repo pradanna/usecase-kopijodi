@@ -14,7 +14,6 @@ import {
   Coffee,
   CheckCircle2,
   Clock,
-  Sparkles,
   Camera,
   X,
   FileText,

@@ -11,7 +11,6 @@ import {
   Smartphone,
   CheckCircle2,
   Calendar,
-  Sparkles,
 } from 'lucide-react';
 
 export const CrmApp: React.FC = () => {

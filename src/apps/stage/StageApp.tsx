@@ -22,7 +22,6 @@ import {
   Play,
   Pause,
   RotateCcw,
-  Sparkles,
   Palette,
   Terminal,
   Layers,
@@ -721,8 +720,7 @@ export const StageApp: React.FC = () => {
           <div className="h-12 bg-[#141822] border-b border-gray-800/80 px-4 sm:px-6 flex items-center justify-between shrink-0 z-20 gap-3">
             {/* Left: 5 Scenario Segmented Tabs */}
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden sm:flex items-center gap-1 mr-1 shrink-0">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden sm:flex items-center mr-1 shrink-0">
                 Skenario:
               </span>
 

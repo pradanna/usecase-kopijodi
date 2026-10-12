@@ -18,7 +18,6 @@ import {
   Calendar,
   Check,
   X,
-  Sparkles,
   ChevronRight,
   UserCheck,
   Timer,

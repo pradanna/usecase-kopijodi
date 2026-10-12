@@ -4,7 +4,6 @@ import {
   Download,
   Printer,
   CheckCircle2,
-  Sparkles,
   ShieldCheck,
   Zap,
   Clock,
@@ -217,8 +216,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
 
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-xs font-bold backdrop-blur-sm">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-xs font-bold backdrop-blur-sm">
                 <span>Dokumen Resmi Presentasi Teknis & Solusi Ekosistem</span>
               </div>
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
