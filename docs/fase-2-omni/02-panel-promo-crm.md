@@ -1,6 +1,19 @@
-# Modul Panel Promo CRM (Marketing & Promosi)
+# Modul Promo & Voucher Panel (Marketing & Promosi)
 
-Dokumen ini mendefinisikan spesifikasi detail seluruh use case untuk aplikasi **Panel Promo CRM** (Fase 2 Omni) yang digunakan oleh Tim Marketing pada web browser desktop untuk merancang strategi voucher, mengelola kampanye diskon, menentukan cakupan gerai, dan memantau dampaknya terhadap penjualan.
+Dokumen ini mendefinisikan spesifikasi detail seluruh use case untuk aplikasi **Promo & Voucher Panel** (Fase 2 Omni) yang digunakan oleh Tim Marketing & Promosi pada desktop web browser.
+
+> **Ringkasan Modul:**  
+> **Pengguna:** Tim Marketing & Promosi • **Platform:** Desktop Web Browser  
+> **Deskripsi:** Buat promo sekali, langsung berlaku di kasir dan Menu QR, lalu pantau hasilnya.  
+> **Alur Utama:** Buat Voucher → Atur Cakupan → Pratinjau → Publikasikan → Pantau Hasil  
+>
+> **Fitur Kunci:**
+> 1. **Voucher Diskon Nominal & Persentase:** Buat voucher dengan kode, masa berlaku, kuota pemakaian, dan minimum belanja.
+> 2. **Semua Outlet atau Outlet Tertentu:** Promo bisa berlaku di seluruh outlet atau dibatasi untuk outlet pilihan.
+> 3. **Berlaku di Kasir & Menu QR:** Satu voucher dipakai di dua tempat: pelanggan memasukkan kode di Menu QR, atau kasir menerapkannya di POS.
+> 4. **Pratinjau Sebelum Dipublikasikan:** Lihat tampilan voucher persis seperti yang dilihat pelanggan, lalu publikasikan bila sudah sesuai.
+> 5. **Pantau Pemakaian Real-Time:** Lihat berapa kali voucher dipakai, di outlet mana, dan berapa sisa kuotanya.
+> 6. **Laporan Efektivitas Promo:** Bandingkan nilai diskon dengan omzet dan margin yang dihasilkan tiap kampanye, untuk menentukan promo mana yang layak diulang.
 
 ---
 

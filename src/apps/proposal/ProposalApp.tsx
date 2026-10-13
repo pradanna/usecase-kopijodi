@@ -27,6 +27,8 @@ import {
   XCircle,
   TrendingDown,
   Lock,
+  Globe,
+  Ticket,
 } from 'lucide-react';
 
 interface RoleGroup {
@@ -199,6 +201,30 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
     },
     {
       id: 4,
+      name: 'Website & Landing Page',
+      role: 'Calon pelanggan & pengunjung',
+      device: 'Website (desktop & mobile)',
+      icon: <Globe className="w-5 h-5 text-blue-600" />,
+      phase: 'Fase 2 (Omni)',
+      summary:
+        'Wajah digital brand di internet: tempat pelanggan menemukan menu, promo, dan lokasi outlet sebelum datang.',
+      workflow: [
+        'Temukan Brand',
+        'Lihat Menu & Promo',
+        'Kunjungi Outlet',
+        'Scan QR & Pesan',
+      ],
+      features: [
+        'Profil Brand yang Profesional: Halaman utama yang menampilkan cerita dan identitas brand, tampil rapi di HP maupun desktop, dan dioptimalkan agar mudah ditemukan di Google.',
+        'Info Promo & Diskon: Promo yang sedang berjalan tampil di halaman depan, sehingga pelanggan tahu penawaran terbaru sebelum datang.',
+        'Katalog Menu: Daftar menu lengkap dengan foto dan harga, tersedia untuk dilihat kapan saja.',
+        'Lokasi & Jam Buka Outlet: Alamat, peta, dan jam operasional tiap outlet, dengan tombol petunjuk arah langsung ke Google Maps.',
+        'Kontak & Media Sosial: Satu sentuhan untuk menghubungi lewat WhatsApp atau membuka Instagram dan media sosial brand.',
+        'Konten Dikelola Sendiri: Tim brand dapat memperbarui banner, promo, dan informasi outlet sendiri, tanpa menunggu programmer.',
+      ],
+    },
+    {
+      id: 5,
       name: 'Menu QR (Web App)',
       role: 'Pelanggan Kopi Seduhan Jodi',
       device: 'Web Mobile (tanpa instal aplikasi)',
@@ -218,25 +244,36 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
         'Bayar Langsung di HP: Pembayaran QRIS dan e-wallet lewat Midtrans, langsung dari halaman pesanan.',
         'Pesanan Langsung ke Kasir & Dapur: Setelah pembayaran berhasil, pesanan masuk otomatis ke POS dan layar barista tanpa diketik ulang, sehingga antrean di kasir berkurang.',
         'Pantau Status Pesanan Live: Pelanggan melihat progres minumannya: Dalam Antrean → Sedang Diracik → Siap Diambil.',
-        'Voucher & Promo: Pelanggan memasukkan kode voucher saat memesan. Promo dibuat dan dikelola dari Panel CRM.',
-      ],
-    },
-    {
-      id: 5,
-      name: 'CRM & Promo Panel',
-      role: 'Tim Marketing & Promosi',
-      device: 'Desktop Web Browser',
-      icon: <PieChart className="w-5 h-5 text-rose-600" />,
-      phase: 'Fase 2 (Omni)',
-      features: [
-        'Pembuatan voucher diskon nominal & persentase.',
-        'Aturan promo fleksibel: berlaku nasional atau khusus cabang tertentu.',
-        'Emulator pratinjau tampilan voucher sebelum dipublikasikan.',
-        'Analisis performa efektivitas dan ROI setiap kampanye promo.',
+        'Voucher & Promo: Pelanggan memasukkan kode voucher saat memesan. Promo dibuat dan dikelola dari Promo & Voucher Panel.',
       ],
     },
     {
       id: 6,
+      name: 'Promo & Voucher Panel',
+      role: 'Tim Marketing & Promosi',
+      device: 'Desktop Web Browser',
+      icon: <Ticket className="w-5 h-5 text-rose-600" />,
+      phase: 'Fase 2 (Omni)',
+      summary:
+        'Buat promo sekali, langsung berlaku di kasir dan Menu QR, lalu pantau hasilnya.',
+      workflow: [
+        'Buat Voucher',
+        'Atur Cakupan',
+        'Pratinjau',
+        'Publikasikan',
+        'Pantau Hasil',
+      ],
+      features: [
+        'Voucher Diskon Nominal & Persentase: Buat voucher dengan kode, masa berlaku, kuota pemakaian, dan minimum belanja.',
+        'Semua Outlet atau Outlet Tertentu: Promo bisa berlaku di seluruh outlet atau dibatasi untuk outlet pilihan.',
+        'Berlaku di Kasir & Menu QR: Satu voucher dipakai di dua tempat: pelanggan memasukkan kode di Menu QR, atau kasir menerapkannya di POS.',
+        'Pratinjau Sebelum Dipublikasikan: Lihat tampilan voucher persis seperti yang dilihat pelanggan, lalu publikasikan bila sudah sesuai.',
+        'Pantau Pemakaian Real-Time: Lihat berapa kali voucher dipakai, di outlet mana, dan berapa sisa kuotanya.',
+        'Laporan Efektivitas Promo: Bandingkan nilai diskon dengan omzet dan margin yang dihasilkan tiap kampanye, untuk menentukan promo mana yang layak diulang.',
+      ],
+    },
+    {
+      id: 7,
       name: 'Portal Mitra Investor',
       role: 'Investor / Mitra Cabang',
       device: 'Desktop Web Browser',
@@ -250,7 +287,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
       ],
     },
     {
-      id: 7,
+      id: 8,
       name: 'Owner Dashboard & HR',
       role: 'Founder, Direksi & HR',
       device: 'Desktop & Tablet',
@@ -363,7 +400,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 01
               </div>
               <div>
-                <h2 className="text-xl font-extrabold text-slate-900">Arsitektur & Cakupan 7 Modul Aplikasi</h2>
+                <h2 className="text-xl font-extrabold text-slate-900">Arsitektur & Cakupan 8 Modul Aplikasi</h2>
                 <p className="text-xs text-slate-500">Seluruh modul saling terhubung tanpa perantara perulangan data manual</p>
               </div>
             </div>
@@ -671,6 +708,10 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>Website & Landing Page Brand</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
                     <span>Menu QR Self-Order (Web Mobile)</span>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -679,7 +720,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>CRM & Promo Panel</span>
+                    <span>Promo & Voucher Panel</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />

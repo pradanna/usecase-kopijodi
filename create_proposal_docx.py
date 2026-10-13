@@ -366,7 +366,7 @@ def build_proposal_docx(file_path):
         ("2", "POS Kasir", "Tablet / PC Web\n(Kasir Outlet)", "Transaksi cepat, modifier (ice/sugar/size), kas laci, mode offline, cetak struk, QRIS Midtrans.", "Fase 1"),
         ("3", "Layar Barista (KDS)", "Tablet / Monitor\n(Barista)", "Antrean pesanan real-time, status pesanan (Queue -> In Progress -> Ready), tanpa kertas bon.", "Fase 1"),
         ("4", "Menu QR (Web App)", "Web Mobile\n(Pelanggan - Tanpa Install)", "Scan QR buka Web App menu di browser HP, pilih varian, bayar QRIS, status live.", "Fase 2"),
-        ("5", "CRM & Promo Panel", "Web Backoffice\n(Tim Marketing)", "Kelola voucher diskon, blast push notification penawaran promo, segmentasi pelanggan.", "Fase 2"),
+        ("5", "Promo & Voucher Panel", "Web Desktop\n(Tim Marketing)", "Buat promo sekali, langsung berlaku di kasir & Menu QR, pantau kuota dan efektivitas omzet.", "Fase 2"),
         ("6", "Portal Mitra / Investor", "Web Portal (Secure)\n(Mitra Pemilik Cabang)", "Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil.", "Fase 3"),
         ("7", "Owner Dashboard & HR", "Web / Mobile\n(Owner & HR)", "KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan.", "Fase 3")
     ]
@@ -463,7 +463,22 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "3. Bayar Langsung di HP: ", "Pembayaran QRIS dan e-wallet lewat Midtrans, langsung dari halaman pesanan.")
     add_bullet_p(doc, "4. Pesanan Langsung ke Kasir & Dapur: ", "Setelah pembayaran berhasil, pesanan masuk otomatis ke POS dan layar barista tanpa diketik ulang, sehingga antrean di kasir berkurang.")
     add_bullet_p(doc, "5. Pantau Status Pesanan Live: ", "Pelanggan melihat progres minumannya: Dalam Antrean → Sedang Diracik → Siap Diambil.")
-    add_bullet_p(doc, "6. Voucher & Promo: ", "Pelanggan memasukkan kode voucher saat memesan. Promo dibuat dan dikelola dari Panel CRM.")
+    add_bullet_p(doc, "6. Voucher & Promo: ", "Pelanggan memasukkan kode voucher saat memesan. Promo dibuat dan dikelola dari Promo & Voucher Panel.")
+
+    # PROMO & VOUCHER PANEL
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+    style_heading(doc.add_paragraph(), "Fitur Kunci Promo & Voucher Panel (Fase 2 Omni):", level=2)
+    add_body_p(doc, "Pengguna: Tim Marketing & Promosi • Platform: Desktop Web Browser\nBuat promo sekali, langsung berlaku di kasir dan Menu QR, lalu pantau hasilnya.")
+    add_callout(doc, "Alur Utama Promo & Voucher Panel:", [
+        "Buat Voucher → Atur Cakupan → Pratinjau → Publikasikan → Pantau Hasil"
+    ], border_color="E11D48", bg_color="FFF1F2")
+
+    add_bullet_p(doc, "1. Voucher Diskon Nominal & Persentase: ", "Buat voucher dengan kode, masa berlaku, kuota pemakaian, dan minimum belanja.")
+    add_bullet_p(doc, "2. Semua Outlet atau Outlet Tertentu: ", "Promo bisa berlaku di seluruh outlet atau dibatasi untuk outlet pilihan.")
+    add_bullet_p(doc, "3. Berlaku di Kasir & Menu QR: ", "Satu voucher dipakai di dua tempat: pelanggan memasukkan kode di Menu QR, atau kasir menerapkannya di POS.")
+    add_bullet_p(doc, "4. Pratinjau Sebelum Dipublikasikan: ", "Lihat tampilan voucher persis seperti yang dilihat pelanggan, lalu publikasikan bila sudah sesuai.")
+    add_bullet_p(doc, "5. Pantau Pemakaian Real-Time: ", "Lihat berapa kali voucher dipakai, di outlet mana, dan berapa sisa kuotanya.")
+    add_bullet_p(doc, "6. Laporan Efektivitas Promo: ", "Bandingkan nilai diskon dengan omzet dan margin yang dihasilkan tiap kampanye, untuk menentukan promo mana yang layak diulang.")
 
     # -------------------------------------------------------------
     # SECTION 3: SKEMA KERJASAMA & BIAYA
@@ -485,7 +500,7 @@ def build_proposal_docx(file_path):
         
     bp_data = [
         ("Fase 1 (Core)", "ERP Backoffice, POS Kasir, KDS Barista", "2.5 - 3 Bulan", "Rp 75.000.000,-"),
-        ("Fase 2 (Omni)", "Menu QR Self-Order (Web Mobile) + Panel Promo CRM", "2 Bulan", "Rp 48.000.000,-"),
+        ("Fase 2 (Omni)", "Menu QR Self-Order (Web Mobile) + Promo & Voucher Panel", "2 Bulan", "Rp 48.000.000,-"),
         ("Fase 3 (Scale)", "Portal Mitra/Investor + Owner Dashboard & HR Shift", "1 - 1.5 Bulan", "Rp 27.000.000,-"),
         ("PAKET BUNDLING\n(Fase 1 + 2 + 3)", "Seluruh Ekosistem Lengkap (Diskon Khusus Rp 15 Juta)", "± 6 Bulan", "Rp 135.000.000,-\n(Net)")
     ]

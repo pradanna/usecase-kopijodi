@@ -50,7 +50,7 @@ docs/
 - **Fokus Utama**: Menjangkau pelanggan online, otomatisasi pesanan *pick-up*, dan kampanye promosi penjualan.
 - **Aplikasi Terlibat**:
   1. **App Pelanggan** (PWA / Mobile App)
-  2. **Panel Promo CRM** (Desktop Web)
+  2. **Promo & Voucher Panel** (Desktop Web)
 - **Keunggulan Sistem**: Pemilihan outlet terdekat, penyesuaian markup channel online transparan, checkout QRIS simulasi Midtrans, pelacakan live status pembuatan minuman (*Baru $\rightarrow$ Dibuat $\rightarrow$ Siap*), dan pembuatan voucher promo fleksibel (global maupun spesifik outlet).
 
 ### 3. [Fase 3: Scale, Investor & Eksekutif](file:///c:/PROJECT/WEBSITE/kopi-jodi/docs/fase-3-scale/)

@@ -95,7 +95,7 @@ Dokumen ini menyajikan inventaris lengkap seluruh 53 Use Case di 9 aplikasi ekos
 | **UC-CUS-06** | Live Tracking Status Pesanan Real-Time | Pelanggan | P0 | [01-app-pelanggan.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/docs/fase-2-omni/01-app-pelanggan.md#uc-cus-06) |
 | **UC-CUS-07** | Riwayat Transaksi & Fitur 1-Tap Reorder Menu | Pelanggan | P1 | [01-app-pelanggan.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/docs/fase-2-omni/01-app-pelanggan.md#uc-cus-07) |
 
-### 2.2 Panel Promo CRM
+### 2.2 Promo & Voucher Panel
 | ID | Nama Use Case | Aktor Utama | Prioritas | Dokumen Detail |
 |---|---|---|:---:|---|
 | **UC-CRM-01** | Pembuatan Voucher Diskon (% / Nominal, Kuota, Min.) | Tim Marketing | P0 | [02-panel-promo-crm.md](file:///c:/PROJECT/WEBSITE/kopi-jodi/docs/fase-2-omni/02-panel-promo-crm.md#uc-crm-01) |
