@@ -253,9 +253,9 @@ Kami menyediakan **2 alternatif skema investasi** yang dapat disesuaikan dengan 
 |---|---|:---:|:---:|
 | **Fase 1 (Core)** | ERP Backoffice, POS Kasir, KDS Barista | 2.5 - 3 Bulan | **Rp 75.000.000,-** |
 | **Fase 2 (Omni)** | Menu QR Self-Order (Web Mobile) + Promo & Voucher Panel | 2 Bulan | **Rp 48.000.000,-** |
-| **Fase 3 (Scale)**| Portal Mitra Investor + Owner Dashboard & HR | 1 - 1.5 Bulan | **Rp 27.000.000,-** |
-| **TOTAL NORMAL** | **Seluruh Ekosistem Lengkap (Fase 1 + 2 + 3)** | **± 6 Bulan** | **Rp 150.000.000,-** |
-| **PAKET BUNDLING** | **Komitmen Penuh Sekaligus (Fase 1 + 2 + 3)** | **± 6 Bulan** | **Rp 135.000.000,-** *(Hemat Rp 15 Juta)* |
+| **Fase 3 (Scale)**| Portal Mitra Investor + Owner Dashboard & HR | 2 – 2.5 Bulan | *Menyusul (TBA)* |
+| **TOTAL NORMAL** | **Seluruh Ekosistem Lengkap (Fase 1 + 2 + 3)** | **± 6.5 – 7 Bulan** | *Menyusul (TBA)* |
+| **PAKET BUNDLING** | **Komitmen Penuh Sekaligus (Fase 1 + 2 + 3)** | **± 6.5 – 7 Bulan** | *Menyusul (TBA)* |
 
 *Fasilitas Beli Putus:* Garansi bug gratis 3-6 bulan, penyerahan full source code, setup deployment cloud, buku panduan (SOP), dan training staf.
 
@@ -371,8 +371,8 @@ Biaya operasional pihak ketiga yang dibayarkan langsung ke penyedia resmi (tanpa
 
 Silakan beri tanda centang `[ √ ]` pada opsi yang dipilih oleh Manajemen Kopi Seduhan Jodi:
 
-- `[   ]` **OPSI 1: Beli Putus Paket Bundling Penuh (Fase 1 + 2 + 3)** — Rp 135.000.000,- *(Hemat Rp 15 Juta)*
-- `[   ]` **OPSI 1: Beli Putus Fase 1 Saja (Core ERP, POS, KDS, Ops)** — Rp 75.000.000,-
+- `[   ]` **OPSI 1: Beli Putus Paket Bundling Penuh (Fase 1 + 2 + 3)** — *Menyusul (TBA)*
+- `[   ]` **OPSI 1: Beli Putus Fase 1 Saja (Core ERP, POS, KDS)** — Rp 75.000.000,-
 - `[   ]` **OPSI 2: Sistem Bulanan Dedicated Programmer** — Rp 5.000.000,- / bulan *(Min. Kontrak 5 Tahun / 60 Bulan, Bebas Tambah Fitur Apapun)*
 
 <br>

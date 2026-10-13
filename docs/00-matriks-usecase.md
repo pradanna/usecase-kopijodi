@@ -105,7 +105,7 @@ Dokumen ini menyajikan inventaris lengkap seluruh 53 Use Case di 9 aplikasi ekos
 
 ---
 
-## 3. Fase 3: Scale, Investor & Eksekutif (1 – 1,5 Bulan)
+## 3. Fase 3: Scale, Investor & Eksekutif (2 – 2,5 Bulan)
 
 ### 3.1 Portal Mitra / Investor (Read-Only)
 | ID | Nama Use Case | Aktor Utama | Prioritas | Dokumen Detail |

@@ -544,8 +544,8 @@ def build_proposal_docx(file_path):
     bp_data = [
         ("Fase 1 (Core)", "ERP Backoffice, POS Kasir, KDS Barista", "2.5 - 3 Bulan", "Rp 75.000.000,-"),
         ("Fase 2 (Omni)", "Menu QR Self-Order (Web Mobile) + Promo & Voucher Panel", "2 Bulan", "Rp 48.000.000,-"),
-        ("Fase 3 (Scale)", "Portal Mitra Investor + Owner Dashboard & HR", "1 - 1.5 Bulan", "Rp 27.000.000,-"),
-        ("PAKET BUNDLING\n(Fase 1 + 2 + 3)", "Seluruh Ekosistem Lengkap (Diskon Khusus Rp 15 Juta)", "± 6 Bulan", "Rp 135.000.000,-\n(Net)")
+        ("Fase 3 (Scale)", "Portal Mitra Investor + Owner Dashboard & HR", "2 – 2.5 Bulan", "Menyusul (TBA)"),
+        ("PAKET BUNDLING\n(Fase 1 + 2 + 3)", "Seluruh Ekosistem Lengkap", "± 6.5 – 7 Bulan", "Menyusul (TBA)")
     ]
     
     for r_idx, d in enumerate(bp_data, start=1):
@@ -714,7 +714,7 @@ def build_proposal_docx(file_path):
         opt_table.cell(0, i).paragraphs[0].text = h
         
     opt_data = [
-        ("[   ]", "OPSI 1: Beli Putus - Paket Bundling (Fase 1 + 2 + 3)\nInvestasi: Rp 135.000.000,- (Hemat Rp 15 Juta)", "Garansi 6 Bulan, penyerahan source code, sistem tuntas."),
+        ("[   ]", "OPSI 1: Beli Putus - Paket Bundling (Fase 1 + 2 + 3)\nInvestasi: Menyusul (TBA)", "Garansi 6 Bulan, penyerahan source code, sistem tuntas."),
         ("[   ]", "OPSI 1: Beli Putus - Fase 1 Saja (Core Operasional)\nInvestasi: Rp 75.000.000,-", "Fokus operasional outlet, stok otomatis, & kasir live."),
         ("[   ]", "OPSI 2: Sistem Bulanan Dedicated Programmer\nBiaya: Rp 5.000.000,- / bulan", "Min. Kontrak 5 Tahun (60 Bulan).\nBebas tambah fitur apapun & dev berkelanjutan oleh genossys.")
     ]

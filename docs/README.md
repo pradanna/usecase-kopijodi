@@ -25,7 +25,7 @@ docs/
 │   ├── 01-app-pelanggan.md                     # UC-CUS-01 s/d UC-CUS-07 (Outlet Terdekat, Menu+Markup, QRIS, Live Tracking)
 │   └── 02-panel-promo-crm.md                   # UC-CRM-01 s/d UC-CRM-04 (Voucher Global vs Outlet, Emulator Preview, Efektivitas)
 │
-├── fase-3-scale/                               # FASE 3: SCALE, INVESTOR & EKSEKUTIF (1 - 1.5 Bulan)
+├── fase-3-scale/                               # FASE 3: SCALE, INVESTOR & EKSEKUTIF (2 - 2.5 Bulan)
 │   ├── 01-portal-mitra-investor.md             # UC-PRT-01 s/d UC-PRT-04 (Read-Only: Omzet, HPP Riil vs Sementara, Kepemilikan)
 │   ├── 02-owner-dashboard.md                   # UC-OWN-01 s/d UC-OWN-04 (Konsolidasi KPI, Ranking Cabang, Executive Approval)
 │   └── 03-demo-stage-orchestrator.md           # UC-STG-01 s/d UC-STG-05 (Device Frames, Auto Demo, Role Switcher, White-Label)

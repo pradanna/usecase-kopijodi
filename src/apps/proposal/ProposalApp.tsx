@@ -790,24 +790,28 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-slate-500 uppercase">Fase 3 (Scale)</span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    1 - 1.5 Bulan
+                    2 – 2.5 Bulan
                   </span>
                 </div>
                 <div className="text-lg font-black text-slate-900 my-1.5">
-                  Milestone 3 (Skalabilitas)
+                  Milestone 3 (Skalabilitas & HR)
                 </div>
                 <div className="mt-2.5 text-[11px] text-slate-600 space-y-1.5 border-t border-slate-200/80 pt-2.5">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>Portal Mitra / Investor Read-Only</span>
+                    <span>Portal Mitra Investor (Web Desktop & HP)</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>Owner Executive Dashboard</span>
+                    <span>Owner Executive Dashboard (KPI & Approval)</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
-                    <span>HR Shift Barista & GPS Mobile</span>
+                    <span>Aplikasi HR & Jadwal Shift Outlet</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
+                    <span>Absensi GPS Mobile & Penggajian Otomatis</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-600,#C86D3B)] shrink-0" />
