@@ -1,6 +1,31 @@
-# Modul Owner Dashboard (Pusat Kendali Eksekutif)
+# Modul Owner Dashboard & HR (Fase 3 Scale)
 
-Dokumen ini mendefinisikan spesifikasi detail seluruh use case untuk aplikasi **Owner Dashboard** (Fase 3 Scale) yang dirancang untuk pendiri, direksi, dan eksekutif bisnis kopi dalam memantau denyut operasional makro seluruh jaringan outlet, mengomparasikan cabang, memproses persetujuan tingkat tinggi, serta mengantisipasi anomali finansial secara terpusat.
+Dokumen ini mendefinisikan spesifikasi detail use case untuk aplikasi **Owner Dashboard & HR** (Fase 3 Scale) yang dirancang untuk direksi, HR, dan seluruh karyawan operasional outlet.
+
+> **Ringkasan Modul:**  
+> **Platform:** Desktop & Tablet (Direksi & HR) • Web Mobile (Karyawan)  
+> **Deskripsi:** Direksi memantau performa seluruh cabang dalam satu layar, sementara jadwal, absensi, dan gaji karyawan dikelola dalam satu sistem yang terhubung ke operasional outlet.  
+> **Alur HR:** Jadwal Shift → Absensi → Rekap Kehadiran → Penggajian → Slip Gaji  
+>
+> ### A. FOUNDER / DIREKSI (Memantau dan memutuskan)
+> 1. **KPI Seluruh Cabang dalam Satu Layar:** Omzet, margin, jumlah pesanan, dan tren penjualan semua cabang terkonsolidasi dalam satu layar eksekutif.
+> 2. **Peringkat Cabang:** Bandingkan cabang terlaris dan margin tertinggi lewat leaderboard.
+> 3. **Pusat Persetujuan Eksekutif:** Setujui pengeluaran di atas batas dan pembelian di luar gudang pusat dari satu tempat.
+> 4. **Peringatan Penting:** Notifikasi untuk stok kritis, hutang ke pusat yang mendekati jatuh tempo, dan selisih HPP yang besar.
+>
+> ### B. HR / ADMIN SDM (Mengelola karyawan dan penggajian)
+> 1. **Data Karyawan & Kontrak:** Profil, posisi, outlet penempatan, status kontrak, dan dokumen karyawan dalam satu tempat.
+> 2. **Jadwal Shift per Outlet:** Susun jadwal barista dan kasir per outlet, lengkap dengan template shift dan persetujuan tukar shift.
+> 3. **Rekap Absensi & Keterlambatan:** Pantau kehadiran, keterlambatan, dan ketidakhadiran per karyawan dan per outlet.
+> 4. **Cuti, Izin & Lembur:** Proses pengajuan cuti, izin, dan lembur dengan alur persetujuan yang jelas.
+> 5. **Penggajian Otomatis:** Gaji dihitung dari komponen yang ditetapkan (gaji pokok, tunjangan, lembur, potongan keterlambatan) berdasarkan data absensi.
+> 6. **Laporan SDM:** Ringkasan kehadiran, jumlah karyawan, dan biaya tenaga kerja per outlet dan per periode.
+>
+> ### C. KARYAWAN (Barista & Kasir - Mengurus kebutuhan kerja dari HP)
+> 1. **Absen dengan GPS & Foto:** Absen masuk dan pulang hanya bisa dilakukan di area outlet, dilengkapi foto selfie untuk mencegah titip absen.
+> 2. **Lihat Jadwal Shift:** Lihat jadwal kerja pribadi kapan saja.
+> 3. **Ajukan Cuti, Izin & Tukar Shift:** Ajukan langsung dari HP dan pantau statusnya.
+> 4. **Slip Gaji Digital:** Lihat rincian gaji bulanan tanpa perlu menunggu slip cetak.
 
 ---
 

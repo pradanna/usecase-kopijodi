@@ -36,8 +36,8 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 | 3 | **Layar Barista (KDS)** | Tablet / Monitor (Barista) | Antrean pesanan real-time, status pesanan (*Queue -> In Progress -> Ready*), tanpa kertas bon. | Fase 1 |
 | 4 | **Menu QR (Web App)** | Web Mobile (Pelanggan) | Pesan mandiri via scan QR di meja/counter (langsung buka Web App tanpa install), bayar QRIS/e-wallet, status pesanan live. | Fase 2 |
 | 5 | **Promo & Voucher Panel** | Web Desktop (Marketing) | Buat promo sekali, langsung berlaku di kasir & Menu QR, pantau kuota dan efektivitas omzet. | Fase 2 |
-| 6 | **Portal Mitra / Investor** | Web (Investor Cabang) | Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil. | Fase 3 |
-| 7 | **Owner Dashboard & HR** | Web / Mobile (Owner & HR) | KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan. | Fase 3 |
+| 6 | **Portal Mitra Investor** | Web desktop & HP (Investor Cabang) | Mitra memantau kinerja outlet miliknya kapan saja dengan data transparan, tanpa menunggu laporan manual. | Fase 3 |
+| 7 | **Owner Dashboard & HR** | Desktop & Tablet (Direksi & HR) • Web Mobile (Karyawan) | Direksi memantau seluruh cabang dalam satu layar, sementara jadwal, absensi, dan gaji karyawan dikelola dalam satu sistem. | Fase 3 |
 
 ---
 
@@ -179,6 +179,66 @@ Satu platform terintegrasi (seperti standar Fore / Kopi Kenangan) yang menghubun
 
 ---
 
+## 3f. Fitur Kunci Portal Mitra Investor (Fase 3 Scale)
+
+**Pengguna:** Investor / Mitra Cabang  
+**Platform:** Web (desktop & HP)  
+**Mitra memantau kinerja outlet miliknya kapan saja dengan data yang transparan, tanpa menunggu laporan manual.**  
+
+> **Alur Utama:** Login Mitra → Pilih Outlet & Periode → Lihat Omzet, HPP & Biaya → Unduh Laporan
+
+---
+
+1. **Laporan Omzet Outlet (Hanya Baca):** Lihat omzet harian dan bulanan outlet milik mitra beserta tren penjualannya. Mitra hanya bisa melihat, tidak bisa mengubah data.
+2. **Hanya Outlet Milik Sendiri:** Setiap mitra hanya dapat membuka data outlet miliknya, dengan akun yang terpisah dan aman.
+3. **HPP Final vs Sementara:** Lihat modal bahan baku, termasuk bagian yang masih sementara (menunggu nota) dan yang sudah dikoreksi, sehingga mitra tahu angka mana yang sudah final.
+4. **Biaya yang Tercatat:** Rincian biaya outlet yang tercatat di sistem, seperti belanja kebutuhan kecil dan pembelian bahan.
+5. **Ringkasan Margin per Periode:** Penjualan dikurangi HPP dan biaya tercatat, per bulan dan per outlet.
+6. **Estimasi Bagi Hasil Sesuai Kesepakatan:** Perhitungan estimasi bulanan mengikuti rumus yang disepakati dengan tiap mitra.
+
+---
+
+## 3g. Fitur Kunci Owner Dashboard & HR (Fase 3 Scale)
+
+**Platform:** Desktop & Tablet (Direksi & HR) • Web Mobile (Karyawan)  
+**Direksi memantau performa seluruh cabang dalam satu layar, sementara jadwal, absensi, dan gaji karyawan dikelola dalam satu sistem yang terhubung ke operasional outlet.**  
+
+> **Alur HR:** Jadwal Shift → Absensi → Rekap Kehadiran → Penggajian → Slip Gaji
+
+---
+
+### A. FOUNDER / DIREKSI
+*Memantau dan memutuskan*
+
+1. **KPI Seluruh Cabang dalam Satu Layar:** Omzet, margin, jumlah pesanan, dan tren penjualan semua cabang terkonsolidasi dalam satu layar eksekutif.
+2. **Peringkat Cabang:** Bandingkan cabang terlaris dan margin tertinggi lewat leaderboard.
+3. **Pusat Persetujuan Eksekutif:** Setujui pengeluaran di atas batas dan pembelian di luar gudang pusat dari satu tempat.
+4. **Peringatan Penting:** Notifikasi untuk stok kritis, hutang ke pusat yang mendekati jatuh tempo, dan selisih HPP yang besar.
+
+---
+
+### B. HR / ADMIN SDM
+*Mengelola karyawan dan penggajian*
+
+1. **Data Karyawan & Kontrak:** Profil, posisi, outlet penempatan, status kontrak, dan dokumen karyawan dalam satu tempat.
+2. **Jadwal Shift per Outlet:** Susun jadwal barista dan kasir per outlet, lengkap dengan template shift dan persetujuan tukar shift.
+3. **Rekap Absensi & Keterlambatan:** Pantau kehadiran, keterlambatan, dan ketidakhadiran per karyawan dan per outlet.
+4. **Cuti, Izin & Lembur:** Proses pengajuan cuti, izin, dan lembur dengan alur persetujuan yang jelas.
+5. **Penggajian Otomatis:** Gaji dihitung dari komponen yang ditetapkan (gaji pokok, tunjangan, lembur, potongan keterlambatan) berdasarkan data absensi.
+6. **Laporan SDM:** Ringkasan kehadiran, jumlah karyawan, dan biaya tenaga kerja per outlet dan per periode.
+
+---
+
+### C. KARYAWAN (Barista & Kasir)
+*Mengurus kebutuhan kerja dari HP*
+
+1. **Absen dengan GPS & Foto:** Absen masuk dan pulang hanya bisa dilakukan di area outlet, dilengkapi foto selfie untuk mencegah titip absen.
+2. **Lihat Jadwal Shift:** Lihat jadwal kerja pribadi kapan saja.
+3. **Ajukan Cuti, Izin & Tukar Shift:** Ajukan langsung dari HP dan pantau statusnya.
+4. **Slip Gaji Digital:** Lihat rincian gaji bulanan tanpa perlu menunggu slip cetak.
+
+---
+
 ## 4. Pilihan Skema Kerjasama & Biaya
 
 Kami menyediakan **2 alternatif skema investasi** yang dapat disesuaikan dengan strategi finansial dan arus kas (*cashflow*) Kopi Seduhan Jodi:
@@ -193,7 +253,7 @@ Kami menyediakan **2 alternatif skema investasi** yang dapat disesuaikan dengan 
 |---|---|:---:|:---:|
 | **Fase 1 (Core)** | ERP Backoffice, POS Kasir, KDS Barista | 2.5 - 3 Bulan | **Rp 75.000.000,-** |
 | **Fase 2 (Omni)** | Menu QR Self-Order (Web Mobile) + Promo & Voucher Panel | 2 Bulan | **Rp 48.000.000,-** |
-| **Fase 3 (Scale)**| Portal Mitra/Investor + Owner Dashboard & HR Shift | 1 - 1.5 Bulan | **Rp 27.000.000,-** |
+| **Fase 3 (Scale)**| Portal Mitra Investor + Owner Dashboard & HR | 1 - 1.5 Bulan | **Rp 27.000.000,-** |
 | **TOTAL NORMAL** | **Seluruh Ekosistem Lengkap (Fase 1 + 2 + 3)** | **± 6 Bulan** | **Rp 150.000.000,-** |
 | **PAKET BUNDLING** | **Komitmen Penuh Sekaligus (Fase 1 + 2 + 3)** | **± 6 Bulan** | **Rp 135.000.000,-** *(Hemat Rp 15 Juta)* |
 

@@ -1,6 +1,19 @@
-# Modul Portal Mitra / Investor (Read-Only)
+# Modul Portal Mitra Investor (Read-Only)
 
-Dokumen ini mendefinisikan spesifikasi detail seluruh use case untuk aplikasi **Portal Mitra / Investor** (Fase 3 Scale) yang dirancang khusus sebagai antarmuka berbasis web baca-saja (*read-only*) untuk para pemilik modal / investor cabang dalam memantau kinerja operasional, HPP riil, dan kesehatan finansial gerai kemitraan mereka.
+Dokumen ini mendefinisikan spesifikasi detail seluruh use case untuk aplikasi **Portal Mitra Investor** (Fase 3 Scale) yang dirancang khusus sebagai antarmuka berbasis web (desktop & HP) baca-saja (*read-only*) bagi investor atau mitra cabang.
+
+> **Ringkasan Modul:**  
+> **Pengguna:** Investor / Mitra Cabang • **Platform:** Web (desktop & HP)  
+> **Deskripsi:** Mitra memantau kinerja outlet miliknya kapan saja dengan data yang transparan, tanpa menunggu laporan manual.  
+> **Alur Utama:** Login Mitra → Pilih Outlet & Periode → Lihat Omzet, HPP & Biaya → Unduh Laporan  
+>
+> **Fitur Kunci:**
+> 1. **Laporan Omzet Outlet (Hanya Baca):** Lihat omzet harian dan bulanan outlet milik mitra beserta tren penjualannya. Mitra hanya bisa melihat, tidak bisa mengubah data.
+> 2. **Hanya Outlet Milik Sendiri:** Setiap mitra hanya dapat membuka data outlet miliknya, dengan akun yang terpisah dan aman.
+> 3. **HPP Final vs Sementara:** Lihat modal bahan baku, termasuk bagian yang masih sementara (menunggu nota) dan yang sudah dikoreksi, sehingga mitra tahu angka mana yang sudah final.
+> 4. **Biaya yang Tercatat:** Rincian biaya outlet yang tercatat di sistem, seperti belanja kebutuhan kecil dan pembelian bahan.
+> 5. **Ringkasan Margin per Periode:** Penjualan dikurangi HPP dan biaya tercatat, per bulan dan per outlet.
+> 6. **Estimasi Bagi Hasil Sesuai Kesepakatan:** Perhitungan estimasi bulanan mengikuti rumus yang disepakati dengan tiap mitra.
 
 ---
 

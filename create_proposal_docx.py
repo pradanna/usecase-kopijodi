@@ -367,8 +367,8 @@ def build_proposal_docx(file_path):
         ("3", "Layar Barista (KDS)", "Tablet / Monitor\n(Barista)", "Antrean pesanan real-time, status pesanan (Queue -> In Progress -> Ready), tanpa kertas bon.", "Fase 1"),
         ("4", "Menu QR (Web App)", "Web Mobile\n(Pelanggan - Tanpa Install)", "Scan QR buka Web App menu di browser HP, pilih varian, bayar QRIS, status live.", "Fase 2"),
         ("5", "Promo & Voucher Panel", "Web Desktop\n(Tim Marketing)", "Buat promo sekali, langsung berlaku di kasir & Menu QR, pantau kuota dan efektivitas omzet.", "Fase 2"),
-        ("6", "Portal Mitra / Investor", "Web Portal (Secure)\n(Mitra Pemilik Cabang)", "Laporan real-time: omzet cabang, rincian biaya, HPP riil, dan estimasi bagi hasil.", "Fase 3"),
-        ("7", "Owner Dashboard & HR", "Web / Mobile\n(Owner & HR)", "KPI konsolidasi seluruh cabang, jadwal shift barista, & absensi GPS karyawan.", "Fase 3")
+        ("6", "Portal Mitra Investor", "Web desktop & HP\n(Mitra Cabang)", "Pantau omzet, HPP riil vs sementara, biaya outlet, dan estimasi bagi hasil transparan.", "Fase 3"),
+        ("7", "Owner Dashboard & HR", "Desktop, Tablet & HP\n(Direksi, HR & Karyawan)", "KPI konsolidasi seluruh cabang, peringkat leaderboard, jadwal shift, absensi GPS & slip gaji.", "Fase 3")
     ]
     
     for row_idx, data in enumerate(app_data, start=1):
@@ -480,6 +480,49 @@ def build_proposal_docx(file_path):
     add_bullet_p(doc, "5. Pantau Pemakaian Real-Time: ", "Lihat berapa kali voucher dipakai, di outlet mana, dan berapa sisa kuotanya.")
     add_bullet_p(doc, "6. Laporan Efektivitas Promo: ", "Bandingkan nilai diskon dengan omzet dan margin yang dihasilkan tiap kampanye, untuk menentukan promo mana yang layak diulang.")
 
+    # PORTAL MITRA INVESTOR
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+    style_heading(doc.add_paragraph(), "Fitur Kunci Portal Mitra Investor (Fase 3 Scale):", level=2)
+    add_body_p(doc, "Pengguna: Investor / Mitra Cabang • Platform: Web (desktop & HP)\nMitra memantau kinerja outlet miliknya kapan saja dengan data yang transparan, tanpa menunggu laporan manual.")
+    add_callout(doc, "Alur Utama Portal Mitra Investor:", [
+        "Login Mitra → Pilih Outlet & Periode → Lihat Omzet, HPP & Biaya → Unduh Laporan"
+    ], border_color="0D9488", bg_color="F0FDFA")
+
+    add_bullet_p(doc, "1. Laporan Omzet Outlet (Hanya Baca): ", "Lihat omzet harian dan bulanan outlet milik mitra beserta tren penjualannya. Mitra hanya bisa melihat, tidak bisa mengubah data.")
+    add_bullet_p(doc, "2. Hanya Outlet Milik Sendiri: ", "Setiap mitra hanya dapat membuka data outlet miliknya, dengan akun yang terpisah dan aman.")
+    add_bullet_p(doc, "3. HPP Final vs Sementara: ", "Lihat modal bahan baku, termasuk bagian yang masih sementara (menunggu nota) dan yang sudah dikoreksi, sehingga mitra tahu angka mana yang sudah final.")
+    add_bullet_p(doc, "4. Biaya yang Tercatat: ", "Rincian biaya outlet yang tercatat di sistem, seperti belanja kebutuhan kecil dan pembelian bahan.")
+    add_bullet_p(doc, "5. Ringkasan Margin per Periode: ", "Penjualan dikurangi HPP dan biaya tercatat, per bulan dan per outlet.")
+    add_bullet_p(doc, "6. Estimasi Bagi Hasil Sesuai Kesepakatan: ", "Perhitungan estimasi bulanan mengikuti rumus yang disepakati dengan tiap mitra.")
+
+    # OWNER DASHBOARD & HR
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+    style_heading(doc.add_paragraph(), "Fitur Kunci Owner Dashboard & HR (Fase 3 Scale) per Peran:", level=2)
+    add_body_p(doc, "Platform: Desktop & Tablet (Direksi & HR) • Web Mobile (Karyawan)\nDireksi memantau performa seluruh cabang dalam satu layar, sementara jadwal, absensi, dan gaji karyawan dikelola dalam satu sistem yang terhubung ke operasional outlet.")
+    add_callout(doc, "Alur HR:", [
+        "Jadwal Shift → Absensi → Rekap Kehadiran → Penggajian → Slip Gaji"
+    ], border_color="B45309", bg_color="FFFBEB")
+
+    style_heading(doc.add_paragraph(), "A. FOUNDER / DIREKSI (Memantau dan Memutuskan)", level=3)
+    add_bullet_p(doc, "1. KPI Seluruh Cabang dalam Satu Layar: ", "Omzet, margin, jumlah pesanan, dan tren penjualan semua cabang terkonsolidasi dalam satu layar eksekutif.")
+    add_bullet_p(doc, "2. Peringkat Cabang: ", "Bandingkan cabang terlaris dan margin tertinggi lewat leaderboard.")
+    add_bullet_p(doc, "3. Pusat Persetujuan Eksekutif: ", "Setujui pengeluaran di atas batas dan pembelian di luar gudang pusat dari satu tempat.")
+    add_bullet_p(doc, "4. Peringatan Penting: ", "Notifikasi untuk stok kritis, hutang ke pusat yang mendekati jatuh tempo, dan selisih HPP yang besar.")
+
+    style_heading(doc.add_paragraph(), "B. HR / ADMIN SDM (Mengelola Karyawan dan Penggajian)", level=3)
+    add_bullet_p(doc, "1. Data Karyawan & Kontrak: ", "Profil, posisi, outlet penempatan, status kontrak, dan dokumen karyawan dalam satu tempat.")
+    add_bullet_p(doc, "2. Jadwal Shift per Outlet: ", "Susun jadwal barista dan kasir per outlet, lengkap dengan template shift dan persetujuan tukar shift.")
+    add_bullet_p(doc, "3. Rekap Absensi & Keterlambatan: ", "Pantau kehadiran, keterlambatan, dan ketidakhadiran per karyawan dan per outlet.")
+    add_bullet_p(doc, "4. Cuti, Izin & Lembur: ", "Proses pengajuan cuti, izin, dan lembur dengan alur persetujuan yang jelas.")
+    add_bullet_p(doc, "5. Penggajian Otomatis: ", "Gaji dihitung dari komponen yang ditetapkan (gaji pokok, tunjangan, lembur, potongan keterlambatan) berdasarkan data absensi.")
+    add_bullet_p(doc, "6. Laporan SDM: ", "Ringkasan kehadiran, jumlah karyawan, dan biaya tenaga kerja per outlet dan per periode.")
+
+    style_heading(doc.add_paragraph(), "C. KARYAWAN (Barista & Kasir - Mengurus Kebutuhan Kerja dari HP)", level=3)
+    add_bullet_p(doc, "1. Absen dengan GPS & Foto: ", "Absen masuk dan pulang hanya bisa dilakukan di area outlet, dilengkapi foto selfie untuk mencegah titip absen.")
+    add_bullet_p(doc, "2. Lihat Jadwal Shift: ", "Lihat jadwal kerja pribadi kapan saja.")
+    add_bullet_p(doc, "3. Ajukan Cuti, Izin & Tukar Shift: ", "Ajukan langsung dari HP dan pantau statusnya.")
+    add_bullet_p(doc, "4. Slip Gaji Digital: ", "Lihat rincian gaji bulanan tanpa perlu menunggu slip cetak.")
+
     # -------------------------------------------------------------
     # SECTION 3: SKEMA KERJASAMA & BIAYA
     # -------------------------------------------------------------
@@ -501,7 +544,7 @@ def build_proposal_docx(file_path):
     bp_data = [
         ("Fase 1 (Core)", "ERP Backoffice, POS Kasir, KDS Barista", "2.5 - 3 Bulan", "Rp 75.000.000,-"),
         ("Fase 2 (Omni)", "Menu QR Self-Order (Web Mobile) + Promo & Voucher Panel", "2 Bulan", "Rp 48.000.000,-"),
-        ("Fase 3 (Scale)", "Portal Mitra/Investor + Owner Dashboard & HR Shift", "1 - 1.5 Bulan", "Rp 27.000.000,-"),
+        ("Fase 3 (Scale)", "Portal Mitra Investor + Owner Dashboard & HR", "1 - 1.5 Bulan", "Rp 27.000.000,-"),
         ("PAKET BUNDLING\n(Fase 1 + 2 + 3)", "Seluruh Ekosistem Lengkap (Diskon Khusus Rp 15 Juta)", "± 6 Bulan", "Rp 135.000.000,-\n(Net)")
     ]
     
