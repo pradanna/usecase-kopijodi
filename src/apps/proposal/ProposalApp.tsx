@@ -715,6 +715,18 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   Pengembangan sistem dibagi menjadi 3 milestone terukur dengan serah terima bertahap per fase agar operasional kafe langsung dapat menggunakan modul inti tanpa menunggu seluruh sistem selesai dibangun.
                 </p>
               </div>
+
+              <div className="flex sm:flex-col sm:items-end justify-between items-center gap-1 shrink-0 bg-emerald-50/70 border border-emerald-200 rounded-2xl px-4 py-3">
+                <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">
+                  Total Waktu Pengerjaan
+                </span>
+                <span className="text-lg font-black text-emerald-800">
+                  ± 6.5 – 7 Bulan
+                </span>
+                <span className="text-[10px] text-emerald-600 font-semibold">
+                  (Fase 1 + 2 + 3)
+                </span>
+              </div>
             </div>
 
             {/* Grid 3 Milestone */}
@@ -822,7 +834,7 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
             </div>
 
             {/* Serah Terima & Garansi */}
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
               <div>
                 <div className="font-extrabold text-slate-900">
                   Standar Serah Terima Setiap Milestone:
@@ -831,8 +843,13 @@ export const ProposalApp: React.FC<{ onBackToDemo?: () => void }> = ({ onBackToD
                   Setiap fase melalui tahapan pengujian langsung (<em>UAT</em>) di pilot outlet, pelatihan barista/manager, dan pendampingan <em>go-live</em> sebelum aktivasi modul berikutnya.
                 </div>
               </div>
-              <div className="text-emerald-700 font-bold shrink-0 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
-                Termasuk Garansi Bug 3 - 6 Bulan
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <div className="text-blue-800 font-extrabold bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200">
+                  Total Waktu: ± 6.5 – 7 Bulan
+                </div>
+                <div className="text-emerald-700 font-bold bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+                  Termasuk Garansi Bug 6 Bulan
+                </div>
               </div>
             </div>
           </div>

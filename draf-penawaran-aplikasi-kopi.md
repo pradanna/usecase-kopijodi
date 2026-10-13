@@ -282,8 +282,8 @@ Kami menyediakan **2 alternatif skema investasi** yang dapat disesuaikan dengan 
 | Parameter | Opsi 1: Beli Putus (Turnkey Fixed-Price) | Opsi 2: Bulanan (Dedicated Programmer) |
 |---|---|---|
 | **Beban Cashflow** | Pengeluaran modal per termin proyek | **Sangat Ringan** (Rp 5 Juta / bulan flat) |
-| **Masa Komitmen** | Selesai per fase proyek (~3 s/d 6 bulan) | Minimal 5 Tahun (Kerjasama Jangka Panjang) |
-| **Maintenance & Update** | Garansi 3 - 6 bulan (setelahnya kontrak maintenance terpisah) | **Gratis & Standby selama 5 Tahun oleh genossys** |
+| **Masa Komitmen** | Selesai per fase proyek (Total ± 6.5 – 7 Bulan) | Minimal 5 Tahun (Kerjasama Jangka Panjang) |
+| **Maintenance & Update** | Garansi bug 6 bulan penuh (setelahnya kontrak maintenance terpisah) | **Gratis & Standby selama 5 Tahun oleh genossys** |
 | **Fleksibilitas Fitur** | Fitur terkunci berdasarkan scope dokumen awal | **100% Bebas Tambah Fitur Apapun Kapan Saja** *(Tanpa biaya ekstra)* |
 | **Rekomendasi** | **Sangat Tepat jika:** Kopi Seduhan Jodi memiliki alokasi modal awal dan ingin proyek tuntas dalam target waktu tertentu. | **Sangat Tepat jika:** Kopi Seduhan Jodi ingin inovasi bebas tanpa batas, butuh tim IT standby, dan ingin cashflow bulanan ringan. |
 

@@ -589,8 +589,8 @@ def build_proposal_docx(file_path):
         
     cmp_data = [
         ("Beban Cashflow", "Pengeluaran modal per termin proyek", "Sangat Ringan (Rp 5 Juta/bln flat)"),
-        ("Masa Komitmen", "Selesai per milestone fase (~3 - 6 bulan)", "Minimal 5 Tahun (Kerjasama Jangka Panjang)"),
-        ("Maintenance & Update", "Garansi 3 - 6 bulan (setelahnya kontrak terpisah)", "Gratis & Standby selama 5 Tahun oleh genossys"),
+        ("Masa Komitmen", "Selesai per milestone fase (Total ± 6.5 – 7 Bulan)", "Minimal 5 Tahun (Kerjasama Jangka Panjang)"),
+        ("Maintenance & Update", "Garansi bug 6 bulan penuh (setelahnya kontrak terpisah)", "Gratis & Standby selama 5 Tahun oleh genossys"),
         ("Fleksibilitas Fitur", "Terkunci sesuai scope dokumen spesifikasi awal", "100% Bebas Tambah Fitur Apapun Kapan Saja (tanpa biaya ekstra per request)"),
         ("Rekomendasi", "Sangat Tepat jika Kopi Seduhan Jodi memiliki modal awal & ingin proyek selesai dalam target waktu.", "Sangat Tepat jika Kopi Seduhan Jodi ingin inovasi bebas tanpa batas & cashflow bulanan ringan.")
     ]
